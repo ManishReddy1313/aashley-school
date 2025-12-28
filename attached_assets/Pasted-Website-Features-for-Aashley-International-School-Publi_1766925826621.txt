@@ -1,0 +1,126 @@
+Website Features for Aashley International School
+🔹 Public-Facing Website (for everyone)
+
+Homepage
+
+Clean, premium design with tagline in footer:
+
+“Learning the Aashley Way” / “Rooted in Values, Rising with Confidence.”
+
+“Photo Stories” gallery — moments captured naturally (not typical grids).
+
+Instagram photo wall auto-pulling posts from #AashleyLife.
+
+Growth Stories / Real Journeys
+
+Section showcasing emotional, real-life student/parent stories.
+
+Example: Vendor’s son/daughter transforms through Aashley values.
+
+Humanises the school and shows inclusivity.
+
+A Day at Aashley
+
+Visual timeline/infographic showing a child’s typical day.
+
+From morning bell → classes → lunch → activities → dispersal.
+
+About Us
+
+Vision, Mission, Core Values.
+
+Principal’s message.
+
+Academics & Programs
+
+Curriculum overview.
+
+Co-curricular & extracurricular activities.
+
+Admissions
+
+Admission process details.
+
+Online enquiry/application form.
+
+Downloadable brochures.
+
+Gallery
+
+Emotional layouts (photo stories, not rigid grid).
+
+Event highlights.
+
+News & Events
+
+Updates, celebrations, school achievements.
+
+Contact Page
+
+Location map.
+
+Contact form.
+
+Direct links for parent inquiries.
+
+Alumni Section
+
+Dedicated page for alumni registration.
+
+Success stories of alumni.
+
+Future integration with alumni networking/events.
+
+🔹 Private Portal (Login Area)
+
+Accessible only by students, parents, teachers with assigned credentials.
+
+Role-Based Access Control
+
+Students → see academic calendar, circulars, exam schedules, homework, fee reminders.
+
+Parents → fee deadlines, circulars, exam notifications, parent-teacher meeting schedules.
+
+Teachers → internal notices, teaching schedules, exam duty lists, resources.
+
+Admin → full control to add/remove access.
+
+Live Update Ticker
+
+Visible only after login.
+
+Shows:
+
+Exam reminders.
+
+Fee deadlines.
+
+Circulars & urgent announcements.
+
+Auto-refresh or scrolling updates.
+
+Access & Deactivation Control
+
+Students: Access removed when they take Transfer Certificates / graduate.
+
+Teachers: Immediate access deactivation if they leave.
+
+Admin panel for role management & deactivation.
+
+Downloadable Resources
+
+Assignments, study material, circulars (PDF uploads by teachers/admin).
+
+🔹 Technical Considerations
+
+Secure Login Authentication (student ID, parent ID, staff ID).
+
+Role-based dashboard (different UI for students, parents, teachers).
+
+Scalable backend for content management (e.g., notices, gallery, stories).
+
+Integration with Instagram API for live photo wall.
+
+Admin CMS for easy updates:
+
+Upload circulars, add events, update gallery, manage alumni
