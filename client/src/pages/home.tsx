@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PublicLayout } from "@/components/public-layout";
-import heroImage from "@assets/generated_images/school_students_classroom_learning.png";
+import heroImage from "@assets/IMG_7873_1767427250737.JPG";
+import heroStudents from "@assets/IMG_7852_1767427250728.JPG";
+import prayerImage from "@assets/IMG_8154_1767427250738.JPG";
+import assemblyImage from "@assets/IMG_7974_1767427250737.JPG";
+import craftImage from "@assets/MVI_8914.00_03_26_02.Still024_1767427250738.png";
+import studentPortrait from "@assets/IMG_7891_1767427250737.JPG";
 import { 
   GraduationCap, 
   Users, 
@@ -43,12 +48,12 @@ const features = [
 ];
 
 const photoStories = [
-  { title: "Science Fair 2024", category: "Events", size: "large" },
-  { title: "Morning Assembly", category: "Daily Life", size: "medium" },
-  { title: "Art Class", category: "Activities", size: "medium" },
-  { title: "Sports Day", category: "Events", size: "small" },
-  { title: "Library Time", category: "Academics", size: "small" },
-  { title: "Music Practice", category: "Activities", size: "small" },
+  { title: "Morning Assembly", category: "Daily Life", size: "large", image: assemblyImage },
+  { title: "Morning Prayer", category: "Values", size: "medium", image: prayerImage },
+  { title: "Creative Arts", category: "Activities", size: "medium", image: craftImage },
+  { title: "School Assembly", category: "Daily Life", size: "small", image: heroStudents },
+  { title: "Student Life", category: "Campus", size: "small", image: studentPortrait },
+  { title: "Our Campus", category: "Campus", size: "small", image: heroImage },
 ];
 
 const growthStories = [
@@ -188,18 +193,19 @@ export default function HomePage() {
                 }`}
                 data-testid={`photo-story-${index}`}
               >
-                <div className={`bg-gradient-to-br from-primary/20 to-accent/20 ${
+                <div className={`relative ${
                   story.size === "large" ? "aspect-square" : 
                   story.size === "medium" ? "aspect-[3/4]" : "aspect-square"
                 }`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center p-4">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                        <BookOpen className="h-8 w-8 text-primary" />
-                      </div>
-                      <h4 className="font-semibold">{story.title}</h4>
-                      <Badge variant="secondary" size="sm" className="mt-2">{story.category}</Badge>
-                    </div>
+                  <img 
+                    src={story.image} 
+                    alt={story.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h4 className="font-semibold text-white">{story.title}</h4>
+                    <Badge variant="secondary" size="sm" className="mt-2">{story.category}</Badge>
                   </div>
                 </div>
               </div>
