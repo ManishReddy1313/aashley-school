@@ -45,13 +45,13 @@ function Header() {
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1 flex-wrap justify-center">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <Button
                   variant={location === link.href ? "secondary" : "ghost"}
                   size="sm"
-                  className="text-sm"
+                  className="text-xs px-2"
                   data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {link.label}
@@ -70,7 +70,7 @@ function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className="xl:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
@@ -80,7 +80,7 @@ function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <nav className="lg:hidden py-4 border-t">
+          <nav className="xl:hidden py-4 border-t">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href}>
