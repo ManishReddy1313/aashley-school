@@ -15,11 +15,7 @@ import {
   Youtube
 } from "lucide-react";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/academics", label: "Academics" },
-  { href: "/admissions", label: "Admissions" },
+const topBarLinks = [
   { href: "/gallery", label: "Gallery" },
   { href: "/day-at-aashley", label: "A Day at Aashley" },
   { href: "/news", label: "News & Events" },
@@ -27,76 +23,118 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+const mainNavLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/academics", label: "Academics" },
+  { href: "/admissions", label: "Admissions" },
+  { href: "/portal", label: "Portal" },
+];
+
 function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const allNavLinks = [...mainNavLinks.slice(0, -1), ...topBarLinks];
+
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 gap-4">
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0" data-testid="link-home-logo">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <GraduationCap className="h-6 w-6 text-primary-foreground" />
+    <header className="sticky top-0 z-50">
+      {/* Top Bar */}
+      <div className="bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-9">
+            <div className="hidden md:flex items-center gap-1">
+              {topBarLinks.map((link, index) => (
+                <span key={link.href} className="flex items-center">
+                  <Link 
+                    href={link.href}
+                    className="text-xs hover:text-accent transition-colors px-2"
+                    data-testid={`link-topbar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {link.label}
+                  </Link>
+                  {index < topBarLinks.length - 1 && (
+                    <span className="text-primary-foreground/40">|</span>
+                  )}
+                </span>
+              ))}
             </div>
-            <div className="hidden sm:block">
-              <span className="font-semibold text-lg">Aashley International</span>
-              <span className="text-xs text-muted-foreground block -mt-1">School</span>
+            <div className="flex items-center gap-3 ml-auto">
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" data-testid="link-topbar-facebook">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" data-testid="link-topbar-instagram">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" data-testid="link-topbar-youtube">
+                <Youtube className="h-4 w-4" />
+              </a>
             </div>
-          </Link>
-
-          <nav className="hidden xl:flex items-center gap-1 flex-wrap justify-center">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <Button
-                  variant={location === link.href ? "secondary" : "ghost"}
-                  size="sm"
-                  className="text-xs px-2"
-                  data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  {link.label}
-                </Button>
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Link href="/portal">
-              <Button size="sm" data-testid="button-portal-login">
-                Portal Login
-              </Button>
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="xl:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
           </div>
         </div>
+      </div>
 
-        {mobileMenuOpen && (
-          <nav className="xl:hidden py-4 border-t">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
+      {/* Main Navigation */}
+      <div className="bg-background border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16 gap-4">
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0" data-testid="link-home-logo">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                <GraduationCap className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div className="hidden sm:block">
+                <span className="font-semibold text-lg">Aashley International</span>
+                <span className="text-xs text-muted-foreground block -mt-1">School</span>
+              </div>
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-1">
+              {mainNavLinks.map((link) => (
                 <Link key={link.href} href={link.href}>
                   <Button
                     variant={location === link.href ? "secondary" : "ghost"}
-                    className="w-full justify-start"
-                    onClick={() => setMobileMenuOpen(false)}
-                    data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    size="sm"
+                    data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                   >
                     {link.label}
                   </Button>
                 </Link>
               ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                data-testid="button-mobile-menu"
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
             </div>
-          </nav>
-        )}
+          </div>
+
+          {mobileMenuOpen && (
+            <nav className="md:hidden py-4 border-t">
+              <div className="flex flex-col gap-1">
+                {allNavLinks.map((link) => (
+                  <Link key={link.href} href={link.href}>
+                    <Button
+                      variant={location === link.href ? "secondary" : "ghost"}
+                      className="w-full justify-start"
+                      onClick={() => setMobileMenuOpen(false)}
+                      data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    >
+                      {link.label}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   );
