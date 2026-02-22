@@ -7,6 +7,6 @@ replit.nix
 replit.md
 *.md
 .local
-attached_assets
+attached_assets/*.txt
 scripts
 /tmp
