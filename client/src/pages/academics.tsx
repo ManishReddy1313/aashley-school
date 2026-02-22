@@ -20,33 +20,27 @@ import {
 const curriculumLevels = [
   {
     level: "Pre-Primary (Nursery - KG)",
-    description: "Foundation years focused on play-based learning, social skills, and early literacy.",
-    subjects: ["English", "Hindi", "Mathematics Concepts", "Environmental Awareness", "Art & Craft", "Music & Movement"],
-    highlights: ["Montessori Methods", "Activity-Based Learning", "Safe & Nurturing Environment"],
+    description: "Foundation years focused on play-based learning, social skills, and early literacy in a safe environment.",
+    subjects: ["English", "Kannada", "Mathematics Concepts", "Environmental Awareness", "Art & Craft", "Music & Movement"],
+    highlights: ["Activity-Based Learning", "Play-Way Methods", "Safe & Nurturing Environment"],
   },
   {
     level: "Primary (Classes 1-5)",
-    description: "Building strong fundamentals through engaging curriculum and hands-on experiences.",
-    subjects: ["English", "Hindi", "Mathematics", "EVS/Science", "Social Studies", "Computer Science", "Art & Music"],
-    highlights: ["CBSE Curriculum", "Smart Classrooms", "Regular Assessments"],
+    description: "Building strong fundamentals through the ICSE curriculum with hands-on experiences.",
+    subjects: ["English", "Kannada/Hindi", "Mathematics", "EVS/Science", "Social Studies", "Computer Science", "Art & Music"],
+    highlights: ["ICSE Curriculum", "Smart Classrooms", "Regular Evaluation"],
   },
   {
     level: "Middle School (Classes 6-8)",
-    description: "Expanding horizons with advanced concepts and specialized subjects.",
-    subjects: ["English", "Hindi", "Sanskrit", "Mathematics", "Science", "Social Science", "Computer Science"],
+    description: "Expanding horizons with advanced ICSE concepts and specialized subjects.",
+    subjects: ["English", "Kannada/Hindi", "Mathematics", "Physics", "Chemistry", "Biology", "History & Civics", "Geography", "Computer Applications"],
     highlights: ["Subject Specialization", "Lab Experiments", "Project-Based Learning"],
   },
   {
     level: "Secondary (Classes 9-10)",
-    description: "Preparing for board examinations with focused academic rigor.",
-    subjects: ["English", "Hindi/Sanskrit", "Mathematics", "Science", "Social Science", "IT/Computer"],
-    highlights: ["CBSE Board Preparation", "Career Guidance", "Exam Strategies"],
-  },
-  {
-    level: "Senior Secondary (Classes 11-12)",
-    description: "Specialized streams for higher education and career readiness.",
-    subjects: ["Science (PCM/PCB)", "Commerce", "Humanities"],
-    highlights: ["Stream Selection", "Competitive Exam Prep", "Career Counseling"],
+    description: "Preparing for ICSE board examinations with focused academic rigor and career guidance.",
+    subjects: ["English", "Second Language", "Mathematics", "Physics", "Chemistry", "Biology", "History & Civics", "Geography", "Computer Applications"],
+    highlights: ["ICSE Board Preparation", "Career Guidance", "Exam Strategies"],
   },
 ];
 
@@ -95,7 +89,7 @@ export default function AcademicsPage() {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Curriculum Overview</h2>
             <p className="text-muted-foreground">
-              CBSE-affiliated curriculum tailored to meet global standards
+              ICSE-affiliated curriculum tailored to meet global standards
             </p>
           </div>
 

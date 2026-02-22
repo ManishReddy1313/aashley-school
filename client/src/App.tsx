@@ -16,6 +16,8 @@ import DayAtAashleyPage from "@/pages/day-at-aashley";
 import NewsPage from "@/pages/news";
 import AlumniPage from "@/pages/alumni";
 import ContactPage from "@/pages/contact";
+import WhyAashleyPage from "@/pages/why-aashley";
+import CareersPage from "@/pages/careers";
 
 // Portal Pages
 import PortalLoginPage from "@/pages/portal/login";
@@ -34,6 +36,8 @@ function Router() {
       <Route path="/news" component={NewsPage} />
       <Route path="/alumni" component={AlumniPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/why-aashley" component={WhyAashleyPage} />
+      <Route path="/careers" component={CareersPage} />
       
       {/* Portal Pages */}
       <Route path="/portal" component={PortalLoginPage} />

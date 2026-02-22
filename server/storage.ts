@@ -7,7 +7,9 @@ import {
   alumni, type Alumni, type InsertAlumni,
   resources, type Resource, type InsertResource,
   contactMessages, type ContactMessage, type InsertContactMessage,
-  growthStories, type GrowthStory, type InsertGrowthStory
+  growthStories, type GrowthStory, type InsertGrowthStory,
+  jobPostings, type JobPosting, type InsertJobPosting,
+  jobApplications, type JobApplication, type InsertJobApplication
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, lte, gte, or, isNull } from "drizzle-orm";
@@ -49,6 +51,15 @@ export interface IStorage {
   // Growth Stories
   getPublishedGrowthStories(): Promise<GrowthStory[]>;
   createGrowthStory(story: InsertGrowthStory): Promise<GrowthStory>;
+
+  // Job Postings
+  getActiveJobPostings(): Promise<JobPosting[]>;
+  getAllJobPostings(): Promise<JobPosting[]>;
+  createJobPosting(posting: InsertJobPosting): Promise<JobPosting>;
+
+  // Job Applications
+  getJobApplications(): Promise<JobApplication[]>;
+  createJobApplication(application: InsertJobApplication): Promise<JobApplication>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -175,6 +186,37 @@ export class DatabaseStorage implements IStorage {
 
   async createGrowthStory(story: InsertGrowthStory): Promise<GrowthStory> {
     const [created] = await db.insert(growthStories).values(story).returning();
+    return created;
+  }
+
+  // Job Postings
+  async getActiveJobPostings(): Promise<JobPosting[]> {
+    return db.select()
+      .from(jobPostings)
+      .where(eq(jobPostings.isActive, true))
+      .orderBy(desc(jobPostings.createdAt));
+  }
+
+  async getAllJobPostings(): Promise<JobPosting[]> {
+    return db.select()
+      .from(jobPostings)
+      .orderBy(desc(jobPostings.createdAt));
+  }
+
+  async createJobPosting(posting: InsertJobPosting): Promise<JobPosting> {
+    const [created] = await db.insert(jobPostings).values(posting).returning();
+    return created;
+  }
+
+  // Job Applications
+  async getJobApplications(): Promise<JobApplication[]> {
+    return db.select()
+      .from(jobApplications)
+      .orderBy(desc(jobApplications.createdAt));
+  }
+
+  async createJobApplication(application: InsertJobApplication): Promise<JobApplication> {
+    const [created] = await db.insert(jobApplications).values(application).returning();
     return created;
   }
 }

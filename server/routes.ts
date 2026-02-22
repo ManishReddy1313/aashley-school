@@ -10,7 +10,9 @@ import {
   insertEventSchema,
   insertGalleryItemSchema,
   insertResourceSchema,
-  insertGrowthStorySchema
+  insertGrowthStorySchema,
+  insertJobPostingSchema,
+  insertJobApplicationSchema
 } from "@shared/schema";
 
 // Middleware to check if user has admin role
@@ -113,6 +115,27 @@ export async function registerRoutes(
       res.json(alumni);
     } catch (error: any) {
       res.status(500).json({ message: error.message || "Failed to fetch alumni" });
+    }
+  });
+
+  // Public Job Postings
+  app.get("/api/careers", async (_req, res) => {
+    try {
+      const jobs = await storage.getActiveJobPostings();
+      res.json(jobs);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch job postings" });
+    }
+  });
+
+  // Job Application Submission
+  app.post("/api/careers/apply", async (req, res) => {
+    try {
+      const data = insertJobApplicationSchema.parse(req.body);
+      const application = await storage.createJobApplication(data);
+      res.status(201).json(application);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message || "Invalid request" });
     }
   });
 
@@ -232,6 +255,37 @@ export async function registerRoutes(
       res.json(alumni);
     } catch (error: any) {
       res.status(500).json({ message: error.message || "Failed to fetch alumni" });
+    }
+  });
+
+  // Admin: Create Job Posting
+  app.post("/api/admin/careers", isAdmin, async (req, res) => {
+    try {
+      const data = insertJobPostingSchema.parse(req.body);
+      const posting = await storage.createJobPosting(data);
+      res.status(201).json(posting);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message || "Invalid request" });
+    }
+  });
+
+  // Admin: Get all job postings
+  app.get("/api/admin/careers", isAdmin, async (_req, res) => {
+    try {
+      const postings = await storage.getAllJobPostings();
+      res.json(postings);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch job postings" });
+    }
+  });
+
+  // Admin: Get all job applications
+  app.get("/api/admin/applications", isAdmin, async (_req, res) => {
+    try {
+      const applications = await storage.getJobApplications();
+      res.json(applications);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch applications" });
     }
   });
 

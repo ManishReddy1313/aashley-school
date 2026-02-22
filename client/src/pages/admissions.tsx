@@ -70,15 +70,12 @@ const grades = [
   "Class 1", "Class 2", "Class 3", "Class 4", "Class 5",
   "Class 6", "Class 7", "Class 8",
   "Class 9", "Class 10",
-  "Class 11 (Science)", "Class 11 (Commerce)", "Class 11 (Humanities)",
-  "Class 12 (Science)", "Class 12 (Commerce)", "Class 12 (Humanities)",
 ];
 
 const documents = [
-  { name: "Admission Prospectus 2024-25", size: "2.4 MB" },
-  { name: "Fee Structure", size: "0.5 MB" },
-  { name: "School Calendar 2024-25", size: "1.2 MB" },
-  { name: "Transport Routes", size: "0.8 MB" },
+  { name: "Admission Prospectus 2025-26", size: "2.4 MB" },
+  { name: "Fee Structure 2025-26", size: "0.5 MB" },
+  { name: "School Calendar 2025-26", size: "1.2 MB" },
 ];
 
 const formSchema = insertAdmissionEnquirySchema.extend({
@@ -137,7 +134,7 @@ export default function AdmissionsPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-admissions">
-              Admissions Open 2024-25
+              Admissions Open 2025-26
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Join the <span className="text-accent">Aashley Family</span>
@@ -367,7 +364,7 @@ export default function AdmissionsPage() {
                     <div className="space-y-3">
                       <div className="flex items-center gap-3" data-testid="contact-phone">
                         <Phone className="h-5 w-5 text-primary" />
-                        <span>+91 98765 43210</span>
+                        <span>+91 81234 56789</span>
                       </div>
                       <div className="flex items-center gap-3" data-testid="contact-email">
                         <Mail className="h-5 w-5 text-primary" />

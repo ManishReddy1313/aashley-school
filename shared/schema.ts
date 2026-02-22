@@ -151,3 +151,38 @@ export const growthStories = pgTable("growth_stories", {
 export const insertGrowthStorySchema = createInsertSchema(growthStories).omit({ id: true, createdAt: true });
 export type InsertGrowthStory = z.infer<typeof insertGrowthStorySchema>;
 export type GrowthStory = typeof growthStories.$inferSelect;
+
+// Job Postings
+export const jobPostings = pgTable("job_postings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  department: varchar("department", { length: 50 }).notNull(),
+  type: varchar("type", { length: 20 }).notNull().default("full-time"),
+  description: text("description").notNull(),
+  requirements: text("requirements").notNull(),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertJobPostingSchema = createInsertSchema(jobPostings).omit({ id: true, createdAt: true });
+export type InsertJobPosting = z.infer<typeof insertJobPostingSchema>;
+export type JobPosting = typeof jobPostings.$inferSelect;
+
+// Job Applications
+export const jobApplications = pgTable("job_applications", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  jobId: varchar("job_id").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  experience: varchar("experience", { length: 50 }).notNull(),
+  qualification: text("qualification").notNull(),
+  coverLetter: text("cover_letter"),
+  resumeUrl: text("resume_url"),
+  status: varchar("status", { length: 20 }).notNull().default("pending"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertJobApplicationSchema = createInsertSchema(jobApplications).omit({ id: true, createdAt: true, status: true });
+export type InsertJobApplication = z.infer<typeof insertJobApplicationSchema>;
+export type JobApplication = typeof jobApplications.$inferSelect;

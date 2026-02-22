@@ -24,24 +24,19 @@ const coreValues = [
 ];
 
 const milestones = [
-  { year: "1999", title: "Foundation", description: "Aashley International School was established with a vision to provide quality education." },
-  { year: "2005", title: "CBSE Affiliation", description: "Received full affiliation from CBSE, marking a significant milestone." },
-  { year: "2010", title: "Campus Expansion", description: "Inaugurated our state-of-the-art campus with modern facilities." },
-  { year: "2015", title: "Excellence Award", description: "Recognized as one of the top schools in the region for academic excellence." },
-  { year: "2020", title: "Digital Transformation", description: "Successfully transitioned to hybrid learning during global challenges." },
-  { year: "2024", title: "Silver Jubilee", description: "Celebrating 25 years of nurturing young minds and building futures." },
+  { year: "2008", title: "Foundation", description: "Aashley International School was established in Bangarapet, Kolar with a vision to provide quality English medium education." },
+  { year: "2010", title: "ICSE Affiliation", description: "Received affiliation from CISCE (Council for Indian School Certificate Examinations) for ICSE curriculum." },
+  { year: "2013", title: "Campus Development", description: "Expanded facilities with 20 classrooms, science labs, computer lab, and dedicated playground." },
+  { year: "2016", title: "Growing Community", description: "Crossed 300+ student enrollment with increasing recognition in Kolar district for quality education." },
+  { year: "2020", title: "Resilient Learning", description: "Successfully adapted to hybrid learning methods while maintaining academic standards during global challenges." },
+  { year: "2025", title: "Leading in Excellence", description: "Rated 4.6/5 by 388+ parents, serving 500+ students with a commitment to holistic development." },
 ];
 
 const leadership = [
   {
-    name: "Dr. Rajesh Kumar",
+    name: "Mrs. Veenarani B C",
     role: "Principal",
-    message: "At Aashley, we believe that education is not just about acquiring knowledge, but about developing the whole person. Our mission is to create an environment where every student can discover their unique potential and develop the skills, values, and confidence to succeed in life.",
-  },
-  {
-    name: "Mrs. Priya Sharma",
-    role: "Vice Principal",
-    message: "We are committed to providing a nurturing environment that encourages curiosity, creativity, and critical thinking. Our dedicated team of educators works tirelessly to ensure that each child receives personalized attention.",
+    message: "At Aashley International School, we don't just educate — we nurture. Every child who walks through our doors is treated as a unique individual with limitless potential. Our ICSE curriculum, combined with values-based education, ensures that students don't just excel in examinations but grow as confident, compassionate human beings ready to face the world.",
   },
 ];
 
@@ -56,12 +51,12 @@ export default function AboutPage() {
               About Us
             </Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Shaping Futures Since <span className="text-accent">1999</span>
+              Shaping Futures Since <span className="text-accent">2008</span>
             </h1>
             <p className="text-lg opacity-90">
-              For over two decades, Aashley International School has been a beacon of excellence 
-              in education, nurturing young minds to become confident, compassionate, and 
-              capable individuals.
+              Located in Bangarapet, Kolar District, Karnataka, Aashley International School 
+              is an ICSE-affiliated co-educational institution nurturing young minds to become 
+              confident, compassionate, and capable individuals since 2008.
             </p>
           </div>
         </div>
@@ -217,7 +212,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["CBSE Affiliated", "ISO 9001:2015", "NABET Accredited", "Green School Certified"].map((item, index) => (
+            {["ICSE Affiliated (CISCE)", "English Medium", "Co-Educational", "Pre-Primary to Class 10"].map((item, index) => (
               <Card key={index} className="text-center" data-testid={`accreditation-${index}`}>
                 <CardContent className="p-6">
                   <Award className="h-10 w-10 text-accent mx-auto mb-3" />

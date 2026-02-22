@@ -35,7 +35,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 98765 43210", "+91 98765 43211"],
+    details: ["+91 81234 56789"],
   },
   {
     icon: Mail,
@@ -45,7 +45,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    details: ["123 Education Lane, Knowledge City", "India - 560001"],
+    details: ["Bangarpet Road, next to HP Gas Agency", "Budikote, Bangarapet, Kolar - 563114"],
   },
   {
     icon: Clock,
@@ -55,10 +55,9 @@ const contactInfo = [
 ];
 
 const departments = [
-  { name: "Admissions Office", email: "admissions@aashleyschool.edu", phone: "+91 98765 43212" },
-  { name: "Principal's Office", email: "principal@aashleyschool.edu", phone: "+91 98765 43213" },
-  { name: "Accounts Department", email: "accounts@aashleyschool.edu", phone: "+91 98765 43214" },
-  { name: "Transport Department", email: "transport@aashleyschool.edu", phone: "+91 98765 43215" },
+  { name: "Admissions Office", email: "admissions@aashleyschool.edu", phone: "+91 81234 56789" },
+  { name: "Principal's Office", email: "principal@aashleyschool.edu", phone: "+91 81234 56789" },
+  { name: "Accounts Department", email: "accounts@aashleyschool.edu", phone: "+91 81234 56789" },
 ];
 
 const formSchema = insertContactMessageSchema.extend({
@@ -282,11 +281,17 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Find Us</h2>
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center" data-testid="map-placeholder">
-                  <div className="text-center">
-                    <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-muted-foreground">Interactive Map</p>
-                    <p className="text-sm text-muted-foreground">123 Education Lane, Knowledge City</p>
-                  </div>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d78.17!3d12.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU5JzI0LjAiTiA3OMKwMTAnMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: "300px" }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Aashley International School Location"
+                    data-testid="map-embed"
+                  />
                 </div>
               </div>
 

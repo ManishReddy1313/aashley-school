@@ -20,6 +20,7 @@ const topBarLinks = [
   { href: "/day-at-aashley", label: "A Day at Aashley" },
   { href: "/news", label: "News & Events" },
   { href: "/alumni", label: "Alumni" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -28,6 +29,7 @@ const mainNavLinks = [
   { href: "/about", label: "About Us" },
   { href: "/academics", label: "Academics" },
   { href: "/admissions", label: "Admissions" },
+  { href: "/why-aashley", label: "Why Aashley?" },
   { href: "/portal", label: "Portal" },
 ];
 
@@ -170,6 +172,8 @@ function Footer() {
               <Link href="/academics" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-academics">Academics</Link>
               <Link href="/admissions" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-admissions">Admissions</Link>
               <Link href="/gallery" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-gallery">Gallery</Link>
+              <Link href="/why-aashley" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-why-aashley">Why Aashley?</Link>
+              <Link href="/careers" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-careers">Careers</Link>
               <Link href="/contact" className="text-sm opacity-80 hover:opacity-100 transition-opacity" data-testid="link-footer-contact">Contact</Link>
             </div>
           </div>
@@ -179,7 +183,7 @@ function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 text-sm opacity-80">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 81234 56789</span>
               </div>
               <div className="flex items-center gap-2 text-sm opacity-80">
                 <Mail className="h-4 w-4 flex-shrink-0" />
@@ -187,7 +191,7 @@ function Footer() {
               </div>
               <div className="flex items-start gap-2 text-sm opacity-80">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
-                <span>123 Education Lane, Knowledge City, India - 560001</span>
+                <span>Bangarpet Road, Budikote, Bangarapet, Kolar - 563114</span>
               </div>
             </div>
           </div>

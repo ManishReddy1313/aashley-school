@@ -23,10 +23,10 @@ import {
 } from "lucide-react";
 
 const stats = [
-  { icon: GraduationCap, value: "25+", label: "Years of Excellence" },
-  { icon: Users, value: "2000+", label: "Happy Students" },
-  { icon: BookOpen, value: "100+", label: "Expert Teachers" },
-  { icon: Trophy, value: "500+", label: "Awards Won" },
+  { icon: GraduationCap, value: "Since 2008", label: "Established" },
+  { icon: Users, value: "500+", label: "Happy Students" },
+  { icon: BookOpen, value: "ICSE", label: "Board Affiliation" },
+  { icon: Trophy, value: "4.6/5", label: "Parent Rating" },
 ];
 
 const features = [
@@ -58,19 +58,19 @@ const photoStories = [
 
 const growthStories = [
   {
-    name: "Priya Sharma",
-    role: "Parent",
-    quote: "My son has transformed completely at Aashley. From a shy child to a confident public speaker, the teachers here truly understand each child's potential.",
+    name: "Mrs. Kavitha R.",
+    role: "Parent of Class 5 Student",
+    quote: "Choosing Aashley was the best decision for my child. The teachers are incredibly dedicated and the values-based approach has truly shaped my son's character.",
   },
   {
-    name: "Rahul Kumar",
-    role: "Alumni (Batch 2018)",
-    quote: "The values I learned at Aashley shaped who I am today. Now at IIT Delhi, I still apply the discipline and curiosity this school instilled in me.",
+    name: "Mr. Suresh Kumar",
+    role: "Parent of Class 8 Student",
+    quote: "The ICSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining.",
   },
   {
-    name: "Mrs. Anita Reddy",
-    role: "Parent",
-    quote: "As a vendor's daughter, my child gets the same opportunities as everyone else. Aashley truly believes in inclusive education.",
+    name: "Mrs. Priya Gowda",
+    role: "Parent of Class 3 Student",
+    quote: "The genuine care for every child, nutritious mid-day meals, clean campus, and morning prayer sessions create a nurturing atmosphere beyond just academics.",
   },
 ];
 
@@ -97,15 +97,15 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-hero">
-              Excellence in Education Since 1999
+              ICSE Affiliated | Bangarapet, Kolar
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Nurturing Young Minds,{" "}
               <span className="text-accent">Building Tomorrow's Leaders</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-              At Aashley International School, we believe every child has unique potential. 
-              Our holistic approach combines academic excellence with character development.
+              At Aashley International School, Bangarapet, we nurture every child's unique potential 
+              through our ICSE curriculum, values-based education, and a caring learning environment.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/admissions">
