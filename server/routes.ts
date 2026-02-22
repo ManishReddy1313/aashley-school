@@ -15,23 +15,16 @@ import {
   insertJobApplicationSchema
 } from "@shared/schema";
 
-// Middleware to check if user has admin role
 const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.isAuthenticated || !req.isAuthenticated()) {
+  const user = (req.session as any)?.user || (req as any).user;
+  if (!user) {
     return res.status(401).json({ message: "Not authenticated" });
   }
-  
-  const user = req.user as any;
-  if (!user || !user.id) {
-    return res.status(401).json({ message: "User not found" });
-  }
-  
-  // Check if user has admin role in portal users
-  const portalUser = await storage.getPortalUser(user.id);
-  if (!portalUser || portalUser.role !== "admin") {
+
+  if (user.role !== "admin") {
     return res.status(403).json({ message: "Admin access required" });
   }
-  
+
   next();
 };
 
