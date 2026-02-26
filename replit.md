@@ -18,27 +18,34 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - **Frontend**: React + TypeScript + Vite (client/)
 - **Backend**: Express + TypeScript (server/)
 - **Database**: PostgreSQL with Drizzle ORM
-- **Auth**: Replit Auth (OIDC)
+- **Auth**: Username/password with bcrypt + express-session
 - **Styling**: Tailwind CSS + shadcn/ui components
-- **Theme**: Deep blue primary (#1a365d style) + Gold accent
+- **Theme**: Deep navy primary (HSL 215 70% 22%) + Rich gold accent (HSL 40 100% 50%)
+- **Fonts**: Poppins (body), Playfair Display (headings)
 
-## Pages (12 Public + Portal)
-1. **Home** - Hero with real school images, stats, features, photo stories, testimonials
+## Active Pages (10 Public)
+1. **Home** - Hero with real school images, stats, features, photo stories, testimonials, scroll-reveal animations
 2. **About Us** - Vision/mission, core values, principal's message, milestones, accreditations
 3. **Academics** - ICSE curriculum overview (4 levels), teaching methodology, co-curricular, facilities
 4. **Admissions** - Process steps, enquiry form, downloads, eligibility
-5. **Gallery** - Photo gallery with categories
+5. **Gallery** - Photo gallery with 21 real categorized images and lightbox
 6. **A Day at Aashley** - Daily schedule showcase
-7. **News & Events** - School news and upcoming events
-8. **Alumni** - Alumni registration and stories
-9. **Contact** - Contact form, department info, map embed
-10. **Why Aashley?** - Unique features showcase, comparison table, parent testimonials, principal's message
-11. **Careers** - Job postings, application form, staff testimonials, benefits
-12. **Portal** - Login + Role-based dashboards (Student/Parent/Teacher/Admin)
+7. **Alumni** - Alumni registration and stories
+8. **Contact** - Contact form, department info, map embed
+9. **Why Aashley?** - Unique features showcase, comparison table, parent testimonials
+10. **Careers** - Job postings, application form, staff testimonials, benefits
+
+## Hidden Pages (temporarily disabled)
+- **News & Events** - Route commented out in App.tsx, removed from navigation
+- **Portal** - Routes still accessible but hidden from navigation and footer
 
 ## Navigation Structure
-- **Top Bar** (dark blue): Gallery | A Day at Aashley | News & Events | Alumni | Careers | Contact + Social icons
-- **Main Nav** (white): Home | About Us | Academics | Admissions | Why Aashley? | Portal
+- **Top Bar** (dark navy): Gallery | A Day at Aashley | Alumni | Careers | Contact + Social icons
+- **Main Nav** (white, sticky with backdrop blur): School Logo + Home | About Us | Academics | Admissions | Why Aashley?
+
+## School Logo
+- File: attached_assets/02_school_logo_1772107248114.jpg
+- Displayed as circular image in header and footer (replaces GraduationCap icon)
 
 ## Database Tables
 - portal_users, announcements, events, gallery_items, admission_enquiries
@@ -49,13 +56,23 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - apiRequest signature: `apiRequest(method, url, data)`
 - Forms use react-hook-form + shadcn Form + Zod validation
 - TanStack Query v5 (object form only)
-- Images imported from `@assets/` directory
+- Images imported from `@assets/` directory (50+ real school images)
 - Port 5000 for both frontend and backend
+- Scroll-reveal animations using IntersectionObserver (home page)
+- CSS animations: fade-in-up, slow-zoom, scroll-reveal
+- Scroll-to-top floating button
+- Hover transitions on cards, buttons, navigation items, social icons
+- Mobile menu with smooth expand/collapse animation
 
 ## Recent Changes (Feb 2026)
-- Added "Why Aashley?" page with 12 unique features, comparison table, 4 parent testimonials
-- Added Careers portal with job postings API, application form, staff testimonials
-- Replaced all placeholder content with real Aashley International School data
-- Updated from CBSE to ICSE throughout all pages
-- Real principal name (Mrs. Veenarani B C), real address, real facilities
-- Two-row header navigation matching Cambridge Institute style
+- Hidden Portal from navigation and footer
+- Hidden News & Events page and removed from top bar
+- Removed Upcoming Events section from home page
+- Added school logo (circular) to header and footer
+- Updated color scheme: deeper navy primary, richer gold accent
+- Changed body font to Poppins, headings to Playfair Display
+- Added scroll-reveal animations on home page sections
+- Added hover transitions (cards lift, images zoom, buttons shadow)
+- Added sticky header with backdrop blur on scroll
+- Added scroll-to-top floating button
+- Integrated 50+ real school images across all pages
