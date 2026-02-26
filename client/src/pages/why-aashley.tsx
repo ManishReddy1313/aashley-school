@@ -3,10 +3,12 @@ import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import heroImage from "@assets/IMG_7873_1767427250737.JPG";
-import assemblyImage from "@assets/IMG_7974_1767427250737.JPG";
-import craftImage from "@assets/MVI_8914.00_03_26_02.Still024_1767427250738.png";
-import prayerImage from "@assets/IMG_8154_1767427250738.JPG";
+import heroImage from "@assets/home_entrance2.png";
+import assemblyImage from "@assets/hero_5.jpg";
+import classroomImage from "@assets/classroom_1.png";
+import sportsImage from "@assets/sports_2.png";
+import labImage from "@assets/lab_3.png";
+import teachersImage from "@assets/teachers_group.png";
 import {
   GraduationCap,
   Users,
@@ -230,27 +232,37 @@ export default function WhyAashleyPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="relative group overflow-hidden rounded-lg aspect-[4/3]" data-testid="photo-campus-1">
-              <img src={assemblyImage} alt="Morning Assembly at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={classroomImage} alt="Classroom Learning at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h4 className="font-semibold text-white">Morning Assembly</h4>
-                <p className="text-white/80 text-sm">Starting every day with discipline and prayer</p>
+                <h4 className="font-semibold text-white">Classroom Learning</h4>
+                <p className="text-white/80 text-sm">Interactive, student-centered education</p>
               </div>
             </div>
             <div className="relative group overflow-hidden rounded-lg aspect-[4/3]" data-testid="photo-campus-2">
-              <img src={craftImage} alt="Creative Activities at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={labImage} alt="Science Lab at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h4 className="font-semibold text-white">Creative Learning</h4>
-                <p className="text-white/80 text-sm">Hands-on activities that spark imagination</p>
+                <h4 className="font-semibold text-white">Hands-on Science</h4>
+                <p className="text-white/80 text-sm">Fully equipped labs for practical learning</p>
               </div>
             </div>
             <div className="relative group overflow-hidden rounded-lg aspect-[4/3]" data-testid="photo-campus-3">
-              <img src={prayerImage} alt="Prayer Session at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={sportsImage} alt="Sports Champions at Aashley" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h4 className="font-semibold text-white">Values Education</h4>
-                <p className="text-white/80 text-sm">Building character through daily prayers</p>
+                <h4 className="font-semibold text-white">Sports Excellence</h4>
+                <p className="text-white/80 text-sm">Championship-winning sports teams</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6">
+            <div className="relative group overflow-hidden rounded-lg aspect-[21/9]" data-testid="photo-campus-teachers">
+              <img src={teachersImage} alt="Our dedicated teaching faculty" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h4 className="font-semibold text-white text-lg">Our Dedicated Faculty</h4>
+                <p className="text-white/80 text-sm">Individual Attention, Homely Care, Promising Future</p>
               </div>
             </div>
           </div>

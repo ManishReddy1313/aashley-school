@@ -2,6 +2,12 @@ import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import classroomImage from "@assets/classroom_1.png";
+import labImage from "@assets/lab_1.png";
+import scienceLabImage from "@assets/lab_3.png";
+import classroomImage2 from "@assets/classroom_4.png";
+import sportsImage from "@assets/sports_2.png";
+import labEquipment from "@assets/lab_6.png";
 import { 
   BookOpen, 
   Calculator, 
@@ -53,22 +59,26 @@ const coCurricularActivities = [
   { icon: Trophy, name: "Sports Academy", description: "Cricket, football, basketball, athletics, and more" },
 ];
 
-const facilities = [
-  { icon: Beaker, name: "Science Labs", description: "Well-equipped Physics, Chemistry, and Biology labs" },
-  { icon: Code, name: "Computer Lab", description: "Modern computers with high-speed internet" },
-  { icon: BookOpen, name: "Library", description: "Extensive collection of books and digital resources" },
-  { icon: Dumbbell, name: "Sports Complex", description: "Indoor and outdoor sports facilities" },
-  { icon: Music, name: "Music Room", description: "Instruments and soundproof practice rooms" },
-  { icon: Palette, name: "Art Studio", description: "Dedicated space for creative expression" },
+const facilityImages = [
+  { name: "Science Labs", description: "Well-equipped Physics, Chemistry, and Biology labs", image: scienceLabImage },
+  { name: "Computer Lab", description: "Modern computers with interactive smart boards", image: labImage },
+  { name: "Classrooms", description: "20 spacious, well-equipped smart classrooms", image: classroomImage2 },
+  { name: "Sports Complex", description: "Dedicated playground and indoor sports facilities", image: sportsImage },
+  { name: "Library", description: "Extensive collection of 500+ books and digital resources", image: classroomImage },
+  { name: "Lab Equipment", description: "Modern scientific instruments for hands-on learning", image: labEquipment },
 ];
 
 export default function AcademicsPage() {
   return (
     <PublicLayout>
-      {/* Hero Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
+      {/* Hero Section with Image */}
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img src={classroomImage} alt="Classroom at Aashley International School" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/85" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-primary-foreground">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-academics">
               Academics & Programs
             </Badge>
@@ -150,7 +160,7 @@ export default function AcademicsPage() {
         </div>
       </section>
 
-      {/* Teaching Methodology */}
+      {/* Teaching Methodology with Image */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -180,31 +190,24 @@ export default function AcademicsPage() {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="bg-primary text-primary-foreground">
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold mb-2">15:1</div>
-                  <div className="text-sm opacity-80">Student-Teacher Ratio</div>
-                </CardContent>
-              </Card>
-              <Card className="bg-accent text-accent-foreground">
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold mb-2">100%</div>
-                  <div className="text-sm">Smart Classrooms</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">98%</div>
-                  <div className="text-sm text-muted-foreground">Board Exam Pass Rate</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">50+</div>
-                  <div className="text-sm text-muted-foreground">Activity Clubs</div>
-                </CardContent>
-              </Card>
+            <div className="space-y-4">
+              <div className="rounded-lg overflow-hidden aspect-video">
+                <img src={labImage} alt="Interactive smart board teaching at Aashley" className="w-full h-full object-cover" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <Card className="bg-primary text-primary-foreground">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl font-bold mb-2">15:1</div>
+                    <div className="text-sm opacity-80">Student-Teacher Ratio</div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-accent text-accent-foreground">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl font-bold mb-2">100%</div>
+                    <div className="text-sm">Smart Classrooms</div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
@@ -236,7 +239,7 @@ export default function AcademicsPage() {
         </div>
       </section>
 
-      {/* Facilities */}
+      {/* Facilities with Real Images */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -247,15 +250,24 @@ export default function AcademicsPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {facilities.map((facility, index) => (
+            {facilityImages.map((facility, index) => (
               <div 
                 key={index} 
-                className="bg-primary-foreground/10 rounded-lg p-6 text-center"
+                className="group relative overflow-hidden rounded-lg"
                 data-testid={`facility-${index}`}
               >
-                <facility.icon className="h-10 w-10 text-accent mx-auto mb-3" />
-                <h4 className="font-semibold mb-1">{facility.name}</h4>
-                <p className="text-sm opacity-80">{facility.description}</p>
+                <div className="aspect-[4/3]">
+                  <img 
+                    src={facility.image} 
+                    alt={facility.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h4 className="font-semibold text-white mb-1">{facility.name}</h4>
+                    <p className="text-sm text-white/80">{facility.description}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

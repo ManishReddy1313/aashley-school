@@ -2,40 +2,68 @@ import { useState } from "react";
 import { PublicLayout } from "@/components/public-layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { 
   Camera, 
   X,
   ChevronLeft,
   ChevronRight,
-  Calendar,
-  MapPin
 } from "lucide-react";
+
+import buildingImg1 from "@assets/home_entrance.png";
+import buildingImg2 from "@assets/home_entrance2.png";
+import assemblyImg1 from "@assets/hero_2.jpg";
+import assemblyImg2 from "@assets/hero_assembly.jpg";
+import assemblyImg3 from "@assets/hero_3.jpg";
+import studentsImg1 from "@assets/hero_1.jpg";
+import studentsImg2 from "@assets/hero_indoor1.jpg";
+import exerciseImg from "@assets/home_6.jpg";
+import classroomImg1 from "@assets/classroom_1.png";
+import classroomImg2 from "@assets/classroom_2.png";
+import classroomImg3 from "@assets/classroom_3.png";
+import labImg1 from "@assets/lab_1.png";
+import labImg2 from "@assets/lab_3.png";
+import labImg3 from "@assets/lab_4.png";
+import labImg4 from "@assets/lab_6.png";
+import sportsImg1 from "@assets/sports_1.png";
+import sportsImg2 from "@assets/sports_2.png";
+import sportsImg3 from "@assets/sports_3.png";
+import sportsImg4 from "@assets/sports_6.png";
+import teachersImg from "@assets/teachers_group.png";
+import prayerImg from "@assets/hero_building.png";
 
 const categories = [
   "All",
-  "Events",
+  "Campus",
   "Daily Life",
   "Sports",
-  "Arts & Culture",
   "Academics",
-  "Campus",
+  "Labs",
+  "Faculty",
 ];
 
 const galleryItems = [
-  { id: 1, title: "Annual Day 2024", category: "Events", description: "Students performing at the annual cultural festival", size: "large" },
-  { id: 2, title: "Morning Assembly", category: "Daily Life", description: "Students gathered for the morning prayer", size: "medium" },
-  { id: 3, title: "Science Exhibition", category: "Academics", description: "Innovative projects by students", size: "medium" },
-  { id: 4, title: "Sports Day", category: "Sports", description: "Inter-house athletics competition", size: "small" },
-  { id: 5, title: "Art Class", category: "Arts & Culture", description: "Creative expression in art studio", size: "small" },
-  { id: 6, title: "Library Session", category: "Academics", description: "Students exploring the world of books", size: "small" },
-  { id: 7, title: "Music Practice", category: "Arts & Culture", description: "Instrumental training session", size: "medium" },
-  { id: 8, title: "Campus View", category: "Campus", description: "Aerial view of our beautiful campus", size: "large" },
-  { id: 9, title: "Basketball Match", category: "Sports", description: "Inter-school basketball tournament", size: "small" },
-  { id: 10, title: "Independence Day", category: "Events", description: "Flag hoisting ceremony", size: "medium" },
-  { id: 11, title: "Classroom Learning", category: "Daily Life", description: "Interactive learning session", size: "small" },
-  { id: 12, title: "Dance Performance", category: "Arts & Culture", description: "Classical dance at cultural event", size: "small" },
+  { id: 1, title: "School Building", category: "Campus", description: "The majestic Aashley International School campus", size: "large" as const, image: buildingImg1 },
+  { id: 2, title: "Morning Assembly", category: "Daily Life", description: "Students gathered for the morning assembly", size: "medium" as const, image: assemblyImg1 },
+  { id: 3, title: "Smart Board Teaching", category: "Academics", description: "Chemistry class with interactive smart board", size: "medium" as const, image: labImg1 },
+  { id: 4, title: "Chess Club", category: "Sports", description: "Student developing strategic thinking through chess", size: "small" as const, image: sportsImg1 },
+  { id: 5, title: "Pre-Primary Assembly", category: "Daily Life", description: "Young students in formation during morning assembly", size: "small" as const, image: assemblyImg2 },
+  { id: 6, title: "Science Lab", category: "Labs", description: "Students conducting physics experiments", size: "small" as const, image: labImg2 },
+  { id: 7, title: "Trophy Winners", category: "Sports", description: "Girls volleyball team with championship trophy", size: "medium" as const, image: sportsImg2 },
+  { id: 8, title: "Campus Panorama", category: "Campus", description: "Students at assembly with school building backdrop", size: "large" as const, image: buildingImg2 },
+  { id: 9, title: "Physical Training", category: "Daily Life", description: "Students participating in morning exercises", size: "small" as const, image: exerciseImg },
+  { id: 10, title: "Classroom Learning", category: "Academics", description: "Senior students studying with teacher supervision", size: "medium" as const, image: classroomImg1 },
+  { id: 11, title: "Senior Students", category: "Daily Life", description: "Senior girls during school assembly", size: "small" as const, image: studentsImg2 },
+  { id: 12, title: "Creative Learning", category: "Academics", description: "Young student engaged in classroom activities", size: "small" as const, image: prayerImg },
+  { id: 13, title: "Lab Experiments", category: "Labs", description: "Students with physics lab equipment", size: "small" as const, image: labImg3 },
+  { id: 14, title: "Our Faculty", category: "Faculty", description: "The dedicated teaching team of Aashley International", size: "large" as const, image: teachersImg },
+  { id: 15, title: "Outdoor Sports", category: "Sports", description: "Students enjoying outdoor activities", size: "small" as const, image: sportsImg3 },
+  { id: 16, title: "Classroom Session", category: "Academics", description: "Interactive classroom learning", size: "medium" as const, image: classroomImg2 },
+  { id: 17, title: "Junior Students", category: "Daily Life", description: "Pre-primary students in school uniform", size: "small" as const, image: assemblyImg3 },
+  { id: 18, title: "Team Sports", category: "Sports", description: "Students competing in team sports", size: "small" as const, image: sportsImg4 },
+  { id: 19, title: "Science Practical", category: "Labs", description: "Hands-on learning in the science laboratory", size: "medium" as const, image: labImg4 },
+  { id: 20, title: "Senior Classroom", category: "Academics", description: "Students focused on their studies", size: "small" as const, image: classroomImg3 },
+  { id: 21, title: "Boys Assembly", category: "Daily Life", description: "Boys standing in formation during assembly", size: "small" as const, image: studentsImg1 },
 ];
 
 export default function GalleryPage() {
@@ -61,9 +89,13 @@ export default function GalleryPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img src={buildingImg2} alt="Aashley International School" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/85" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-primary-foreground">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-gallery">
               Photo Stories
             </Badge>
@@ -111,16 +143,16 @@ export default function GalleryPage() {
                 onClick={() => setSelectedImage(item.id)}
                 data-testid={`gallery-item-${item.id}`}
               >
-                <div className={`bg-gradient-to-br from-primary/20 to-accent/20 relative ${
+                <div className={`relative ${
                   item.size === "large" ? "aspect-square" : 
                   item.size === "medium" ? "aspect-[3/4]" : "aspect-square"
                 }`}>
-                  {/* Placeholder for image */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Camera className="h-12 w-12 text-primary/30" />
-                  </div>
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-white">
                     <h4 className="font-semibold text-center mb-1">{item.title}</h4>
                     <p className="text-sm text-center opacity-80">{item.description}</p>
@@ -142,9 +174,8 @@ export default function GalleryPage() {
 
       {/* Lightbox Dialog */}
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-4xl p-0 bg-black/90 border-0">
+        <DialogContent className="max-w-4xl p-0 bg-black/95 border-0">
           <div className="relative">
-            {/* Close button */}
             <Button
               variant="ghost"
               size="icon"
@@ -155,7 +186,6 @@ export default function GalleryPage() {
               <X className="h-6 w-6" />
             </Button>
 
-            {/* Navigation */}
             <Button
               variant="ghost"
               size="icon"
@@ -175,25 +205,27 @@ export default function GalleryPage() {
               <ChevronRight className="h-8 w-8" />
             </Button>
 
-            {/* Image content */}
-            {selectedImage && (
-              <div className="aspect-video flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Camera className="h-24 w-24 text-white/30 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {filteredItems.find(i => i.id === selectedImage)?.title}
-                  </h3>
-                  <p className="text-white/70">
-                    {filteredItems.find(i => i.id === selectedImage)?.description}
-                  </p>
+            {selectedImage && (() => {
+              const item = filteredItems.find(i => i.id === selectedImage);
+              return item ? (
+                <div className="flex flex-col items-center">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="max-h-[80vh] w-full object-contain"
+                  />
+                  <div className="p-4 text-center">
+                    <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
+                    <p className="text-white/70 text-sm">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              ) : null;
+            })()}
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Instagram Wall Teaser */}
+      {/* Instagram Wall with real images */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -206,13 +238,13 @@ export default function GalleryPage() {
           </div>
 
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-            {[...Array(6)].map((_, index) => (
+            {[assemblyImg2, sportsImg2, classroomImg1, prayerImg, labImg1, exerciseImg].map((img, index) => (
               <div 
                 key={index}
-                className="aspect-square bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg flex items-center justify-center hover-elevate cursor-pointer"
+                className="aspect-square overflow-hidden rounded-lg hover-elevate cursor-pointer"
                 data-testid={`instagram-item-${index}`}
               >
-                <Camera className="h-8 w-8 text-primary/30" />
+                <img src={img} alt={`School life ${index + 1}`} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
               </div>
             ))}
           </div>
