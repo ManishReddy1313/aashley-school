@@ -88,7 +88,7 @@ function Header() {
               <img 
                 src={schoolLogo} 
                 alt="Aashley International School" 
-                className="w-12 h-12 rounded-full object-cover border-2 border-accent shadow-md transition-transform duration-300 group-hover:scale-105"
+                className="h-12 object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
@@ -185,7 +185,7 @@ function Footer() {
               <img 
                 src={schoolLogo} 
                 alt="Aashley International School" 
-                className="w-14 h-14 rounded-full object-cover border-2 border-accent"
+                className="h-14 object-contain"
               />
             </div>
             <p className="text-sm opacity-80 mb-4">
