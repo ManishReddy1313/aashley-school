@@ -84,16 +84,12 @@ function Header() {
       <div className={`bg-background border-b transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md" : ""}`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
-            <Link href="/" className="flex items-center gap-3 flex-shrink-0 group" data-testid="link-home-logo">
+            <Link href="/" className="flex-shrink-0 group" data-testid="link-home-logo">
               <img 
                 src={schoolLogo} 
-                alt="Aashley International School Logo" 
+                alt="Aashley International School" 
                 className="w-12 h-12 rounded-full object-cover border-2 border-accent shadow-md transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="hidden sm:block">
-                <span className="font-serif font-bold text-lg tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary">Aashley International</span>
-                <span className="text-xs text-muted-foreground block -mt-0.5 tracking-wider uppercase">School</span>
-              </div>
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">
@@ -185,16 +181,12 @@ function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="mb-4">
               <img 
                 src={schoolLogo} 
                 alt="Aashley International School" 
-                className="w-12 h-12 rounded-full object-cover border-2 border-accent"
+                className="w-14 h-14 rounded-full object-cover border-2 border-accent"
               />
-              <div>
-                <span className="font-serif font-bold text-lg">Aashley International</span>
-                <span className="text-xs opacity-80 block -mt-0.5 tracking-wider uppercase">School</span>
-              </div>
             </div>
             <p className="text-sm opacity-80 mb-4">
               Rooted in Values, Rising with Confidence.
