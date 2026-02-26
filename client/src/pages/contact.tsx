@@ -30,7 +30,7 @@ import {
   Instagram,
   Youtube
 } from "lucide-react";
-import buildingImage from "@assets/home_entrance.png";
+import buildingImage from "@assets/home_entrance.jpg";
 
 const contactInfo = [
   {
@@ -111,7 +111,7 @@ export default function ContactPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={buildingImage} alt="Aashley International School Campus" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

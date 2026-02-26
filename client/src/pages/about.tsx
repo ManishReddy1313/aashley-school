@@ -1,9 +1,9 @@
 import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import buildingImage from "@assets/home_entrance.png";
-import teachersImage from "@assets/teachers_group.png";
-import classroomImage from "@assets/classroom_1.png";
+import buildingImage from "@assets/home_entrance.jpg";
+import teachersImage from "@assets/teachers_group.jpg";
+import classroomImage from "@assets/classroom_1.jpg";
 import assemblyImage from "@assets/hero_2.jpg";
 import { 
   Target, 
@@ -48,7 +48,7 @@ export default function AboutPage() {
   return (
     <PublicLayout>
       {/* Hero Section with Image */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={assemblyImage} alt="Aashley International School Assembly" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

@@ -10,27 +10,27 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import buildingImg1 from "@assets/home_entrance.png";
-import buildingImg2 from "@assets/home_entrance2.png";
+import buildingImg1 from "@assets/home_entrance.jpg";
+import buildingImg2 from "@assets/home_entrance2.jpg";
 import assemblyImg1 from "@assets/hero_2.jpg";
 import assemblyImg2 from "@assets/hero_assembly.jpg";
 import assemblyImg3 from "@assets/hero_3.jpg";
 import studentsImg1 from "@assets/hero_1.jpg";
 import studentsImg2 from "@assets/hero_indoor1.jpg";
 import exerciseImg from "@assets/home_6.jpg";
-import classroomImg1 from "@assets/classroom_1.png";
-import classroomImg2 from "@assets/classroom_2.png";
-import classroomImg3 from "@assets/classroom_3.png";
-import labImg1 from "@assets/lab_1.png";
-import labImg2 from "@assets/lab_3.png";
-import labImg3 from "@assets/lab_4.png";
-import labImg4 from "@assets/lab_6.png";
-import sportsImg1 from "@assets/sports_1.png";
-import sportsImg2 from "@assets/sports_2.png";
-import sportsImg3 from "@assets/sports_3.png";
-import sportsImg4 from "@assets/sports_6.png";
-import teachersImg from "@assets/teachers_group.png";
-import prayerImg from "@assets/hero_building.png";
+import classroomImg1 from "@assets/classroom_1.jpg";
+import classroomImg2 from "@assets/classroom_2.jpg";
+import classroomImg3 from "@assets/classroom_3.jpg";
+import labImg1 from "@assets/lab_1.jpg";
+import labImg2 from "@assets/lab_3.jpg";
+import labImg3 from "@assets/lab_4.jpg";
+import labImg4 from "@assets/lab_6.jpg";
+import sportsImg1 from "@assets/sports_1.jpg";
+import sportsImg2 from "@assets/sports_2.jpg";
+import sportsImg3 from "@assets/sports_3.jpg";
+import sportsImg4 from "@assets/sports_6.jpg";
+import teachersImg from "@assets/teachers_group.jpg";
+import prayerImg from "@assets/hero_building.jpg";
 
 const categories = [
   "All",
@@ -89,7 +89,7 @@ export default function GalleryPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={buildingImg2} alt="Aashley International School" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

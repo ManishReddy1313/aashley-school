@@ -3,12 +3,12 @@ import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import heroImage from "@assets/home_entrance2.png";
+import heroImage from "@assets/home_entrance2.jpg";
 import assemblyImage from "@assets/hero_5.jpg";
-import classroomImage from "@assets/classroom_1.png";
-import sportsImage from "@assets/sports_2.png";
-import labImage from "@assets/lab_3.png";
-import teachersImage from "@assets/teachers_group.png";
+import classroomImage from "@assets/classroom_1.jpg";
+import sportsImage from "@assets/sports_2.jpg";
+import labImage from "@assets/lab_3.jpg";
+import teachersImage from "@assets/teachers_group.jpg";
 import {
   GraduationCap,
   Users,
@@ -142,7 +142,7 @@ export default function WhyAashleyPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center">
+      <section className="relative min-h-[60vh] flex items-center -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img
             src={heroImage}

@@ -24,7 +24,7 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - **Fonts**: Poppins (body), Playfair Display (headings)
 
 ## Active Pages (10 Public)
-1. **Home** - Hero with real school images, stats, features, photo stories, testimonials, scroll-reveal animations
+1. **Home** - Hero slider (3 images, auto-advance), stats, features, photo stories, testimonials, scroll-reveal animations
 2. **About Us** - Vision/mission, core values, principal's message, milestones, accreditations
 3. **Academics** - ICSE curriculum overview (4 levels), teaching methodology, co-curricular, facilities
 4. **Admissions** - Process steps, enquiry form, downloads, eligibility
@@ -40,12 +40,19 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - **Portal** - Routes still accessible but hidden from navigation and footer
 
 ## Navigation Structure
-- **Top Bar** (dark navy): Gallery | A Day at Aashley | Alumni | Careers | Contact + Social icons
-- **Main Nav** (white, sticky with backdrop blur): School Logo + Home | About Us | Academics | Admissions | Why Aashley?
+- **Top Bar** (dark navy, hides on scroll): Gallery | A Day at Aashley | Alumni | Careers | Contact + Social icons
+- **Main Nav** (fixed floating, backdrop blur on scroll): School Logo + Home | About Us | Academics | Admissions | Why Aashley?
 
 ## School Logo
 - File: attached_assets/02_school_logo_1772107248114.jpg
-- Displayed as circular image in header and footer (replaces GraduationCap icon)
+- Displayed as rectangular image in header and footer
+
+## Image Optimization
+- All images optimized with sharp: PNGs converted to JPGs, resized to max 1920px width
+- Logo: 18MB -> optimized
+- Average image: 2-3MB -> 0.1-0.3MB (10x reduction)
+- All imports use .jpg extension after conversion
+- Images use loading="lazy" for off-screen content
 
 ## Database Tables
 - portal_users, announcements, events, gallery_items, admission_enquiries
@@ -56,23 +63,30 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - apiRequest signature: `apiRequest(method, url, data)`
 - Forms use react-hook-form + shadcn Form + Zod validation
 - TanStack Query v5 (object form only)
-- Images imported from `@assets/` directory (50+ real school images)
+- Images imported from `@assets/` directory (50+ real school images, optimized JPGs)
 - Port 5000 for both frontend and backend
-- Scroll-reveal animations using IntersectionObserver (home page)
+- Hero slider: 3 slides, 6s auto-advance, crossfade transition
+- Fixed floating header: top bar collapses on scroll, main nav gets backdrop blur
+- Hero sections use -mt-[100px] to overlap behind floating header
+- Scroll-reveal animations using IntersectionObserver
 - CSS animations: fade-in-up, slow-zoom, scroll-reveal
 - Scroll-to-top floating button
 - Hover transitions on cards, buttons, navigation items, social icons
 - Mobile menu with smooth expand/collapse animation
 
 ## Recent Changes (Feb 2026)
+- Optimized all images (10x size reduction, PNG to JPG conversion)
+- Added 3-slide hero slider with auto-advance and dot navigation
+- Made header fully floating/fixed with scroll-aware behavior
+- Top bar collapses smoothly when scrolling, main nav stays with blur
+- Hero sections overlap behind floating header for premium look
 - Hidden Portal from navigation and footer
 - Hidden News & Events page and removed from top bar
 - Removed Upcoming Events section from home page
-- Added school logo (circular) to header and footer
+- Added school logo (rectangular) to header and footer
 - Updated color scheme: deeper navy primary, richer gold accent
 - Changed body font to Poppins, headings to Playfair Display
 - Added scroll-reveal animations on home page sections
 - Added hover transitions (cards lift, images zoom, buttons shadow)
-- Added sticky header with backdrop blur on scroll
 - Added scroll-to-top floating button
 - Integrated 50+ real school images across all pages

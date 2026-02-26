@@ -2,11 +2,11 @@ import { PublicLayout } from "@/components/public-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import assemblyImage from "@assets/hero_assembly.jpg";
-import classroomImage from "@assets/classroom_1.png";
-import labImage from "@assets/lab_1.png";
-import sportsImage from "@assets/sports_1.png";
+import classroomImage from "@assets/classroom_1.jpg";
+import labImage from "@assets/lab_1.jpg";
+import sportsImage from "@assets/sports_1.jpg";
 import exerciseImage from "@assets/home_6.jpg";
-import buildingImage from "@assets/home_entrance2.png";
+import buildingImage from "@assets/home_entrance2.jpg";
 import { 
   Sun, 
   Coffee, 
@@ -105,7 +105,7 @@ export default function DayAtAashleyPage() {
   return (
     <PublicLayout>
       {/* Hero Section with Image */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={exerciseImage} alt="Students during morning activities at Aashley" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

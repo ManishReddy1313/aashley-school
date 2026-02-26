@@ -46,42 +46,44 @@ function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-lg" : ""}`}>
-      <div className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-9">
-            <div className="hidden md:flex items-center gap-1">
-              {topBarLinks.map((link, index) => (
-                <span key={link.href} className="flex items-center">
-                  <Link 
-                    href={link.href}
-                    className="text-xs hover:text-accent transition-colors duration-200 px-2"
-                    data-testid={`link-topbar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {link.label}
-                  </Link>
-                  {index < topBarLinks.length - 1 && (
-                    <span className="text-primary-foreground/40">|</span>
-                  )}
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-3 ml-auto">
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-facebook">
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram">
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-youtube">
-                <Youtube className="h-4 w-4" />
-              </a>
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className={`transition-all duration-300 ${scrolled ? "h-0 overflow-hidden opacity-0" : "h-9 opacity-100"}`}>
+        <div className="bg-primary text-primary-foreground h-9">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between h-9">
+              <div className="hidden md:flex items-center gap-1">
+                {topBarLinks.map((link, index) => (
+                  <span key={link.href} className="flex items-center">
+                    <Link 
+                      href={link.href}
+                      className="text-xs hover:text-accent transition-colors duration-200 px-2"
+                      data-testid={`link-topbar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    >
+                      {link.label}
+                    </Link>
+                    {index < topBarLinks.length - 1 && (
+                      <span className="text-primary-foreground/40">|</span>
+                    )}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-3 ml-auto">
+                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-facebook">
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram">
+                  <Instagram className="h-4 w-4" />
+                </a>
+                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-youtube">
+                  <Youtube className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className={`bg-background border-b transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md" : ""}`}>
+      <div className={`transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-xl shadow-lg border-b" : "bg-background border-b"}`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
             <Link href="/" className="flex-shrink-0 group" data-testid="link-home-logo">
@@ -260,7 +262,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 pt-[100px]">
         {children}
       </main>
       <Footer />

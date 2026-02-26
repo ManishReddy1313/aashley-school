@@ -2,12 +2,12 @@ import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import classroomImage from "@assets/classroom_1.png";
-import labImage from "@assets/lab_1.png";
-import scienceLabImage from "@assets/lab_3.png";
-import classroomImage2 from "@assets/classroom_4.png";
-import sportsImage from "@assets/sports_2.png";
-import labEquipment from "@assets/lab_6.png";
+import classroomImage from "@assets/classroom_1.jpg";
+import labImage from "@assets/lab_1.jpg";
+import scienceLabImage from "@assets/lab_3.jpg";
+import classroomImage2 from "@assets/classroom_4.jpg";
+import sportsImage from "@assets/sports_2.jpg";
+import labEquipment from "@assets/lab_6.jpg";
 import { 
   BookOpen, 
   Calculator, 
@@ -72,7 +72,7 @@ export default function AcademicsPage() {
   return (
     <PublicLayout>
       {/* Hero Section with Image */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={classroomImage} alt="Classroom at Aashley International School" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

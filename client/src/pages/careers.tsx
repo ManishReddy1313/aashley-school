@@ -47,8 +47,8 @@ import {
   BookOpen,
   CheckCircle,
 } from "lucide-react";
-import teachersImage from "@assets/teachers_group.png";
-import classroomImage from "@assets/classroom_1.png";
+import teachersImage from "@assets/teachers_group.jpg";
+import classroomImage from "@assets/classroom_1.jpg";
 
 const staffTestimonials = [
   {
@@ -258,7 +258,7 @@ export default function CareersPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-20 -mt-[100px] pt-[100px]">
         <div className="absolute inset-0">
           <img src={teachersImage} alt="Teaching faculty of Aashley International School" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

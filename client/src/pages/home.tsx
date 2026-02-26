@@ -1,18 +1,20 @@
 import { Link } from "wouter";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PublicLayout } from "@/components/public-layout";
-import heroImage from "@assets/home_entrance2.png";
-import heroStudents from "@assets/hero_1.jpg";
-import prayerImage from "@assets/hero_building.png";
-import assemblyImage from "@assets/hero_5.jpg";
-import classroomImage from "@assets/classroom_1.png";
-import sportsImage from "@assets/sports_2.png";
-import labImage from "@assets/lab_1.png";
+import heroImage1 from "@assets/home_entrance2.jpg";
+import heroImage2 from "@assets/hero_5.jpg";
+import heroImage3 from "@assets/hero_assembly.jpg";
+import prayerImage from "@assets/hero_building.jpg";
+import classroomImage from "@assets/classroom_1.jpg";
+import sportsImage from "@assets/sports_2.jpg";
+import labImage from "@assets/lab_1.jpg";
 import exerciseImage from "@assets/home_6.jpg";
-import buildingImage from "@assets/home_entrance.png";
+import buildingImage from "@assets/home_entrance.jpg";
+import heroStudents from "@assets/hero_1.jpg";
+import assemblyImage from "@assets/hero_5.jpg";
 import { 
   GraduationCap, 
   Users, 
@@ -55,6 +57,27 @@ function RevealSection({ children, className = "", delay = 0 }: { children: Reac
     </div>
   );
 }
+
+const heroSlides = [
+  {
+    image: heroImage1,
+    title: "Nurturing Young Minds,",
+    highlight: "Building Tomorrow's Leaders",
+    subtitle: "At Aashley International School, Bangarapet, we nurture every child's unique potential through our ICSE curriculum, values-based education, and a caring learning environment.",
+  },
+  {
+    image: heroImage2,
+    title: "Where Learning Meets",
+    highlight: "Excellence & Values",
+    subtitle: "Our ICSE curriculum combined with holistic development programs creates well-rounded students ready to take on the world with confidence.",
+  },
+  {
+    image: heroImage3,
+    title: "Rooted in Values,",
+    highlight: "Rising with Confidence",
+    subtitle: "From morning assembly to co-curricular activities, every moment at Aashley is designed to inspire curiosity, build character, and foster lifelong learning.",
+  },
+];
 
 const stats = [
   { icon: GraduationCap, value: "Since 2008", label: "Established" },
@@ -113,48 +136,104 @@ const growthStories = [
   },
 ];
 
+function HeroSlider() {
+  const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goToSlide = useCallback((index: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrent(index);
+    setTimeout(() => setIsTransitioning(false), 800);
+  }, [isTransitioning]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setCurrent(prev => (prev + 1) % heroSlides.length);
+    }, 6000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  return (
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden -mt-[100px] pt-[100px]" data-testid="hero-slider">
+      {heroSlides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+            index === current ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt={`Aashley International School - ${slide.title}`}
+            className="w-full h-full object-cover"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/25" />
+        </div>
+      ))}
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-2xl">
+          <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-hero">
+            ICSE Affiliated | Bangarapet, Kolar
+          </Badge>
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`transition-all duration-700 ${
+                index === current
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4 absolute pointer-events-none"
+              }`}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+                {slide.title}{" "}
+                <span className="text-accent">{slide.highlight}</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+                {slide.subtitle}
+              </p>
+            </div>
+          ))}
+          <div className="flex flex-wrap gap-4">
+            <Link href="/admissions">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-testid="button-hero-admissions">
+                Apply for Admission
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/about">
+              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-testid="button-hero-learn-more">
+                Learn More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3" data-testid="hero-dots">
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`h-2 rounded-full transition-all duration-500 ${
+              index === current ? "w-8 bg-accent" : "w-2 bg-white/50 hover:bg-white/80"
+            }`}
+            data-testid={`hero-dot-${index}`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   return (
     <PublicLayout>
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src={heroImage} 
-            alt="Aashley International School - Students at morning assembly" 
-            className="w-full h-full object-cover animate-slow-zoom"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-2xl animate-fade-in-up">
-            <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-hero">
-              ICSE Affiliated | Bangarapet, Kolar
-            </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-              Nurturing Young Minds,{" "}
-              <span className="text-accent">Building Tomorrow's Leaders</span>
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-              At Aashley International School, Bangarapet, we nurture every child's unique potential 
-              through our ICSE curriculum, values-based education, and a caring learning environment.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/admissions">
-                <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-testid="button-hero-admissions">
-                  Apply for Admission
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-testid="button-hero-learn-more">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
 
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
@@ -194,6 +273,7 @@ export default function HomePage() {
                       src={feature.image} 
                       alt={feature.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300" />
                   </div>
@@ -246,6 +326,7 @@ export default function HomePage() {
                       src={story.image} 
                       alt={story.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-400">
@@ -305,6 +386,7 @@ export default function HomePage() {
             src={exerciseImage} 
             alt="Students at Aashley International School" 
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-primary/90" />
         </div>
