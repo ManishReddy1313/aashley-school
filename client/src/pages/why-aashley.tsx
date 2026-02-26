@@ -142,7 +142,7 @@ export default function WhyAashleyPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center -mt-[100px] pt-[100px]">
+      <section className="relative min-h-[60vh] flex items-center">
         <div className="absolute inset-0">
           <img
             src={heroImage}

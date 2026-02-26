@@ -105,7 +105,7 @@ export default function DayAtAashleyPage() {
   return (
     <PublicLayout>
       {/* Hero Section with Image */}
-      <section className="relative py-20 -mt-[100px] pt-[100px]">
+      <section className="relative py-20">
         <div className="absolute inset-0">
           <img src={exerciseImage} alt="Students during morning activities at Aashley" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />

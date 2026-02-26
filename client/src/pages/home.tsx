@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PublicLayout } from "@/components/public-layout";
-import heroImage1 from "@assets/home_entrance2.jpg";
+import heroImage1 from "@assets/hero_2.jpg";
 import heroImage2 from "@assets/hero_5.jpg";
 import heroImage3 from "@assets/hero_assembly.jpg";
 import prayerImage from "@assets/hero_building.jpg";
@@ -156,7 +156,7 @@ function HeroSlider() {
   }, []);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden -mt-[100px] pt-[100px]" data-testid="hero-slider">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden" data-testid="hero-slider">
       {heroSlides.map((slide, index) => (
         <div
           key={index}

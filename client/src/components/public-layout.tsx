@@ -35,55 +35,46 @@ const mainNavLinks = [
 function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const allNavLinks = [...mainNavLinks, ...topBarLinks];
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className={`transition-all duration-300 ${scrolled ? "h-0 overflow-hidden opacity-0" : "h-9 opacity-100"}`}>
-        <div className="bg-primary text-primary-foreground h-9">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between h-9">
-              <div className="hidden md:flex items-center gap-1">
-                {topBarLinks.map((link, index) => (
-                  <span key={link.href} className="flex items-center">
-                    <Link 
-                      href={link.href}
-                      className="text-xs hover:text-accent transition-colors duration-200 px-2"
-                      data-testid={`link-topbar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    >
-                      {link.label}
-                    </Link>
-                    {index < topBarLinks.length - 1 && (
-                      <span className="text-primary-foreground/40">|</span>
-                    )}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center gap-3 ml-auto">
-                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-facebook">
-                  <Facebook className="h-4 w-4" />
-                </a>
-                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram">
-                  <Instagram className="h-4 w-4" />
-                </a>
-                <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-youtube">
-                  <Youtube className="h-4 w-4" />
-                </a>
-              </div>
+    <header className="sticky top-0 z-50 shadow-sm">
+      <div className="bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-9">
+            <div className="hidden md:flex items-center gap-1">
+              {topBarLinks.map((link, index) => (
+                <span key={link.href} className="flex items-center">
+                  <Link 
+                    href={link.href}
+                    className="text-xs hover:text-accent transition-colors duration-200 px-2"
+                    data-testid={`link-topbar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {link.label}
+                  </Link>
+                  {index < topBarLinks.length - 1 && (
+                    <span className="text-primary-foreground/40">|</span>
+                  )}
+                </span>
+              ))}
+            </div>
+            <div className="flex items-center gap-3 ml-auto">
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-facebook">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-youtube">
+                <Youtube className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className={`transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-xl shadow-lg border-b" : "bg-background border-b"}`}>
+      <div className="bg-background border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
             <Link href="/" className="flex-shrink-0 group" data-testid="link-home-logo">
@@ -98,13 +89,9 @@ function Header() {
               {mainNavLinks.map((link) => (
                 <Link key={link.href} href={link.href}>
                   <Button
-                    variant={location === link.href ? "default" : "ghost"}
+                    variant={location === link.href ? "secondary" : "ghost"}
                     size="sm"
-                    className={`transition-all duration-200 font-medium ${
-                      location === link.href 
-                        ? "bg-primary text-primary-foreground shadow-md" 
-                        : "hover:bg-primary/10 hover:text-primary"
-                    }`}
+                    className="transition-all duration-200 font-medium"
                     data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                   >
                     {link.label}
@@ -118,7 +105,7 @@ function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden transition-transform duration-200"
+                className="md:hidden"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 data-testid="button-mobile-menu"
               >
@@ -127,17 +114,14 @@ function Header() {
             </div>
           </div>
 
-          <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-            <nav className="py-4 border-t">
+          {mobileMenuOpen && (
+            <nav className="md:hidden py-4 border-t">
               <div className="flex flex-col gap-1">
-                {allNavLinks.map((link, index) => (
+                {allNavLinks.map((link) => (
                   <Link key={link.href} href={link.href}>
                     <Button
-                      variant={location === link.href ? "default" : "ghost"}
-                      className={`w-full justify-start transition-all duration-200 ${
-                        location === link.href ? "bg-primary text-primary-foreground" : ""
-                      }`}
-                      style={{ animationDelay: `${index * 50}ms` }}
+                      variant={location === link.href ? "secondary" : "ghost"}
+                      className="w-full justify-start"
                       onClick={() => setMobileMenuOpen(false)}
                       data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                     >
@@ -147,7 +131,7 @@ function Header() {
                 ))}
               </div>
             </nav>
-          </div>
+          )}
         </div>
       </div>
     </header>
@@ -262,7 +246,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-[100px]">
+      <main className="flex-1">
         {children}
       </main>
       <Footer />
