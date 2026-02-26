@@ -18,6 +18,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertAlumniSchema } from "@shared/schema";
+import heroImage from "@assets/hero_2.jpg";
 import { z } from "zod";
 import { 
   GraduationCap, 
@@ -117,9 +118,13 @@ export default function AlumniPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="Aashley International School" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/85" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-primary-foreground">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-alumni">
               Alumni Network
             </Badge>

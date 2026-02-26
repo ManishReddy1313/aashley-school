@@ -1,6 +1,10 @@
 import { PublicLayout } from "@/components/public-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import buildingImage from "@assets/home_entrance.png";
+import teachersImage from "@assets/teachers_group.png";
+import classroomImage from "@assets/classroom_1.png";
+import assemblyImage from "@assets/hero_2.jpg";
 import { 
   Target, 
   Eye, 
@@ -43,10 +47,14 @@ const leadership = [
 export default function AboutPage() {
   return (
     <PublicLayout>
-      {/* Hero Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
+      {/* Hero Section with Image */}
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img src={assemblyImage} alt="Aashley International School Assembly" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/85" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-primary-foreground">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-about-hero">
               About Us
             </Badge>
@@ -58,6 +66,23 @@ export default function AboutPage() {
               is an ICSE-affiliated co-educational institution nurturing young minds to become 
               confident, compassionate, and capable individuals since 2008.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Campus Image Strip */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="aspect-video rounded-lg overflow-hidden">
+              <img src={buildingImage} alt="Aashley International School Building" className="w-full h-full object-cover" />
+            </div>
+            <div className="aspect-video rounded-lg overflow-hidden">
+              <img src={classroomImage} alt="Students in classroom" className="w-full h-full object-cover" />
+            </div>
+            <div className="aspect-video rounded-lg overflow-hidden">
+              <img src={teachersImage} alt="Teaching faculty of Aashley International School" className="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
       </section>
@@ -128,7 +153,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Principal's Message */}
+      {/* Principal's Message with Teachers Image */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -138,23 +163,34 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-4xl mx-auto">
             {leadership.map((leader, index) => (
-              <Card key={index} data-testid={`card-leader-${index}`}>
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Users className="h-8 w-8 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg">{leader.name}</h3>
-                      <p className="text-muted-foreground">{leader.role}</p>
-                    </div>
+              <Card key={index} className="overflow-hidden" data-testid={`card-leader-${index}`}>
+                <div className="grid md:grid-cols-5 gap-0">
+                  <div className="md:col-span-2">
+                    <img 
+                      src={teachersImage} 
+                      alt="Faculty of Aashley International School" 
+                      className="w-full h-full object-cover min-h-[250px]"
+                    />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed italic">
-                    "{leader.message}"
-                  </p>
-                </CardContent>
+                  <div className="md:col-span-3">
+                    <CardContent className="p-8">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                          <GraduationCap className="h-8 w-8 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg">{leader.name}</h3>
+                          <p className="text-muted-foreground">{leader.role}</p>
+                        </div>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed italic">
+                        "{leader.message}"
+                      </p>
+                    </CardContent>
+                  </div>
+                </div>
               </Card>
             ))}
           </div>

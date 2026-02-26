@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PublicLayout } from "@/components/public-layout";
-import heroImage from "@assets/IMG_7873_1767427250737.JPG";
-import heroStudents from "@assets/IMG_7852_1767427250728.JPG";
-import prayerImage from "@assets/IMG_8154_1767427250738.JPG";
-import assemblyImage from "@assets/IMG_7974_1767427250737.JPG";
-import craftImage from "@assets/MVI_8914.00_03_26_02.Still024_1767427250738.png";
-import studentPortrait from "@assets/IMG_7891_1767427250737.JPG";
+import heroImage from "@assets/home_entrance2.png";
+import heroStudents from "@assets/hero_1.jpg";
+import prayerImage from "@assets/hero_building.png";
+import assemblyImage from "@assets/hero_5.jpg";
+import classroomImage from "@assets/classroom_1.png";
+import sportsImage from "@assets/sports_2.png";
+import labImage from "@assets/lab_1.png";
+import exerciseImage from "@assets/home_6.jpg";
+import buildingImage from "@assets/home_entrance.png";
 import { 
   GraduationCap, 
   Users, 
@@ -34,26 +37,31 @@ const features = [
     icon: Heart,
     title: "Values-Based Education",
     description: "We nurture character alongside academics, building responsible citizens with strong moral foundations.",
+    image: prayerImage,
   },
   {
     icon: Star,
     title: "Holistic Development",
     description: "Our curriculum balances academics, sports, arts, and life skills for complete personality development.",
+    image: sportsImage,
   },
   {
     icon: BookOpen,
     title: "Modern Curriculum",
     description: "Innovative teaching methods combined with cutting-edge technology prepare students for the future.",
+    image: labImage,
   },
 ];
 
 const photoStories = [
   { title: "Morning Assembly", category: "Daily Life", size: "large", image: assemblyImage },
-  { title: "Morning Prayer", category: "Values", size: "medium", image: prayerImage },
-  { title: "Creative Arts", category: "Activities", size: "medium", image: craftImage },
+  { title: "Classroom Learning", category: "Academics", size: "medium", image: classroomImage },
+  { title: "Creative Minds", category: "Activities", size: "medium", image: prayerImage },
   { title: "School Assembly", category: "Daily Life", size: "small", image: heroStudents },
-  { title: "Student Life", category: "Campus", size: "small", image: studentPortrait },
-  { title: "Our Campus", category: "Campus", size: "small", image: heroImage },
+  { title: "Sports Champions", category: "Sports", size: "small", image: sportsImage },
+  { title: "Physical Training", category: "Campus", size: "small", image: exerciseImage },
+  { title: "Smart Classrooms", category: "Academics", size: "small", image: labImage },
+  { title: "Our Campus", category: "Campus", size: "large", image: buildingImage },
 ];
 
 const growthStories = [
@@ -88,7 +96,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
-            alt="Students learning at Aashley International School" 
+            alt="Aashley International School - Students at morning assembly" 
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
@@ -139,7 +147,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section with Images */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -153,7 +161,14 @@ export default function HomePage() {
           
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="hover-elevate" data-testid={`card-feature-${index}`}>
+              <Card key={index} className="overflow-hidden hover-elevate" data-testid={`card-feature-${index}`}>
+                <div className="aspect-video relative overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                     <feature.icon className="h-6 w-6 text-accent" />
@@ -205,7 +220,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <h4 className="font-semibold text-white">{story.title}</h4>
-                    <Badge variant="secondary" size="sm" className="mt-2">{story.category}</Badge>
+                    <Badge variant="secondary" className="mt-2">{story.category}</Badge>
                   </div>
                 </div>
               </div>
@@ -251,10 +266,18 @@ export default function HomePage() {
       </section>
 
       {/* A Day at Aashley Teaser */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={exerciseImage} 
+            alt="Students at Aashley International School" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary/90" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="text-primary-foreground">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Experience <span className="text-accent">A Day at Aashley</span>
               </h2>
@@ -270,22 +293,22 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-primary-foreground/10 rounded-lg p-4">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-primary-foreground">
                 <Clock className="h-6 w-6 text-accent mb-2" />
                 <div className="text-sm opacity-80">8:00 AM</div>
                 <div className="font-medium">Morning Assembly</div>
               </div>
-              <div className="bg-primary-foreground/10 rounded-lg p-4">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-primary-foreground">
                 <BookOpen className="h-6 w-6 text-accent mb-2" />
                 <div className="text-sm opacity-80">9:00 AM</div>
                 <div className="font-medium">Academic Classes</div>
               </div>
-              <div className="bg-primary-foreground/10 rounded-lg p-4">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-primary-foreground">
                 <Users className="h-6 w-6 text-accent mb-2" />
                 <div className="text-sm opacity-80">1:00 PM</div>
                 <div className="font-medium">Lunch & Recreation</div>
               </div>
-              <div className="bg-primary-foreground/10 rounded-lg p-4">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-primary-foreground">
                 <Star className="h-6 w-6 text-accent mb-2" />
                 <div className="text-sm opacity-80">3:00 PM</div>
                 <div className="font-medium">Co-curricular Activities</div>

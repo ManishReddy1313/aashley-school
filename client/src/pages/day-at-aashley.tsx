@@ -1,6 +1,12 @@
 import { PublicLayout } from "@/components/public-layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import assemblyImage from "@assets/hero_assembly.jpg";
+import classroomImage from "@assets/classroom_1.png";
+import labImage from "@assets/lab_1.png";
+import sportsImage from "@assets/sports_1.png";
+import exerciseImage from "@assets/home_6.jpg";
+import buildingImage from "@assets/home_entrance2.png";
 import { 
   Sun, 
   Coffee, 
@@ -23,6 +29,7 @@ const dailySchedule = [
     description: "Students arrive at school and prepare for the day ahead.",
     icon: Sun,
     color: "bg-amber-500/10 text-amber-600",
+    image: buildingImage,
   },
   {
     time: "8:00 AM",
@@ -30,6 +37,7 @@ const dailySchedule = [
     description: "We gather together for prayer, national anthem, and important announcements that set the tone for the day.",
     icon: Users,
     color: "bg-blue-500/10 text-blue-600",
+    image: assemblyImage,
   },
   {
     time: "8:30 AM",
@@ -37,6 +45,7 @@ const dailySchedule = [
     description: "Core subjects like Mathematics, Science, and Languages are taught during the most productive hours.",
     icon: BookOpen,
     color: "bg-green-500/10 text-green-600",
+    image: classroomImage,
   },
   {
     time: "10:30 AM",
@@ -51,6 +60,7 @@ const dailySchedule = [
     description: "Continuation of academic learning with hands-on activities and group discussions.",
     icon: Beaker,
     color: "bg-purple-500/10 text-purple-600",
+    image: labImage,
   },
   {
     time: "12:45 PM",
@@ -72,6 +82,7 @@ const dailySchedule = [
     description: "Sports, clubs, and extracurricular activities for holistic development.",
     icon: Dumbbell,
     color: "bg-teal-500/10 text-teal-600",
+    image: sportsImage,
   },
   {
     time: "3:30 PM",
@@ -93,10 +104,14 @@ const specialDays = [
 export default function DayAtAashleyPage() {
   return (
     <PublicLayout>
-      {/* Hero Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
+      {/* Hero Section with Image */}
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img src={exerciseImage} alt="Students during morning activities at Aashley" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/85" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center text-primary-foreground">
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-day">
               Experience Aashley
             </Badge>
@@ -123,7 +138,6 @@ export default function DayAtAashleyPage() {
 
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              {/* Vertical line */}
               <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2" />
 
               {dailySchedule.map((item, index) => (
@@ -134,9 +148,13 @@ export default function DayAtAashleyPage() {
                   }`}
                   data-testid={`timeline-item-${index}`}
                 >
-                  {/* Content */}
                   <div className={`flex-1 ml-20 md:ml-0 ${index % 2 === 0 ? "md:text-right md:pr-8" : "md:text-left md:pl-8"}`}>
-                    <Card className="inline-block hover-elevate">
+                    <Card className="inline-block hover-elevate overflow-hidden">
+                      {'image' in item && item.image && (
+                        <div className="aspect-video">
+                          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                        </div>
+                      )}
                       <CardContent className="p-6">
                         <div className={`flex items-center gap-3 mb-3 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${item.color}`}>
@@ -155,12 +173,10 @@ export default function DayAtAashleyPage() {
                     </Card>
                   </div>
 
-                  {/* Timeline dot */}
                   <div className="absolute left-8 md:left-1/2 top-6 transform -translate-x-1/2 flex items-center justify-center">
                     <div className="w-4 h-4 rounded-full bg-primary border-4 border-background" />
                   </div>
 
-                  {/* Spacer for alternating layout */}
                   <div className="flex-1 hidden md:block" />
                 </div>
               ))}
@@ -195,9 +211,13 @@ export default function DayAtAashleyPage() {
         </div>
       </section>
 
-      {/* Highlights */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
+      {/* Highlights with image */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={assemblyImage} alt="Students at Aashley" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-primary/90" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { 
@@ -216,8 +236,8 @@ export default function DayAtAashleyPage() {
                 icon: Users 
               },
             ].map((item, index) => (
-              <div key={index} className="text-center" data-testid={`highlight-${index}`}>
-                <div className="w-16 h-16 rounded-full bg-primary-foreground/10 flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="text-center text-primary-foreground" data-testid={`highlight-${index}`}>
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
                   <item.icon className="h-8 w-8 text-accent" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
