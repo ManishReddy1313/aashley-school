@@ -33,7 +33,8 @@ function Router() {
       <Route path="/admissions" component={AdmissionsPage} />
       <Route path="/gallery" component={GalleryPage} />
       <Route path="/day-at-aashley" component={DayAtAashleyPage} />
-      <Route path="/news" component={NewsPage} />
+      {/* News page hidden for now */}
+      {/* <Route path="/news" component={NewsPage} /> */}
       <Route path="/alumni" component={AlumniPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/why-aashley" component={WhyAashleyPage} />
