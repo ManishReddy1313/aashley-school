@@ -1,0 +1,8 @@
+# Aashley International School - https://www.aashleyinternationalschool.in
+User-agent: *
+Allow: /
+Disallow: /portal
+Disallow: /portal/
+Disallow: /api/
+
+Sitemap: https://www.aashleyinternationalschool.in/sitemap.xml

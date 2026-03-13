@@ -32,7 +32,7 @@ const dailySchedule = [
     image: buildingImage,
   },
   {
-    time: "8:00 AM",
+    time: "8:45 AM",
     title: "Morning Assembly",
     description: "We gather together for prayer, national anthem, and important announcements that set the tone for the day.",
     icon: Users,
@@ -40,7 +40,7 @@ const dailySchedule = [
     image: assemblyImage,
   },
   {
-    time: "8:30 AM",
+    time: "9:10 AM",
     title: "First Academic Session",
     description: "Core subjects like Mathematics, Science, and Languages are taught during the most productive hours.",
     icon: BookOpen,
@@ -50,7 +50,7 @@ const dailySchedule = [
   {
     time: "10:30 AM",
     title: "Short Break",
-    description: "Time for a healthy snack and brief interaction with friends.",
+    description: "Time for a healthy snack and a short pause between sessions.",
     icon: Coffee,
     color: "bg-orange-500/10 text-orange-600",
   },
@@ -120,7 +120,7 @@ export default function DayAtAashleyPage() {
             </h1>
             <p className="text-lg opacity-90">
               From the morning bell to the afternoon dispersal, every moment is designed 
-              to inspire learning, creativity, and friendship.
+              to inspire learning and creativity.
             </p>
           </div>
         </div>

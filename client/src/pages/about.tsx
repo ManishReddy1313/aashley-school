@@ -28,19 +28,19 @@ const coreValues = [
 ];
 
 const milestones = [
-  { year: "2008", title: "Foundation", description: "Aashley International School was established in Bangarapet, Kolar with a vision to provide quality English medium education." },
-  { year: "2010", title: "ICSE Affiliation", description: "Received affiliation from CISCE (Council for Indian School Certificate Examinations) for ICSE curriculum." },
-  { year: "2013", title: "Campus Development", description: "Expanded facilities with 20 classrooms, science labs, computer lab, and dedicated playground." },
+  { year: "2008", title: "Foundation", description: "Aashley International School was established in Bangarpet, Kolar with a vision to provide quality English medium education." },
+  { year: "2010", title: "ICSE Affiliation", description: "Received affiliation from CISCE (Council for Indian School Certificate Examinations) for the ICSE curriculum." },
+  { year: "2013", title: "Campus Development", description: "Expanded facilities with 50+ classrooms, well-equipped science labs, a computer lab, and a dedicated playground." },
   { year: "2016", title: "Growing Community", description: "Crossed 300+ student enrollment with increasing recognition in Kolar district for quality education." },
   { year: "2020", title: "Resilient Learning", description: "Successfully adapted to hybrid learning methods while maintaining academic standards during global challenges." },
-  { year: "2025", title: "Leading in Excellence", description: "Rated 4.6/5 by 388+ parents, serving 500+ students with a commitment to holistic development." },
+  { year: "2025", title: "Leading in Excellence", description: "Rated 4.6/5 by 388+ parents, serving 2000+ students with a commitment to holistic development." },
 ];
 
 const leadership = [
   {
     name: "Mrs. Veenarani B C",
     role: "Principal",
-    message: "At Aashley International School, we don't just educate — we nurture. Every child who walks through our doors is treated as a unique individual with limitless potential. Our ICSE curriculum, combined with values-based education, ensures that students don't just excel in examinations but grow as confident, compassionate human beings ready to face the world.",
+    message: "At Aashley International School, we don't just educate — we nurture. Every child who walks through our doors is treated as a unique individual with limitless potential. ICSE curriculum, combined with value-based education, ensures that students don't just excel in examinations but grow as confident, compassionate human beings ready to face the world.",
   },
 ];
 
@@ -62,8 +62,8 @@ export default function AboutPage() {
               Shaping Futures Since <span className="text-accent">2008</span>
             </h1>
             <p className="text-lg opacity-90">
-              Located in Bangarapet, Kolar District, Karnataka, Aashley International School 
-              is an ICSE-affiliated co-educational institution nurturing young minds to become 
+              Located in Bangarpet, Kolar District, Karnataka, Aashley International School 
+              is a CBSE-affiliated co-educational institution nurturing young minds to become 
               confident, compassionate, and capable individuals since 2008.
             </p>
           </div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Leadership Message</h2>
             <p className="text-muted-foreground">
-              Words from our school leadership
+              Words from our school leader
             </p>
           </div>
 
@@ -243,7 +243,7 @@ export default function AboutPage() {
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Accreditations & Affiliations</h2>
             <p className="text-muted-foreground">
-              Recognized for our commitment to quality education
+            In recognition of our commitment to quality education
             </p>
           </div>
 

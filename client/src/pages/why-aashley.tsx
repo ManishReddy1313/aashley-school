@@ -32,11 +32,38 @@ import {
   TreePine,
 } from "lucide-react";
 
+const parentFeedback = [
+  {
+    name: "Mr. Srirama B. V.",
+    relation: "Parent of Unnathi (VIII Std) & Kruthika (VI Std)",
+    quote:
+      "We are very much impressed with the curriculum and teaching methods. Well‑planned worksheets make our daughters think beyond textbooks, and the school’s vision is to turn young novices into value‑oriented, energetic citizens of tomorrow.",
+  },
+  {
+    name: "Mrs. Padma Sathish R.",
+    relation: "Parent",
+    quote:
+      "We are very much satisfied. Aashley teachers are friendly and caring, and the school has been successful in striking the right balance between academics and co‑curricular activities. Our child gets ample opportunities to explore and progress in all aspects.",
+  },
+  {
+    name: "Dr. Umme Habiba",
+    relation: "Parent",
+    quote:
+      "AIS is a very good platform for our children’s education. My children always get good opportunities to explore and progress in all aspects, with a strong balance between academics and co‑curricular activities.",
+  },
+  {
+    name: "Mrs. Shilpa Vinay M. V.",
+    relation: "Parent",
+    quote:
+      "Aashley International School prepared my children to face the real world. It helped them love learning and taught them real‑life skills like decision‑making, prioritising and problem‑solving, shaping their personalities and giving them memories for life.",
+  },
+];
+
 const uniqueFeatures = [
   {
     icon: BookOpen,
     title: "ICSE Curriculum Excellence",
-    description: "Affiliated with CISCE, our ICSE curriculum emphasizes conceptual understanding, analytical skills, and holistic development beyond textbooks.",
+    description: "Affiliated with CISCE, ICSE curriculum emphasizes conceptual understanding, analytical skills, and holistic development beyond textbooks.",
   },
   {
     icon: Heart,
@@ -74,11 +101,6 @@ const uniqueFeatures = [
     description: "Boundary walls with security fencing, dedicated security staff, and a caring environment ensure every child's safety.",
   },
   {
-    icon: Utensils,
-    title: "Nutritious Mid-day Meals",
-    description: "Healthy, balanced meals provided daily ensure students stay energized and focused throughout the school day.",
-  },
-  {
     icon: Globe,
     title: "English Medium Instruction",
     description: "Complete English-medium education from Pre-Primary to Class 10 prepares students for national and global opportunities.",
@@ -90,48 +112,24 @@ const uniqueFeatures = [
   },
   {
     icon: TreePine,
-    title: "Green Campus Environment",
-    description: "A clean, well-maintained campus surrounded by nature provides the perfect atmosphere for learning and growth.",
+    title: "Clean Green Campus",
+    description: "A clean, well-maintained campus surrounded by nature provides the perfect learning and natural environment for growth",
   },
 ];
 
 const keyStats = [
   { value: "2008", label: "Established", icon: Star },
-  { value: "500+", label: "Happy Students", icon: Users },
+  { value: "2000+", label: "Happy Students", icon: Users },
   { value: "4.6/5", label: "Parent Rating", icon: Trophy },
-  { value: "20+", label: "Classrooms", icon: BookOpen },
+  { value: "50+", label: "Classrooms", icon: BookOpen },
   { value: "ICSE", label: "Board Affiliation", icon: GraduationCap },
   { value: "Pre-K to 10", label: "Classes Offered", icon: Globe },
-];
-
-const parentTestimonials = [
-  {
-    name: "Mrs. Kavitha R.",
-    role: "Parent of Class 5 Student",
-    quote: "Choosing Aashley was the best decision for my child. The teachers are incredibly dedicated and the values-based approach has truly shaped my son's character. He loves going to school every day!",
-  },
-  {
-    name: "Mr. Suresh Kumar",
-    role: "Parent of Class 8 Student",
-    quote: "The ICSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining. The school's attention to each student is remarkable.",
-  },
-  {
-    name: "Mrs. Priya Gowda",
-    role: "Parent of Class 3 Student",
-    quote: "What sets Aashley apart is the genuine care for every child. The mid-day meals, clean campus, and the morning prayer sessions create a nurturing atmosphere that goes beyond just academics.",
-  },
-  {
-    name: "Mr. Ravi Shankar",
-    role: "Parent of Class 7 Student",
-    quote: "We relocated to Bangarapet specifically for Aashley International. The combination of quality education, reasonable fees, and a safe environment is unmatched in this region.",
-  },
 ];
 
 const whyNotOthers = [
   { feature: "ICSE Board (CISCE Affiliated)", aashley: true, others: "Mostly State Board" },
   { feature: "English Medium from Pre-Primary", aashley: true, others: "Often mixed medium" },
   { feature: "Daily Values & Prayer Sessions", aashley: true, others: "Rarely offered" },
-  { feature: "Mid-day Meals Included", aashley: true, others: "Extra charge" },
   { feature: "Computer Lab Access", aashley: true, others: "Limited or unavailable" },
   { feature: "Dedicated Playground", aashley: true, others: "Shared or none" },
   { feature: "Reasonable Fee Structure", aashley: true, others: "Often expensive" },
@@ -161,7 +159,7 @@ export default function WhyAashleyPage() {
               <span className="text-accent">Aashley International?</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-              Since 2008, we've been shaping young minds in Bangarapet, Kolar with an
+              Since 2008, we've been shaping young minds in Bangarpet, Kolar with an
               ICSE curriculum, values-driven education, and a commitment to every child's success.
             </p>
             <Link href="/admissions">
@@ -320,25 +318,33 @@ export default function WhyAashleyPage() {
               What <span className="text-accent">Parents Say</span>
             </h2>
             <p className="opacity-90">
-              Real experiences from parents who chose Aashley for their children
+              Real experiences from parents who chose Aashley for their children.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {parentTestimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-primary-foreground/10 border-primary-foreground/20" data-testid={`testimonial-why-${index}`}>
+            {parentFeedback.map((item, index) => (
+              <Card
+                key={index}
+                className="bg-primary-foreground/10 border-primary-foreground/20"
+                data-testid={`testimonial-why-${index}`}
+              >
                 <CardContent className="p-6">
                   <Quote className="h-8 w-8 text-accent mb-4" />
                   <p className="text-primary-foreground/90 mb-6 italic leading-relaxed">
-                    "{testimonial.quote}"
+                    "{item.quote}"
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
                       <Users className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <div className="font-semibold text-primary-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-primary-foreground/70">{testimonial.role}</div>
+                      <div className="font-semibold text-primary-foreground">
+                        {item.name}
+                      </div>
+                      <div className="text-sm text-primary-foreground/70">
+                        {item.relation}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -360,8 +366,8 @@ export default function WhyAashleyPage() {
             </h2>
             <blockquote className="text-lg text-muted-foreground italic leading-relaxed mb-6">
               "At Aashley International School, we don't just educate — we nurture. Every child who walks
-              through our doors is treated as a unique individual with limitless potential. Our ICSE
-              curriculum, combined with values-based education, ensures that students don't just excel in
+              through our doors is treated as a unique individual with limitless potential. ICSE
+              curriculum, combined with value-based education, ensures that students don't just excel in
               examinations but grow as confident, compassionate human beings ready to face the world."
             </blockquote>
             <div className="font-semibold text-lg">Mrs. Veenarani B C</div>

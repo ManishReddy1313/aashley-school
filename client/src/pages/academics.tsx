@@ -62,7 +62,7 @@ const coCurricularActivities = [
 const facilityImages = [
   { name: "Science Labs", description: "Well-equipped Physics, Chemistry, and Biology labs", image: scienceLabImage },
   { name: "Computer Lab", description: "Modern computers with interactive smart boards", image: labImage },
-  { name: "Classrooms", description: "20 spacious, well-equipped smart classrooms", image: classroomImage2 },
+  { name: "Classrooms", description: "50+ spacious, well-equipped smart classrooms", image: classroomImage2 },
   { name: "Sports Complex", description: "Dedicated playground and indoor sports facilities", image: sportsImage },
   { name: "Library", description: "Extensive collection of 500+ books and digital resources", image: classroomImage },
   { name: "Lab Equipment", description: "Modern scientific instruments for hands-on learning", image: labEquipment },

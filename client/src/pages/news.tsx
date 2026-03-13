@@ -264,7 +264,9 @@ export default function NewsPage() {
             Follow us on social media or check the portal regularly for the latest news and announcements.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button data-testid="button-follow-us">Follow Us on Instagram</Button>
+            <Button asChild>
+              <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer" data-testid="button-follow-us">Follow Us on Instagram</a>
+            </Button>
             <Button variant="outline" data-testid="button-portal-updates">Login to Portal</Button>
           </div>
         </div>

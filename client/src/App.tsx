@@ -1,5 +1,7 @@
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
+import { SEOHead } from "@/components/seo/seo-head";
+import { JsonLdSchema } from "@/components/seo/json-ld-schema";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -55,6 +57,8 @@ function App() {
     <ThemeProvider defaultTheme="light" storageKey="aashley-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
+          <SEOHead />
+          <JsonLdSchema />
           <Toaster />
           <Router />
         </TooltipProvider>

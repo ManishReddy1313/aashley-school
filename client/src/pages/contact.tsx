@@ -25,10 +25,7 @@ import {
   MapPin, 
   Clock,
   Send,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube
+  Instagram
 } from "lucide-react";
 import buildingImage from "@assets/home_entrance.jpg";
 
@@ -36,29 +33,23 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 81234 56789"],
+    details: ["+91 94803 30967"],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["info@aashleyschool.edu", "admissions@aashleyschool.edu"],
+    details: ["contact@aashleyinternationalschool.in"],
   },
   {
     icon: MapPin,
     title: "Address",
-    details: ["Bangarpet Road, next to HP Gas Agency", "Budikote, Bangarapet, Kolar - 563114"],
+    details: ["Bangarpet Road, next to HP Gas Agency", "Budikote, Bangarpet, Kolar - 563114"],
   },
   {
     icon: Clock,
     title: "Office Hours",
     details: ["Mon - Fri: 8:00 AM - 4:00 PM", "Sat: 9:00 AM - 1:00 PM"],
   },
-];
-
-const departments = [
-  { name: "Admissions Office", email: "admissions@aashleyschool.edu", phone: "+91 81234 56789" },
-  { name: "Principal's Office", email: "principal@aashleyschool.edu", phone: "+91 81234 56789" },
-  { name: "Accounts Department", email: "accounts@aashleyschool.edu", phone: "+91 81234 56789" },
 ];
 
 const formSchema = insertContactMessageSchema.extend({
@@ -287,10 +278,10 @@ export default function ContactPage() {
                 <h2 className="text-3xl font-bold mb-6">Find Us</h2>
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center" data-testid="map-placeholder">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d78.17!3d12.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU5JzI0LjAiTiA3OMKwMTAnMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.762844593029!2d78.170699!3d12.987014700000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bade9007e687007%3A0xfdaee093d678a252!2sAashley%20International%20School!5e0!3m2!1sen!2sin!4v1773438717841!5m2!1sen!2sin"
                     width="100%"
-                    height="100%"
-                    style={{ border: 0, minHeight: "300px" }}
+                    height="450"
+                    style={{ border: 0, minHeight: "450px" }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -300,45 +291,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Department Contacts */}
-              <div>
-                <h3 className="text-xl font-bold mb-4">Department Contacts</h3>
-                <div className="space-y-3">
-                  {departments.map((dept, index) => (
-                    <Card key={index} className="hover-elevate" data-testid={`dept-${index}`}>
-                      <CardContent className="p-4">
-                        <div className="font-medium mb-1">{dept.name}</div>
-                        <div className="text-sm text-muted-foreground flex flex-wrap gap-4">
-                          <span className="flex items-center gap-1">
-                            <Mail className="h-3 w-3" />
-                            {dept.email}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Phone className="h-3 w-3" />
-                            {dept.phone}
-                          </span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-
               {/* Social Links */}
               <div>
                 <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
                 <div className="flex gap-3">
-                  <a href="#" className="w-12 h-12 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors" data-testid="social-facebook">
-                    <Facebook className="h-6 w-6 text-primary" />
-                  </a>
-                  <a href="#" className="w-12 h-12 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors" data-testid="social-twitter">
-                    <Twitter className="h-6 w-6 text-primary" />
-                  </a>
-                  <a href="#" className="w-12 h-12 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors" data-testid="social-instagram">
+                  <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors" data-testid="social-instagram" aria-label="Instagram">
                     <Instagram className="h-6 w-6 text-primary" />
-                  </a>
-                  <a href="#" className="w-12 h-12 rounded-lg bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-colors" data-testid="social-youtube">
-                    <Youtube className="h-6 w-6 text-primary" />
                   </a>
                 </div>
               </div>

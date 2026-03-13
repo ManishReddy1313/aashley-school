@@ -2,17 +2,14 @@ import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import schoolLogo from "@assets/02_school_logo_1772107248114.jpg";
+import { SchoolLogo } from "@/components/school-logo";
 import { 
   Menu, 
   X, 
   Phone,
   Mail,
   MapPin,
-  Facebook,
-  Twitter,
   Instagram,
-  Youtube,
   ChevronUp
 } from "lucide-react";
 
@@ -60,14 +57,8 @@ function Header() {
               ))}
             </div>
             <div className="flex items-center gap-3 ml-auto">
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-facebook">
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram">
+              <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-instagram" aria-label="Instagram">
                 <Instagram className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 hover:scale-110 transform" data-testid="link-topbar-youtube">
-                <Youtube className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -78,11 +69,9 @@ function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
             <Link href="/" className="flex-shrink-0 group" data-testid="link-home-logo">
-              <img 
-                src={schoolLogo} 
-                alt="Aashley International School" 
-                className="h-12 object-contain transition-transform duration-300 group-hover:scale-105"
-              />
+              <div className="transition-transform duration-300 group-hover:scale-105">
+                <SchoolLogo />
+              </div>
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">
@@ -168,11 +157,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="mb-4">
-              <img 
-                src={schoolLogo} 
-                alt="Aashley International School" 
-                className="h-14 object-contain"
-              />
+              <SchoolLogo />
             </div>
             <p className="text-sm opacity-80 mb-4">
               Rooted in Values, Rising with Confidence.
@@ -189,6 +174,8 @@ function Footer() {
               <Link href="/academics" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-academics">Academics</Link>
               <Link href="/admissions" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-admissions">Admissions</Link>
               <Link href="/gallery" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-gallery">Gallery</Link>
+              <Link href="/day-at-aashley" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-day-at-aashley">A Day at Aashley</Link>
+              <Link href="/alumni" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-alumni">Alumni</Link>
               <Link href="/why-aashley" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-why-aashley">Why Aashley?</Link>
               <Link href="/careers" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-careers">Careers</Link>
               <Link href="/contact" className="text-sm opacity-80 hover:opacity-100 hover:translate-x-1 transform transition-all duration-200" data-testid="link-footer-contact">Contact</Link>
@@ -200,15 +187,15 @@ function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity duration-200">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <span>+91 81234 56789</span>
+                <span>+91 94803 30967</span>
               </div>
               <div className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity duration-200">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <span>info@aashleyschool.edu</span>
+                <span>contact@aashleyinternationalschool.in</span>
               </div>
               <div className="flex items-start gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity duration-200">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
-                <span>Bangarpet Road, Budikote, Bangarapet, Kolar - 563114</span>
+                <span>Bangarpet Road, Budikote, Bangarpet, Kolar - 563114</span>
               </div>
             </div>
           </div>
@@ -216,17 +203,8 @@ function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-3">
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-all duration-300 hover:scale-110" data-testid="link-social-facebook">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-all duration-300 hover:scale-110" data-testid="link-social-twitter">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-all duration-300 hover:scale-110" data-testid="link-social-instagram">
+              <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-all duration-300 hover:scale-110" data-testid="link-social-instagram" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-all duration-300 hover:scale-110" data-testid="link-social-youtube">
-                <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>

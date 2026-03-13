@@ -370,11 +370,11 @@ export default function AdmissionsPage() {
                     <div className="space-y-3">
                       <div className="flex items-center gap-3" data-testid="contact-phone">
                         <Phone className="h-5 w-5 text-primary" />
-                        <span>+91 81234 56789</span>
+                        <span>+91 94803 30967</span>
                       </div>
                       <div className="flex items-center gap-3" data-testid="contact-email">
                         <Mail className="h-5 w-5 text-primary" />
-                        <span>admissions@aashleyschool.edu</span>
+                        <span>contact@aashleyinternationalschool.in</span>
                       </div>
                     </div>
                   </CardContent>

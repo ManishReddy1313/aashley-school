@@ -26,38 +26,45 @@ import {
   Briefcase, 
   Quote,
   ArrowRight,
-  Building2,
-  Calendar
+  Building2
 } from "lucide-react";
 
-const successStories = [
+const alumniStories = [
   {
-    name: "Dr. Arun Verma",
-    batch: "2005",
-    role: "Senior Scientist",
-    organization: "ISRO",
-    story: "My journey at Aashley laid the foundation for my scientific curiosity. The teachers encouraged me to ask questions and explore beyond textbooks. Today, I'm proud to be part of India's space program.",
+    name: "Mr. Chandan N Swaraj",
+    highlight: "Founder of CNS Constructions, CNS Creations & CNS School of Dance",
+    summary:
+      "As a proud graduate of Aashley’s inaugural batch, he credits the school’s holistic education and support from teachers and management for nurturing both his academic foundation and passion for cultural activities, shaping his multifaceted career.",
   },
   {
-    name: "Priya Nair",
-    batch: "2010",
-    role: "Software Engineer",
-    organization: "Google",
-    story: "The problem-solving skills I developed at Aashley through various competitions and projects have been invaluable in my tech career. The school taught me that no dream is too big.",
+    name: "Ms. Shivani M V",
+    highlight: "Clinical Psychologist",
+    summary:
+      "Studying at Aashley helped her understand herself better, build friendships, and grow in confidence. With strong mentorship, her four years at Aashley shaped her personality and will always hold a special place in her heart.",
   },
   {
-    name: "Rahul Sharma",
-    batch: "2008",
-    role: "Entrepreneur",
-    organization: "HealthTech Startup",
-    story: "Aashley's emphasis on innovation and leadership prepared me to take risks and build my own company. The values of integrity and hard work I learned here guide my business decisions.",
+    name: "Mr. Srikanth T R",
+    highlight: "CS & AI student at IIITDM Kancheepuram (AIR 13888, 98.6%)",
+    summary:
+      "From Grade 1 to 10, Aashley’s rigorous academics, innovative teaching and focus on sports and extracurriculars laid the foundation for his success in Computer Science & AI, building both his academic strength and leadership skills.",
   },
   {
-    name: "Dr. Sneha Reddy",
-    batch: "2007",
-    role: "Cardiologist",
-    organization: "Apollo Hospitals",
-    story: "The discipline and dedication that Aashley instilled in me helped me through the rigorous journey of becoming a doctor. I'm grateful for the strong academic foundation.",
+    name: "Mr. Mohith N P",
+    highlight: "Student at School of Planning and Architecture, New Delhi",
+    summary:
+      "Aashley’s teachers taught him to think creatively, balance hard work and smart work, and develop life skills like time management and perseverance, which helped him secure top ranks in JEE (AIR 1385, Category Rank 59).",
+  },
+  {
+    name: "Ms. Ganavi Gowda",
+    highlight: "Frontend Developer at Lenovo Pvt. Ltd.",
+    summary:
+      "She recalls late‑night study sessions at school, constant teacher support even on Sundays, and a nurturing environment that removed stage fear and built the confidence she now uses daily in her IT career.",
+  },
+  {
+    name: "Mr. Tarun Rao",
+    highlight: "Student Pilot",
+    summary:
+      "He describes Aashley as the bedrock of his educational journey, where dedicated teachers not only guided his academics but also offered career advice, helping him pursue his dream of becoming a pilot.",
   },
 ];
 
@@ -154,34 +161,27 @@ export default function AlumniPage() {
         </div>
       </section>
 
-      {/* Success Stories */}
+      {/* Alumni Achievers */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Success Stories</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Alumni Achievers</h2>
             <p className="text-muted-foreground">
-              Our alumni are making a difference across the world
+              Real journeys from Aashley alumni whose achievements span engineering, design, psychology, IT and aviation.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {successStories.map((story, index) => (
-              <Card key={index} data-testid={`story-${index}`}>
+            {alumniStories.map((story, index) => (
+              <Card key={index} data-testid={`alumni-story-${index}`}>
                 <CardContent className="p-6">
                   <Quote className="h-8 w-8 text-accent mb-4" />
-                  <p className="text-muted-foreground mb-6 italic">"{story.story}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                      <GraduationCap className="h-7 w-7 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">{story.name}</div>
-                      <div className="text-sm text-muted-foreground">{story.role} at {story.organization}</div>
-                      <div className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-                        <Calendar className="h-3 w-3" />
-                        Batch of {story.batch}
-                      </div>
-                    </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {story.summary}
+                  </p>
+                  <div className="border-t pt-4 mt-2 flex flex-col">
+                    <span className="font-semibold">{story.name}</span>
+                    <span className="text-sm text-muted-foreground">{story.highlight}</span>
                   </div>
                 </CardContent>
               </Card>

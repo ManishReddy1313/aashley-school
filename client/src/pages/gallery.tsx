@@ -91,7 +91,7 @@ export default function GalleryPage() {
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="absolute inset-0">
-          <img src={buildingImg2} alt="Aashley International School" className="w-full h-full object-cover" />
+          <img src={buildingImg2} alt="Aashley International School Bangarpet - Best school in Kolar District campus" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
@@ -244,14 +244,16 @@ export default function GalleryPage() {
                 className="aspect-square overflow-hidden rounded-lg hover-elevate cursor-pointer"
                 data-testid={`instagram-item-${index}`}
               >
-                <img src={img} alt={`School life ${index + 1}`} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
+                <img src={img} alt={`Students and campus life at Aashley International School Bangarpet - ${index + 1}`} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
               </div>
             ))}
           </div>
 
           <div className="text-center mt-8">
-            <Button variant="outline" data-testid="button-follow-instagram">
-              Follow @AashleySchool
+            <Button variant="outline" asChild>
+              <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer" data-testid="button-follow-instagram">
+                Follow @aashley__2009
+              </a>
             </Button>
           </div>
         </div>

@@ -63,13 +63,13 @@ const heroSlides = [
     image: heroImage1,
     title: "Nurturing Young Minds,",
     highlight: "Building Tomorrow's Leaders",
-    subtitle: "At Aashley International School, Bangarapet, we nurture every child's unique potential through our ICSE curriculum, values-based education, and a caring learning environment.",
+    subtitle: "At Aashley International School, Bangarpet, we nurture every child's unique potential through CBSE curriculum, value-based education, and a caring learning environment.",
   },
   {
     image: heroImage2,
     title: "Where Learning Meets",
     highlight: "Excellence & Values",
-    subtitle: "Our ICSE curriculum combined with holistic development programs creates well-rounded students ready to take on the world with confidence.",
+    subtitle: "CBSE curriculum combined with holistic development programs creates well-rounded students ready to take on the world with confidence.",
   },
   {
     image: heroImage3,
@@ -81,15 +81,15 @@ const heroSlides = [
 
 const stats = [
   { icon: GraduationCap, value: "Since 2008", label: "Established" },
-  { icon: Users, value: "500+", label: "Happy Students" },
-  { icon: BookOpen, value: "ICSE", label: "Board Affiliation" },
+  { icon: Users, value: "2000+", label: "Happy Students" },
+  { icon: BookOpen, value: "CBSE", label: "Board Affiliation" },
   { icon: Trophy, value: "4.6/5", label: "Parent Rating" },
 ];
 
 const features = [
   {
     icon: Heart,
-    title: "Values-Based Education",
+    title: "Value Based Education",
     description: "We nurture character alongside academics, building responsible citizens with strong moral foundations.",
     image: prayerImage,
   },
@@ -122,17 +122,17 @@ const growthStories = [
   {
     name: "Mrs. Kavitha R.",
     role: "Parent of Class 5 Student",
-    quote: "Choosing Aashley was the best decision for my child. The teachers are incredibly dedicated and the values-based approach has truly shaped my son's character.",
+    quote: "Choosing Aashley was the best decision for my child. The teachers are incredibly dedicated and the value-based approach has truly shaped my son's character.",
   },
   {
     name: "Mr. Suresh Kumar",
     role: "Parent of Class 8 Student",
-    quote: "The ICSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining.",
+    quote: "The CBSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining.",
   },
   {
     name: "Mrs. Priya Gowda",
     role: "Parent of Class 3 Student",
-    quote: "The genuine care for every child, nutritious mid-day meals, clean campus, and morning prayer sessions create a nurturing atmosphere beyond just academics.",
+    quote: "The genuine care for every child, a clean campus, and morning prayer sessions create a nurturing atmosphere beyond just academics.",
   },
 ];
 
@@ -177,8 +177,11 @@ function HeroSlider() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-2xl">
           <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-hero">
-            ICSE Affiliated | Bangarapet, Kolar
+            CBSE Affiliated | Bangarpet, Kolar
           </Badge>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+            Aashley International School – Best School in Bangarpet
+          </h1>
           {heroSlides.map((slide, index) => (
             <div
               key={index}
@@ -187,11 +190,11 @@ function HeroSlider() {
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4 absolute pointer-events-none"
               }`}
+              aria-hidden={index !== current}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-                {slide.title}{" "}
-                <span className="text-accent">{slide.highlight}</span>
-              </h1>
+              <p className="text-2xl md:text-3xl font-semibold text-accent mb-4">
+                {slide.title} <span className="text-white">{slide.highlight}</span>
+              </p>
               <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
                 {slide.subtitle}
               </p>
@@ -251,6 +254,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="py-20 bg-muted/30" aria-labelledby="best-school-bangarpet">
+        <div className="container mx-auto px-4">
+          <RevealSection>
+            <div className="max-w-3xl mx-auto">
+              <h2 id="best-school-bangarpet" className="text-3xl md:text-4xl font-serif font-bold mb-6 text-center">
+                Best School in Bangarpet & Kolar District
+              </h2>
+              <div className="prose prose-lg text-muted-foreground space-y-4 max-w-none">
+                <p>
+                  <strong className="text-foreground">Aashley International School</strong> is recognized as one of the <strong className="text-foreground">top schools in Bangarpet</strong> and the wider Kolar District. Located conveniently on Bangarpet Road in Budikote, we serve families from Bangarpet, Kolar, KGF, Malur, and surrounding areas. Our commitment to <strong className="text-foreground">quality CBSE education</strong> combined with modern infrastructure makes us a leading choice for parents seeking the best education in Bangarpet.
+                </p>
+                <p>
+                  Our experienced teachers, well-equipped classrooms, science and computer labs, sports facilities, and value-based curriculum create a nurturing environment for holistic development. From primary to secondary education, we prepare students for academic excellence and life beyond the classroom. As an <strong className="text-foreground">international school in Bangarpet</strong>, we offer a balanced approach to learning that includes co-curricular activities, sports, arts, and character building.
+                </p>
+                <p>
+                  Parents choosing <strong className="text-foreground">schools near Bangarpet</strong> consistently select Aashley for our dedicated faculty, safe campus, and focus on each child&apos;s unique potential. We invite you to visit our campus and experience why we are considered among the <strong className="text-foreground">best schools in Kolar District</strong>.
+                </p>
+              </div>
+            </div>
+          </RevealSection>
+        </div>
+      </section>
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <RevealSection>
@@ -271,7 +297,7 @@ export default function HomePage() {
                   <div className="aspect-video relative overflow-hidden">
                     <img 
                       src={feature.image} 
-                      alt={feature.title}
+                      alt={`${feature.title} at Aashley International School Bangarpet`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
@@ -324,7 +350,7 @@ export default function HomePage() {
                   }`}>
                     <img 
                       src={story.image} 
-                      alt={story.title}
+                      alt={`${story.title} - Aashley International School Bangarpet campus and activities`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
@@ -399,7 +425,7 @@ export default function HomePage() {
                 </h2>
                 <p className="opacity-90 mb-6">
                   From the morning bell to the afternoon dispersal, every moment at Aashley is designed 
-                  to inspire curiosity, foster friendships, and build character.
+                  to inspire curiosity and build character.
                 </p>
                 <Link href="/day-at-aashley">
                   <Button className="bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" data-testid="button-day-at-aashley">
@@ -411,8 +437,8 @@ export default function HomePage() {
             </RevealSection>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Clock, time: "8:00 AM", label: "Morning Assembly" },
-                { icon: BookOpen, time: "9:00 AM", label: "Academic Classes" },
+                { icon: Clock, time: "8:45 AM", label: "School Assembly" },
+                { icon: BookOpen, time: "9:10 AM", label: "Academic Classes" },
                 { icon: Users, time: "1:00 PM", label: "Lunch & Recreation" },
                 { icon: Star, time: "3:00 PM", label: "Co-curricular Activities" },
               ].map((item, index) => (
@@ -433,7 +459,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <RevealSection>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Ready to Join the <span className="text-primary">Aashley Family?</span>
+              Are You Ready to  <span className="text-primary">Join the Aashley Family?</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Give your child the gift of quality education. Start your journey with us today.

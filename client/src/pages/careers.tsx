@@ -50,21 +50,114 @@ import {
 import teachersImage from "@assets/teachers_group.jpg";
 import classroomImage from "@assets/classroom_1.jpg";
 
-const staffTestimonials = [
+const teacherReviews = [
   {
-    name: "Mrs. Lakshmi N.",
-    role: "Assistant Teacher, 4 Years at Aashley",
-    quote: "Working at Aashley has been incredibly rewarding. The supportive environment from the management and the joy of seeing students grow makes every day meaningful. It's more than a job — it's a calling.",
+    name: "Mr. Kantharaj – MA, M.Ed, M.Phil",
+    role: "Headmaster",
+    quote:
+      "As the headmaster of our esteemed school, I am proud to say that our institution is not just a place of learning but a haven for growth. Nestled in the embrace of lush greenery with more than 150 trees on our campus, it provides an environment conducive to both academic excellence and personal development.",
   },
   {
-    name: "Mr. Rajesh M.",
-    role: "Science Teacher, 6 Years at Aashley",
-    quote: "The school truly values its teachers. We are given the freedom to innovate in our teaching methods and the resources to make learning come alive for our students.",
+    name: "Mrs. Dhamayanthi B – BA, B.Ed",
+    role: "Teacher",
+    quote:
+      "I'm proud to be a part of the Aashley community where every student is known and valued. The sense of unity, collaboration, and the personalized approach to education gives students the opportunity to succeed.",
   },
   {
-    name: "Mrs. Suma K.",
-    role: "Pre-Primary Teacher, 3 Years at Aashley",
-    quote: "The warm, family-like culture at Aashley makes it special. I love how the school focuses on holistic development — it aligns perfectly with my philosophy of teaching young minds.",
+    name: "Mrs. Pallavi K – M.Sc, B.Ed",
+    role: "Teacher",
+    quote:
+      "AIS has good infrastructure with skilled staff supported by the management. Teachers are constantly trained to foster a positive work environment and implement strategic plans to equip children in every way, thus preparing them for the future.",
+  },
+  {
+    name: "Mr. Pratap B.G – B.PEd, M.PEd",
+    role: "Physical Education Teacher",
+    quote:
+      "AIS gives a great platform for all students to build their passion and hobbies. The school promotes excellent sportsmanship and encourages the best sporting spirit among students while nurturing each child’s inbuilt qualities.",
+  },
+  {
+    name: "Mrs. Mary Shalini Ratna – M.Sc, B.Ed",
+    role: "Teacher",
+    quote:
+      "It’s the learning environment that determines the success and motivation of a student to achieve. I strongly believe this suits AIS 100%. I have experienced the depth of quality education given from Montessori to Grade 10, where students flourish into all‑round development.",
+  },
+  {
+    name: "Mrs. Shilpa B.S – M.Sc, B.Ed",
+    role: "Teacher",
+    quote:
+      "Aashley teachers are professional, caring, and well organized. The school gives individual attention and creates a homely learning atmosphere which helps in developing the required qualities among students for the future society.",
+  },
+  {
+    name: "Mrs. Aparna N – M.Sc, B.Ed",
+    role: "Math Teacher",
+    quote:
+      "As your child's math teacher, our goal is not just to teach mathematical concepts but to instill a genuine understanding and appreciation for the subject, with personalised support for every learner.",
+  },
+  {
+    name: "Mrs. Roopa M – D.Ed, BA, B.Ed",
+    role: "Teacher",
+    quote:
+      "AIS has a strong academic reputation along with its focus on providing all‑round education that includes extracurricular activities and character development.",
+  },
+  {
+    name: "Mrs. Geetha A.S – B.Sc, B.Ed",
+    role: "Teacher",
+    quote:
+      "We strive to prepare all students to become lifelong learners and responsible citizens who are ready to meet the challenges of the future.",
+  },
+  {
+    name: "Mr. Syed Jaffer – MBA, B.Ed",
+    role: "Teacher",
+    quote:
+      "My desire has always been to be a deserving teacher for students in a caring institution. I am proud of the school for three Qs – Quality Education, Qualified Teachers, and Quality Infrastructure.",
+  },
+  {
+    name: "Mrs. Pavithra V – D.Ed",
+    role: "Teacher",
+    quote:
+      "AIS creates a safe and caring environment where every student can reach their potential under the guidance of dedicated teachers.",
+  },
+  {
+    name: "Mrs. Shabhana Sultana – BA, B.Ed",
+    role: "Teacher",
+    quote:
+      "Teaching for me is not just a job but nurturing young minds. I encourage my students to be strong, independent, and responsible individuals.",
+  },
+  {
+    name: "Mrs. Jacintha Rani – TCH",
+    role: "Teacher",
+    quote:
+      "Confidence has flourished in this school through love, attention, and care. Every child is safe and protected in our school.",
+  },
+  {
+    name: "Mrs. Vanajamma B.J – D.Ed",
+    role: "Teacher",
+    quote:
+      "Students of AIS are bold and active. The school has experienced faculty, creative teaching methods, and frequent teacher workshops. As a teacher, I aim to build self‑confident and successful human beings for society.",
+  },
+  {
+    name: "Mrs. Vanajakshi R – D.Ed, MTT",
+    role: "Homeroom Teacher",
+    quote:
+      "I am a passionate and dedicated homeroom teacher at Aashley. I foster an inclusive environment that helps students grow and succeed.",
+  },
+  {
+    name: "Mrs. Suhasini G.K – D.Ed, MTT",
+    role: "Teacher",
+    quote:
+      "Teaching for me is about nurturing young minds. I encourage freedom of expression, mutual respect, and a sense of responsibility among my students.",
+  },
+  {
+    name: "Mrs. Uma S – B.Com, MTT",
+    role: "Montessori Teacher",
+    quote:
+      "As a Montessori teacher, I believe education at Aashley is not just from board to paper but through unique learning materials relevant to each subject, where every child can excel.",
+  },
+  {
+    name: "Ms. Selvi K – MTT",
+    role: "Montessori Teacher",
+    quote:
+      "AIS Montessori is like heaven for both teacher and child. Children feel a homely atmosphere here where each child is individually cared for and observed carefully.",
   },
 ];
 
@@ -350,7 +443,7 @@ export default function CareersPage() {
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                       <span className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
-                        Bangarapet, Kolar
+                        Bangarpet, Kolar
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
@@ -379,7 +472,7 @@ export default function CareersPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     Send your resume and cover letter to:
                   </p>
-                  <p className="font-semibold text-primary">careers@aashleyschool.edu</p>
+                  <p className="font-semibold text-primary">contact@aashleyinternationalschool.in</p>
                   <p className="text-xs text-muted-foreground mt-2">
                     Subject: [Position] - [Your Name]
                   </p>
@@ -390,33 +483,42 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Staff Testimonials */}
+
+      {/* Teacher Reviews */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What Our <span className="text-accent">Team Says</span>
+              What Our <span className="text-accent">Teachers Say</span>
             </h2>
             <p className="opacity-90">
-              Hear from the educators who make Aashley special every day
+              Hear directly from the educators who make Aashley a special place to work and learn.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {staffTestimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-primary-foreground/10 border-primary-foreground/20" data-testid={`testimonial-staff-${index}`}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {teacherReviews.map((review, index) => (
+              <Card
+                key={index}
+                className="bg-primary-foreground/10 border-primary-foreground/20"
+                data-testid={`teacher-review-${index}`}
+              >
                 <CardContent className="p-6">
                   <Quote className="h-8 w-8 text-accent mb-4" />
-                  <p className="text-primary-foreground/90 mb-6 italic leading-relaxed">
-                    "{testimonial.quote}"
+                  <p className="text-primary-foreground/90 mb-6 leading-relaxed italic">
+                    "{review.quote}"
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
                       <Users className="h-5 w-5 text-accent" />
                     </div>
                     <div>
-                      <div className="font-semibold text-primary-foreground text-sm">{testimonial.name}</div>
-                      <div className="text-xs text-primary-foreground/70">{testimonial.role}</div>
+                      <div className="font-semibold text-primary-foreground text-sm">
+                        {review.name}
+                      </div>
+                      <div className="text-xs text-primary-foreground/70">
+                        {review.role}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -438,9 +540,9 @@ export default function CareersPage() {
           </p>
           <div className="text-sm text-muted-foreground">
             For inquiries, reach us at{" "}
-            <span className="font-semibold text-primary">careers@aashleyschool.edu</span>{" "}
+            <span className="font-semibold text-primary">contact@aashleyinternationalschool.in</span>{" "}
             or call{" "}
-            <span className="font-semibold text-primary">+91 81234 56789</span>
+            <span className="font-semibold text-primary">+91 94803 30967</span>
           </div>
         </div>
       </section>

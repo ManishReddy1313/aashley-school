@@ -93,9 +93,11 @@ export default function PortalLoginPage() {
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
-              <GraduationCap className="h-10 w-10 text-primary-foreground" />
-            </div>
+            <img
+              src="/aashley_logo.png"
+              alt="Aashley International School"
+              className="h-20 w-auto object-contain mx-auto mb-4"
+            />
             <h1 className="text-2xl font-bold">Aashley International School</h1>
             <p className="text-muted-foreground">Portal {isRegisterMode ? "Registration" : "Login"}</p>
           </div>
@@ -246,7 +248,7 @@ export default function PortalLoginPage() {
 
           <div className="mt-6 text-center text-sm text-muted-foreground">
             <p>Need help? Contact the school office</p>
-            <p>+91 81234 56789</p>
+            <p>+91 94803 30967</p>
           </div>
         </div>
       </main>
