@@ -11,16 +11,16 @@
 ### Per-Page Meta Tags
 - **Title tags** – Unique, keyword-rich titles (55–60 chars) for each page
 - **Meta descriptions** – Compelling 150–160 char descriptions with primary keywords
-- **Meta keywords** – Target keywords added: Aashley International School Bangarpet, Best School in Bangarpet, CBSE School in Bangarpet, Top School in Bangarpet, Best School in Kolar District, Schools near Bangarpet, Best Education in Bangarpet
+- **Meta keywords** – Target keywords added: Aashley International School Bangarpet, Best School in Bangarpet, ICSE School in Bangarpet, CISCE Bangarpet, Top School in Bangarpet, Best School in Kolar District, Schools near Bangarpet, Best Education in Bangarpet
 - **Canonical URLs** – Dynamic canonical set per page via `SEOHead` component
 - **Robots meta** – `index, follow` for public pages; `noindex, nofollow` for `/portal` and `/portal/dashboard`
 
 ### Pages Configured
 | Page | Title |
 |------|-------|
-| Home | Aashley International School \| Best School in Bangarpet \| CBSE Education |
+| Home | Aashley International School \| Best School in Bangarpet \| ICSE (CISCE) Education |
 | About | About Us \| Aashley International School - Best School in Bangarpet |
-| Academics | Academics \| CBSE Curriculum \| Aashley International School Bangarpet |
+| Academics | Academics \| ICSE CISCE Curriculum \| Aashley International School Bangarpet |
 | Admissions | Admissions \| Aashley International School - Enroll in Bangarpet's Best School |
 | Why Aashley | Why Choose Aashley? \| Best International School in Bangarpet |
 | Gallery | Gallery \| Aashley International School Bangarpet - Campus & Activities |
@@ -97,10 +97,10 @@ Disallow: /portal
 Disallow: /portal/
 Disallow: /api/
 
-Sitemap: https://www.aashleyinternationalschool.in/sitemap.xml
+Sitemap: https://aashleyinternationalschool.in/sitemap.xml
 ```
 
-**Important:** Replace `https://www.aashleyinternationalschool.in` in `sitemap.xml` and `robots.txt` with your live domain.
+**Important:** Replace `https://aashleyinternationalschool.in` in `sitemap.xml` and `robots.txt` with your live domain.
 
 ---
 
@@ -145,7 +145,7 @@ Sitemap: https://www.aashleyinternationalschool.in/sitemap.xml
 
 ## 10. CURRICULUM ALIGNMENT
 
-- Content updated from ICSE to **CBSE** to match target keywords (e.g. “CBSE School in Bangarpet”)
+- Content reflects **ICSE (CISCE)** board affiliation throughout
 - Applied across Home, About, and related mentions
 
 ---
@@ -162,9 +162,9 @@ Sitemap: https://www.aashleyinternationalschool.in/sitemap.xml
 ### Modified
 - `client/index.html` – Default meta, og, twitter tags, canonical
 - `client/src/App.tsx` – `SEOHead`, `JsonLdSchema` components
-- `client/src/pages/home.tsx` – H1, Local SEO section, image alts, CBSE
+- `client/src/pages/home.tsx` – H1, Local SEO section, image alts, ICSE/CISCE
 - `client/src/components/public-layout.tsx` – Footer links
-- `client/src/pages/about.tsx` – CBSE update
+- `client/src/pages/about.tsx` – ICSE (CISCE) affiliation
 - `client/src/pages/gallery.tsx` – Image alt text
 
 ---
@@ -204,7 +204,7 @@ Sitemap: https://www.aashleyinternationalschool.in/sitemap.xml
 
 A blog section was not added. Suggested topics for future posts:
 - Best Schools in Bangarpet
-- Why CBSE Education Works Well for Students
+- Why ICSE (CISCE) Education Works Well for Students
 - How to Choose the Best School in Kolar District
 - Importance of Sports in Education
 

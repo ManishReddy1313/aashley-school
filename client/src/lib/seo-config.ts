@@ -5,12 +5,12 @@
 
 const SITE_URL = typeof window !== "undefined" 
   ? window.location.origin 
-  : "https://www.aashleyinternationalschool.in";
+  : "https://aashleyinternationalschool.in";
 
 export const SEO_CONFIG = {
   siteName: "Aashley International School",
-  defaultTitle: "Aashley International School | Best School in Bangarpet | CBSE Education",
-  defaultDescription: "Aashley International School in Bangarpet provides quality CBSE education with modern infrastructure, experienced teachers, sports facilities, and holistic learning for students in Kolar District.",
+  defaultTitle: "Aashley International School | Best School in Bangarpet | ICSE (CISCE) Education",
+  defaultDescription: "Aashley International School in Bangarpet provides quality ICSE (CISCE) education with modern infrastructure, experienced teachers, sports facilities, and holistic learning for students in Kolar District.",
   defaultImage: "/aashley_logo.png",
   locale: "en_IN",
   siteUrl: SITE_URL,
@@ -35,7 +35,7 @@ export const SEO_CONFIG = {
     "Aashley International School Bangarpet",
     "Best School in Bangarpet",
     "International School in Bangarpet",
-    "CBSE School in Bangarpet",
+    "ICSE School in Bangarpet",
     "Top School in Bangarpet",
     "Best School in Kolar District",
     "Schools near Bangarpet",
@@ -57,10 +57,10 @@ export type PageSEO = {
 
 export const PAGE_SEO: Record<string, PageSEO> = {
   "/": {
-    title: "Aashley International School | Best School in Bangarpet | CBSE Education",
-    description: "Aashley International School in Bangarpet provides quality CBSE education with modern infrastructure, experienced teachers, sports facilities, and holistic learning for students in Kolar District.",
+    title: "Aashley International School | Best School in Bangarpet | ICSE (CISCE) Education",
+    description: "Aashley International School in Bangarpet provides quality ICSE (CISCE) education with modern infrastructure, experienced teachers, sports facilities, and holistic learning for students in Kolar District.",
     path: "/",
-    keywords: "Aashley International School Bangarpet, Best School in Bangarpet, CBSE School in Bangarpet, Top School in Kolar District",
+    keywords: "Aashley International School Bangarpet, Best School in Bangarpet, ICSE School in Bangarpet, CISCE Bangarpet, Top School in Kolar District",
   },
   "/about": {
     title: "About Us | Aashley International School - Best School in Bangarpet",
@@ -69,16 +69,16 @@ export const PAGE_SEO: Record<string, PageSEO> = {
     keywords: "About Aashley International School, Best School Bangarpet, School mission values",
   },
   "/academics": {
-    title: "Academics | CBSE Curriculum | Aashley International School Bangarpet",
-    description: "Explore our CBSE curriculum, grade-wise programs, and academic excellence at Aashley International School in Bangarpet. Quality education from primary to secondary.",
+    title: "Academics | ICSE CISCE Curriculum | Aashley International School Bangarpet",
+    description: "Explore our ICSE (CISCE) curriculum, grade-wise programs, and academic excellence at Aashley International School in Bangarpet. Quality education from primary to secondary.",
     path: "/academics",
-    keywords: "CBSE curriculum Bangarpet, Academics Aashley School, School programs Kolar",
+    keywords: "ICSE curriculum Bangarpet, CISCE Bangarpet, Academics Aashley School, School programs Kolar",
   },
   "/admissions": {
     title: "Admissions | Aashley International School - Enroll in Bangarpet's Best School",
-    description: "Apply for admissions at Aashley International School Bangarpet. Complete process, eligibility, and requirements for CBSE education in Kolar District.",
+    description: "Apply for admissions at Aashley International School Bangarpet. Complete process, eligibility, and requirements for ICSE (CISCE) education in Kolar District.",
     path: "/admissions",
-    keywords: "School admissions Bangarpet, CBSE admission Kolar, Enroll Aashley School",
+    keywords: "School admissions Bangarpet, ICSE admission Kolar, Enroll Aashley School",
   },
   "/why-aashley": {
     title: "Why Choose Aashley? | Best International School in Bangarpet",

@@ -157,7 +157,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="mb-4">
-              <SchoolLogo />
+              <SchoolLogo variant="white" />
             </div>
             <p className="text-sm opacity-80 mb-4">
               Rooted in Values, Rising with Confidence.

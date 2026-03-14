@@ -63,7 +63,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-lg opacity-90">
               Located in Bangarpet, Kolar District, Karnataka, Aashley International School 
-              is a CBSE-affiliated co-educational institution nurturing young minds to become 
+              is an ICSE (CISCE)-affiliated co-educational institution nurturing young minds to become 
               confident, compassionate, and capable individuals since 2008.
             </p>
           </div>

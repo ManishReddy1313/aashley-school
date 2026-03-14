@@ -63,13 +63,13 @@ const heroSlides = [
     image: heroImage1,
     title: "Nurturing Young Minds,",
     highlight: "Building Tomorrow's Leaders",
-    subtitle: "At Aashley International School, Bangarpet, we nurture every child's unique potential through CBSE curriculum, value-based education, and a caring learning environment.",
+    subtitle: "At Aashley International School, Bangarpet, we nurture every child's unique potential through ICSE (CISCE) curriculum, value-based education, and a caring learning environment.",
   },
   {
     image: heroImage2,
     title: "Where Learning Meets",
     highlight: "Excellence & Values",
-    subtitle: "CBSE curriculum combined with holistic development programs creates well-rounded students ready to take on the world with confidence.",
+    subtitle: "ICSE (CISCE) curriculum combined with holistic development programs creates well-rounded students ready to take on the world with confidence.",
   },
   {
     image: heroImage3,
@@ -82,7 +82,7 @@ const heroSlides = [
 const stats = [
   { icon: GraduationCap, value: "Since 2008", label: "Established" },
   { icon: Users, value: "2000+", label: "Happy Students" },
-  { icon: BookOpen, value: "CBSE", label: "Board Affiliation" },
+  { icon: BookOpen, value: "ICSE", label: "Board Affiliation" },
   { icon: Trophy, value: "4.6/5", label: "Parent Rating" },
 ];
 
@@ -127,7 +127,7 @@ const growthStories = [
   {
     name: "Mr. Suresh Kumar",
     role: "Parent of Class 8 Student",
-    quote: "The CBSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining.",
+    quote: "The ICSE curriculum at Aashley prepares students thoroughly. My daughter's analytical skills and confidence have grown tremendously since joining.",
   },
   {
     name: "Mrs. Priya Gowda",
@@ -177,7 +177,7 @@ function HeroSlider() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-2xl">
           <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-hero">
-            CBSE Affiliated | Bangarpet, Kolar
+            ICSE (CISCE) Affiliated | Bangarpet, Kolar
           </Badge>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
             Aashley International School – Best School in Bangarpet
@@ -263,7 +263,7 @@ export default function HomePage() {
               </h2>
               <div className="prose prose-lg text-muted-foreground space-y-4 max-w-none">
                 <p>
-                  <strong className="text-foreground">Aashley International School</strong> is recognized as one of the <strong className="text-foreground">top schools in Bangarpet</strong> and the wider Kolar District. Located conveniently on Bangarpet Road in Budikote, we serve families from Bangarpet, Kolar, KGF, Malur, and surrounding areas. Our commitment to <strong className="text-foreground">quality CBSE education</strong> combined with modern infrastructure makes us a leading choice for parents seeking the best education in Bangarpet.
+                  <strong className="text-foreground">Aashley International School</strong> is recognized as one of the <strong className="text-foreground">top schools in Bangarpet</strong> and the wider Kolar District. Located conveniently on Bangarpet Road in Budikote, we serve families from Bangarpet, Kolar, KGF, Malur, and surrounding areas. Our commitment to <strong className="text-foreground">quality ICSE (CISCE) education</strong> combined with modern infrastructure makes us a leading choice for parents seeking the best education in Bangarpet.
                 </p>
                 <p>
                   Our experienced teachers, well-equipped classrooms, science and computer labs, sports facilities, and value-based curriculum create a nurturing environment for holistic development. From primary to secondary education, we prepare students for academic excellence and life beyond the classroom. As an <strong className="text-foreground">international school in Bangarpet</strong>, we offer a balanced approach to learning that includes co-curricular activities, sports, arts, and character building.

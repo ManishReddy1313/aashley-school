@@ -12,7 +12,7 @@ A comprehensive marketing and admission-focused website for Aashley Internationa
 - **Established**: 2008-2009
 - **Classes**: Pre-Primary through Class 10
 - **Rating**: 4.6/5 (388+ reviews)
-- **Facilities**: 20 classrooms, computer lab, science lab, library (500+ books), playground, mid-day meals
+- **Facilities**: 20 classrooms, computer lab, science lab, library (500+ books), playground, lunch break
 
 ## Architecture
 - **Frontend**: React + TypeScript + Vite (client/)

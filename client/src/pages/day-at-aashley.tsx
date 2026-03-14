@@ -226,8 +226,8 @@ export default function DayAtAashleyPage() {
                 icon: BookOpen 
               },
               { 
-                title: "Healthy Meals", 
-                description: "Nutritious and hygienic food options that keep students energized.",
+                title: "Lunch Break", 
+                description: "A break for lunch and rest before afternoon sessions.",
                 icon: Utensils 
               },
               { 
