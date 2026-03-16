@@ -48,14 +48,14 @@ const dailySchedule = [
     image: classroomImage,
   },
   {
-    time: "10:30 AM",
+    time: "11:20 AM",
     title: "Short Break",
     description: "Time for a healthy snack and a short pause between sessions.",
     icon: Coffee,
     color: "bg-orange-500/10 text-orange-600",
   },
   {
-    time: "10:45 AM",
+    time: "11:40 AM",
     title: "Second Academic Session",
     description: "Continuation of academic learning with hands-on activities and group discussions.",
     icon: Beaker,
@@ -63,14 +63,14 @@ const dailySchedule = [
     image: labImage,
   },
   {
-    time: "12:45 PM",
+    time: "12:40 PM",
     title: "Lunch Break",
     description: "Nutritious lunch followed by recreational time with friends.",
     icon: Utensils,
     color: "bg-red-500/10 text-red-600",
   },
   {
-    time: "1:30 PM",
+    time: "1:10 PM",
     title: "Afternoon Session",
     description: "Art, craft, music, and other creative subjects that nurture imagination.",
     icon: Palette,
@@ -85,7 +85,7 @@ const dailySchedule = [
     image: sportsImage,
   },
   {
-    time: "3:30 PM",
+    time: "4:00 PM",
     title: "Dispersal",
     description: "Students head home with new knowledge and wonderful memories.",
     icon: Home,

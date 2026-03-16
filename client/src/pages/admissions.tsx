@@ -116,10 +116,13 @@ export default function AdmissionsPage() {
       });
       form.reset();
     },
-    onError: () => {
+    onError: (error: Error) => {
+      const msg = error?.message || "";
+      const match = msg.match(/\d+:\s*\{.*"message"\s*:\s*"([^"]+)"/);
+      const serverMessage = match ? match[1] : null;
       toast({
-        title: "Error",
-        description: "Failed to submit enquiry. Please try again.",
+        title: "Could not submit enquiry",
+        description: serverMessage || "Please check your entries and try again.",
         variant: "destructive",
       });
     },
@@ -127,6 +130,14 @@ export default function AdmissionsPage() {
 
   const onSubmit = (data: FormData) => {
     submitEnquiry.mutate(data);
+  };
+
+  const onInvalid = () => {
+    toast({
+      title: "Please fix the form",
+      description: "Check the fields above and try again.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -197,7 +208,7 @@ export default function AdmissionsPage() {
               <Card>
                 <CardContent className="p-6">
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-4" noValidate>
                       <div className="grid md:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
@@ -397,10 +408,10 @@ export default function AdmissionsPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { grade: "Nursery", age: "3+ years as of 31st March" },
-              { grade: "LKG", age: "4+ years as of 31st March" },
-              { grade: "UKG", age: "5+ years as of 31st March" },
-              { grade: "Class 1", age: "6+ years as of 31st March" },
+              { grade: "Nursery", age: "3+ years as of 1st June" },
+              { grade: "LKG", age: "4+ years as of 1st June" },
+              { grade: "UKG", age: "5+ years as of 1st June" },
+              { grade: "Class 1", age: "6+ years as of 1st June" },
               { grade: "Classes 2-8", age: "Previous class completion" },
               { grade: "Classes 9-12", age: "Board requirements apply" },
             ].map((item, index) => (

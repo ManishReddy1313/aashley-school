@@ -86,10 +86,13 @@ export default function ContactPage() {
       });
       form.reset();
     },
-    onError: () => {
+    onError: (error: Error) => {
+      const msg = error?.message || "";
+      const match = msg.match(/\d+:\s*\{.*"message"\s*:\s*"([^"]+)"/);
+      const serverMessage = match ? match[1] : null;
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "Could not send message",
+        description: serverMessage || "Please check your entries and try again.",
         variant: "destructive",
       });
     },
@@ -97,6 +100,14 @@ export default function ContactPage() {
 
   const onSubmit = (data: FormData) => {
     submitMessage.mutate(data);
+  };
+
+  const onInvalid = () => {
+    toast({
+      title: "Please fix the form",
+      description: "Check the fields above and try again.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -154,7 +165,7 @@ export default function ContactPage() {
               <Card>
                 <CardContent className="p-6">
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-4" noValidate>
                       <div className="grid md:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}

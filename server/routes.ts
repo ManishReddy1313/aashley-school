@@ -14,6 +14,8 @@ import {
   insertJobPostingSchema,
   insertJobApplicationSchema
 } from "@shared/schema";
+import { z } from "zod";
+import { sendContactFormEmail, sendAdmissionEnquiryEmail } from "./mail";
 
 const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const user = (req.session as any)?.user || (req as any).user;
@@ -38,14 +40,35 @@ export async function registerRoutes(
 
   // ============ PUBLIC API ROUTES ============
 
-  // Admission Enquiries
+  // Admission Enquiries – direct mail send (no DB)
   app.post("/api/admission-enquiries", async (req, res) => {
     try {
-      const data = insertAdmissionEnquirySchema.parse(req.body);
-      const enquiry = await storage.createAdmissionEnquiry(data);
-      res.status(201).json(enquiry);
+      const body = req.body as Record<string, unknown>;
+      const normalized = {
+        studentName: String(body.studentName ?? ""),
+        parentName: String(body.parentName ?? ""),
+        email: String(body.email ?? ""),
+        phone: String(body.phone ?? ""),
+        grade: String(body.grade ?? ""),
+        message: body.message === "" || body.message == null ? undefined : String(body.message),
+      };
+      const data = insertAdmissionEnquirySchema.parse(normalized);
+      await sendAdmissionEnquiryEmail({
+        studentName: data.studentName,
+        parentName: data.parentName,
+        email: data.email,
+        phone: data.phone ?? "",
+        grade: data.grade,
+        message: data.message ?? undefined,
+      });
+      res.status(200).json({ success: true, message: "Enquiry sent successfully." });
     } catch (error: any) {
-      res.status(400).json({ message: error.message || "Invalid request" });
+      if (error instanceof z.ZodError) {
+        const msg = error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join("; ");
+        return res.status(400).json({ message: msg });
+      }
+      console.error("[api] Admission enquiry email failed:", error?.message, error?.code);
+      res.status(500).json({ message: error?.message || "Failed to send enquiry. Please try again." });
     }
   });
 
@@ -60,14 +83,30 @@ export async function registerRoutes(
     }
   });
 
-  // Contact Messages
+  // Contact – direct mail send (no DB)
   app.post("/api/contact", async (req, res) => {
     try {
-      const data = insertContactMessageSchema.parse(req.body);
-      const message = await storage.createContactMessage(data);
-      res.status(201).json(message);
+      const body = req.body as Record<string, unknown>;
+      const normalized = {
+        name: body.name ?? "",
+        email: body.email ?? "",
+        phone: body.phone === "" || body.phone == null ? undefined : String(body.phone),
+        subject: body.subject ?? "",
+        message: body.message ?? "",
+      };
+      const data = insertContactMessageSchema.parse(normalized);
+      await sendContactFormEmail({
+        ...data,
+        phone: data.phone ?? undefined,
+      });
+      res.status(200).json({ success: true, message: "Message sent successfully." });
     } catch (error: any) {
-      res.status(400).json({ message: error.message || "Invalid request" });
+      if (error instanceof z.ZodError) {
+        const msg = error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join("; ");
+        return res.status(400).json({ message: msg });
+      }
+      console.error("[api] Contact form email failed:", error?.message, error?.code);
+      res.status(500).json({ message: error?.message || "Failed to send message. Please try again." });
     }
   });
 
