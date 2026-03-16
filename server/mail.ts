@@ -13,24 +13,38 @@ let transporter: Transporter | null = null;
 
 function getTransporter(): Transporter | null {
   if (transporter) return transporter;
-  const host = process.env.SMTP_HOST?.trim();
+
+  const host = (process.env.SMTP_HOST || "smtp.hostinger.com").trim();
   const user = process.env.SMTP_USER?.trim();
   const pass = process.env.SMTP_PASS;
-  if (!host || !user || !pass) {
+
+  if (!user || !pass) {
     console.warn(
-      "[mail] SMTP not configured. Set SMTP_HOST, SMTP_USER, SMTP_PASS in .env (restart server after editing .env)."
+      "[mail] SMTP not configured. Set SMTP_USER and SMTP_PASS in .env (restart server after editing .env)."
     );
     return null;
   }
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
-  const secure = process.env.SMTP_SECURE === "true";
+
+  // Default to 2525 as you requested, but allow override via .env
+  const port = parseInt(process.env.SMTP_PORT || "2525", 10);
+
+  // For port 2525, secure MUST be false
+  const secure = false;
+
   transporter = nodemailer.createTransport({
     host,
     port,
     secure,
-    auth: { user, pass },
-    ...(port === 587 && !secure && { requireTLS: true }),
+    auth: {
+      user,
+      pass,
+    },
+    tls: {
+      ciphers: "SSLv3",
+      rejectUnauthorized: false,
+    },
   });
+
   console.log("[mail] SMTP configured:", host + ":" + port, "secure:", secure, "user:", user);
   return transporter;
 }

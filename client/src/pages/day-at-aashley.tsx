@@ -189,9 +189,9 @@ export default function DayAtAashleyPage() {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Special Activity Days</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Weekly Activity Focus</h2>
             <p className="text-muted-foreground">
-              Each day brings unique opportunities for exploration
+              These activities run throughout the week, with a special focus each day to keep learning engaging and varied.
             </p>
           </div>
 
