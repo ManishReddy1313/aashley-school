@@ -29,7 +29,7 @@ function getTransporter(): Transporter | null {
   const port = parseInt(process.env.SMTP_PORT || "2525", 10);
 
   // For port 2525, secure MUST be false
-  const secure = false;
+  const secure = true;
 
   transporter = nodemailer.createTransport({
     host,
