@@ -1,19 +1,28 @@
+# Loads all variables from .env in this directory into the app container.
+# Copy .env.example → .env and fill in values. Do not commit .env.
+#
+# Run: docker compose up -d --build
+#
 version: "3.8"
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aashley-school:latest
     container_name: aashley-school
     restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Overrides / defaults (take precedence over keys in .env if duplicated)
+      NODE_ENV: production
+      PORT: "5000"
     expose:
       - "5000"
     ports:
       - "5000:5000"
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      NODE_ENV: production
-      PORT: "5000"
-      SESSION_SECRET: ${SESSION_SECRET:-change-me-to-a-secure-random-string}
     networks:
       - default
       - nginx-proxy

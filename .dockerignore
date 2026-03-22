@@ -1,3 +1,6 @@
+# Do not copy local secrets into the image; use env_file in docker-compose at runtime
+.env
+
 node_modules
 dist
 .git
