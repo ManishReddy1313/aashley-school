@@ -15,7 +15,7 @@ import {
   insertJobApplicationSchema
 } from "@shared/schema";
 import { z } from "zod";
-import { sendContactFormEmail, sendAdmissionEnquiryEmail } from "./mail";
+import { sendContactFormEmail, sendAdmissionEnquiryEmail } from "./services/emailService";
 
 const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const user = (req.session as any)?.user || (req as any).user;
