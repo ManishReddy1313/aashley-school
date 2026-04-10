@@ -56,13 +56,14 @@ export function SEOHead() {
     updateMeta("og:image", imageUrl, true);
     updateMeta("og:type", "website", true);
     updateMeta("og:site_name", SEO_CONFIG.siteName, true);
-    updateMeta("og:locale", "en_IN", true);
+    updateMeta("og:locale", SEO_CONFIG.locale, true);
 
     // Twitter
     updateMeta("twitter:card", "summary_large_image");
     updateMeta("twitter:title", pageSeo.title);
     updateMeta("twitter:description", pageSeo.description);
     updateMeta("twitter:image", imageUrl);
+    updateMeta("twitter:url", fullUrl);
   }, [path, pageSeo]);
 
   return null;

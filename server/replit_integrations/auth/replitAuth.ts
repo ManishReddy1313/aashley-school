@@ -3,6 +3,7 @@ import type { Express, RequestHandler } from "express";
 import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import { authStorage } from "./storage";
+import { normalizeRole, resolveEffectivePermissions } from "@shared/authz";
 
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000;
@@ -48,51 +49,30 @@ export async function setupAuth(app: Express) {
       }
 
       const { password: _, ...safeUser } = user;
-      (req.session as any).user = safeUser;
+      const normalizedRole = normalizeRole(safeUser.role);
+      const effectivePermissions = Array.from(
+        resolveEffectivePermissions({
+          role: normalizedRole,
+          permissionGrants: safeUser.permissionGrants ?? [],
+          permissionRevokes: safeUser.permissionRevokes ?? [],
+        })
+      );
+      const sessionUser = {
+        ...safeUser,
+        role: normalizedRole,
+        effectivePermissions,
+      };
+      (req.session as any).user = sessionUser;
 
-      res.json(safeUser);
+      res.json(sessionUser);
     } catch (error) {
       console.error("Login error:", error);
       res.status(500).json({ message: "Login failed" });
     }
   });
 
-  app.post("/api/auth/register", async (req, res) => {
-    try {
-      const { username, password, email, firstName, lastName } = req.body;
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username and password are required" });
-      }
-
-      const existing = await authStorage.getUserByUsername(username);
-      if (existing) {
-        return res.status(409).json({ message: "Username already exists" });
-      }
-
-      if (email) {
-        const existingEmail = await authStorage.getUserByEmail(email);
-        if (existingEmail) {
-          return res.status(409).json({ message: "Email already registered" });
-        }
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await authStorage.createUser({
-        username,
-        password: hashedPassword,
-        email: email || null,
-        firstName: firstName || null,
-        lastName: lastName || null,
-      });
-
-      const { password: _, ...safeUser } = user;
-      (req.session as any).user = safeUser;
-
-      res.status(201).json(safeUser);
-    } catch (error) {
-      console.error("Register error:", error);
-      res.status(500).json({ message: "Registration failed" });
-    }
+  app.post("/api/auth/register", async (_req, res) => {
+    res.status(403).json({ message: "Public registration is disabled. Contact admin." });
   });
 
   app.get("/api/logout", (req, res) => {

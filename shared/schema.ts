@@ -22,13 +22,48 @@ export const insertPortalUserSchema = createInsertSchema(portalUsers).omit({ id:
 export type InsertPortalUser = z.infer<typeof insertPortalUserSchema>;
 export type PortalUser = typeof portalUsers.$inferSelect;
 
+// Academic Classes
+export const classes = pgTable("classes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: varchar("name", { length: 100 }).notNull().unique(),
+  section: varchar("section", { length: 20 }),
+  academicYear: varchar("academic_year", { length: 20 }).notNull(),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const classTeachers = pgTable("class_teachers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  classId: varchar("class_id").notNull(),
+  teacherUserId: varchar("teacher_user_id").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const classStudents = pgTable("class_students", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  classId: varchar("class_id").notNull(),
+  studentUserId: varchar("student_user_id").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertClassSchema = createInsertSchema(classes).omit({ id: true, createdAt: true });
+export type InsertClass = z.infer<typeof insertClassSchema>;
+export type Class = typeof classes.$inferSelect;
+
+export const assignClassTeachersSchema = z.object({
+  teacherUserIds: z.array(z.string()).default([]),
+});
+export const assignClassStudentsSchema = z.object({
+  studentUserIds: z.array(z.string()).default([]),
+});
+
 // Announcements / Circulars
 export const announcements = pgTable("announcements", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   title: text("title").notNull(),
   content: text("content").notNull(),
   priority: varchar("priority", { length: 20 }).notNull().default("normal"),
-  targetRoles: text("target_roles").array().notNull().default(sql`ARRAY['student', 'parent', 'teacher']`),
+  targetRoles: text("target_roles").array().notNull().default(sql`ARRAY['student', 'staff', 'admin', 'super_admin']`),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
   expiresAt: timestamp("expires_at"),
@@ -111,7 +146,7 @@ export const resources = pgTable("resources", {
   description: text("description"),
   fileUrl: text("file_url").notNull(),
   fileType: varchar("file_type", { length: 20 }).notNull().default("pdf"),
-  targetRoles: text("target_roles").array().notNull().default(sql`ARRAY['student', 'parent', 'teacher']`),
+  targetRoles: text("target_roles").array().notNull().default(sql`ARRAY['student', 'staff', 'admin', 'super_admin']`),
   category: varchar("category", { length: 50 }).notNull().default("circular"),
   createdAt: timestamp("created_at").defaultNow(),
 });

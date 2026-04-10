@@ -24,6 +24,9 @@ import CareersPage from "@/pages/careers";
 // Portal Pages
 import PortalLoginPage from "@/pages/portal/login";
 import PortalDashboard from "@/pages/portal/dashboard";
+import ManageUsersPage from "@/pages/portal/manage-users";
+import ManageClassesPage from "@/pages/portal/manage-classes";
+import TeacherStudentsPage from "@/pages/portal/teacher-students";
 
 function Router() {
   return (
@@ -45,6 +48,9 @@ function Router() {
       {/* Portal Pages */}
       <Route path="/portal" component={PortalLoginPage} />
       <Route path="/portal/dashboard" component={PortalDashboard} />
+      <Route path="/portal/admin/users" component={ManageUsersPage} />
+      <Route path="/portal/admin/classes" component={ManageClassesPage} />
+      <Route path="/portal/teacher/students" component={TeacherStudentsPage} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />

@@ -13,21 +13,16 @@ import {
   ArrowLeft,
   Shield,
   Eye,
-  EyeOff,
-  UserPlus
+  EyeOff
 } from "lucide-react";
 
 export default function PortalLoginPage() {
-  const { user, isLoading, isAuthenticated, login, register, loginError, registerError, isLoggingIn, isRegistering } = useAuth();
+  const { isLoading, isAuthenticated, login, isLoggingIn } = useAuth();
   const [, setLocation] = useLocation();
-  const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    email: "",
-    firstName: "",
-    lastName: "",
   });
   const [error, setError] = useState("");
 
@@ -42,20 +37,10 @@ export default function PortalLoginPage() {
     setError("");
 
     try {
-      if (isRegisterMode) {
-        await register({
-          username: formData.username,
-          password: formData.password,
-          email: formData.email || undefined,
-          firstName: formData.firstName || undefined,
-          lastName: formData.lastName || undefined,
-        });
-      } else {
-        await login({
-          username: formData.username,
-          password: formData.password,
-        });
-      }
+      await login({
+        username: formData.username,
+        password: formData.password,
+      });
     } catch (err: any) {
       const msg = err?.message || "";
       try {
@@ -99,19 +84,17 @@ export default function PortalLoginPage() {
               className="h-20 w-auto object-contain mx-auto mb-4"
             />
             <h1 className="text-2xl font-bold">Aashley International School</h1>
-            <p className="text-muted-foreground">Portal {isRegisterMode ? "Registration" : "Login"}</p>
+            <p className="text-muted-foreground">Portal Login</p>
           </div>
 
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
-                {isRegisterMode ? "Create Account" : "Secure Login"}
+                Secure Login
               </CardTitle>
               <CardDescription>
-                {isRegisterMode 
-                  ? "Register to access your personalized dashboard."
-                  : "Access your personalized dashboard with exam schedules, circulars, and important updates."}
+                Access your personalized dashboard with exam schedules, circulars, and important updates.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -160,76 +143,16 @@ export default function PortalLoginPage() {
                   </div>
                 </div>
 
-                {isRegisterMode && (
-                  <>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email (optional)</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        data-testid="input-email"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          type="text"
-                          placeholder="First name"
-                          value={formData.firstName}
-                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                          data-testid="input-first-name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          type="text"
-                          placeholder="Last name"
-                          value={formData.lastName}
-                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                          data-testid="input-last-name"
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-
                 <Button 
                   className="w-full" 
                   size="lg"
                   type="submit"
-                  disabled={isLoggingIn || isRegistering}
+                  disabled={isLoggingIn}
                   data-testid="button-submit"
                 >
-                  {isRegisterMode ? (
-                    <>
-                      <UserPlus className="mr-2 h-5 w-5" />
-                      {isRegistering ? "Creating Account..." : "Create Account"}
-                    </>
-                  ) : (
-                    <>
-                      <LogIn className="mr-2 h-5 w-5" />
-                      {isLoggingIn ? "Logging in..." : "Login"}
-                    </>
-                  )}
+                  <LogIn className="mr-2 h-5 w-5" />
+                  {isLoggingIn ? "Logging in..." : "Login"}
                 </Button>
-
-                <div className="text-center">
-                  <Button
-                    type="button"
-                    variant="link"
-                    onClick={() => { setIsRegisterMode(!isRegisterMode); setError(""); }}
-                    data-testid="button-toggle-mode"
-                  >
-                    {isRegisterMode ? "Already have an account? Login" : "Don't have an account? Register"}
-                  </Button>
-                </div>
 
                 <div className="border-t pt-4">
                   <div className="text-sm text-center space-y-2">

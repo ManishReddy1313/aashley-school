@@ -122,7 +122,26 @@ export const PAGE_SEO: Record<string, PageSEO> = {
     path: "/portal/dashboard",
     noindex: true,
   },
+  "/portal/admin/users": {
+    title: "Admin Users | Aashley International School",
+    description: "Manage portal user accounts.",
+    path: "/portal/admin/users",
+    noindex: true,
+  },
+  "/portal/admin/classes": {
+    title: "Admin Classes | Aashley International School",
+    description: "Manage academic classes and assignments.",
+    path: "/portal/admin/classes",
+    noindex: true,
+  },
+  "/portal/teacher/students": {
+    title: "Teacher Students | Aashley International School",
+    description: "Edit student details for your assigned classes.",
+    path: "/portal/teacher/students",
+    noindex: true,
+  },
   "/alumni": {
+    title: "Alumni | Aashley International School Bangarpet",
     description: "Connect with Aashley International School alumni. Stay connected with your alma mater - the best school in Bangarpet and Kolar District.",
     path: "/alumni",
     keywords: "Aashley School alumni, Alumni network Bangarpet",

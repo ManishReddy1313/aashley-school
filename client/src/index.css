@@ -4,58 +4,92 @@
 
 /* LIGHT MODE - Aashley International School Colors */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(11, 31, 58, 0.12);
+  --badge-outline: rgba(11, 31, 58, 0.08);
   --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-  --background: 210 15% 98%;
-  --foreground: 220 30% 12%;
-  --border: 210 15% 88%;
-  --card: 0 0% 100%;
-  --card-foreground: 220 30% 12%;
-  --card-border: 210 15% 90%;
-  --sidebar: 220 45% 18%;
-  --sidebar-foreground: 45 10% 95%;
-  --sidebar-border: 220 40% 22%;
-  --sidebar-primary: 43 96% 56%;
-  --sidebar-primary-foreground: 220 30% 12%;
-  --sidebar-accent: 220 40% 25%;
-  --sidebar-accent-foreground: 45 10% 95%;
-  --sidebar-ring: 43 96% 56%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 30% 12%;
-  --popover-border: 210 15% 88%;
-  --primary: 215 70% 22%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 210 15% 92%;
-  --secondary-foreground: 215 30% 18%;
-  --muted: 210 15% 94%;
-  --muted-foreground: 215 15% 40%;
-  --accent: 40 100% 50%;
-  --accent-foreground: 220 30% 12%;
-  --destructive: 0 72% 45%;
-  --destructive-foreground: 0 0% 100%;
-  --input: 210 15% 75%;
-  --ring: 220 65% 28%;
-  --chart-1: 220 65% 28%;
-  --chart-2: 43 96% 56%;
-  --chart-3: 160 65% 42%;
-  --chart-4: 195 75% 40%;
-  --chart-5: 280 70% 45%;
-  --font-sans: Poppins, Inter, sans-serif;
-  --font-serif: Playfair Display, Lora, Georgia, serif;
+  /* subtle navy-based elevation */
+  --elevate-1: rgba(11, 31, 58, 0.04);
+  --elevate-2: rgba(11, 31, 58, 0.10);
+
+  /* Brand palette: Premium Warm Academic */
+  /* Primary: Deep Navy #0B1F3A */
+  --primary: 214 71% 16%;
+  --primary-foreground: 40 55% 98%;
+  --primary-border: hsl(var(--primary));
+
+  /* Secondary: Soft Gray #F3F5F8 */
+  --secondary: 215 25% 96%;
+  --secondary-foreground: 215 25% 15%;
+  --secondary-border: hsl(var(--secondary));
+
+  /* Background: Ivory White #FAF8F4 */
+  --background: 40 45% 97%;
+  --foreground: 215 25% 15%;
+  --border: 207 26% 87%;
+  --card: 40 40% 99%;
+  --card-foreground: 215 25% 15%;
+  --card-border: 207 26% 88%;
+
+  --muted: 215 20% 95%;
+  --muted-foreground: 214 15% 40%;
+
+  /* Accent: Premium Maroon #8B1E2D (controlled usage only) */
+  --accent: 350 68% 30%;
+  --accent-foreground: 40 55% 98%;
+
+  /* GOLD — Premium school tradition color */
+  --gold: 43 74% 49%;
+  --gold-light: 43 85% 65%;
+  --gold-dark: 38 70% 35%;
+
+  /* Sidebar uses calm navy/ivory tones */
+  --sidebar: 214 40% 14%;
+  --sidebar-foreground: 40 55% 98%;
+  --sidebar-border: 214 35% 22%;
+  --sidebar-primary: 350 68% 30%;
+  --sidebar-primary-foreground: 40 55% 98%;
+  --sidebar-accent: 214 40% 18%;
+  --sidebar-accent-foreground: 40 55% 98%;
+  --sidebar-ring: 350 68% 30%;
+
+  --popover: 40 40% 99%;
+  --popover-foreground: 215 25% 15%;
+  --popover-border: 207 26% 88%;
+
+  --destructive: 350 68% 30%;
+  --destructive-foreground: 40 55% 98%;
+
+  --input: 207 22% 86%;
+  --ring: 214 71% 16%;
+
+  /* Charts: keep subtle school-appropriate tints */
+  --chart-1: 214 71% 16%;
+  --chart-2: 350 68% 30%;
+  --chart-3: 160 45% 38%;
+  --chart-4: 195 65% 35%;
+  --chart-5: 280 55% 40%;
+
+  /* Typography */
+  --font-sans: Inter, Poppins, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: JetBrains Mono, monospace;
-  --radius: .5rem;
-  --shadow-2xs: 0px 2px 0px 0px hsl(210 8% 15% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(210 8% 15% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(210 8% 15% / 0.00), 0px 1px 2px -1px hsl(210 8% 15% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(210 8% 15% / 0.00), 0px 1px 2px -1px hsl(210 8% 15% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(210 8% 15% / 0.00), 0px 2px 4px -1px hsl(210 8% 15% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(210 8% 15% / 0.00), 0px 4px 6px -1px hsl(210 8% 15% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(210 8% 15% / 0.00), 0px 8px 10px -1px hsl(210 8% 15% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(210 8% 15% / 0.00);
-  --tracking-normal: 0em;
+
+  /* Geometry */
+  --radius: 1rem;
+
+  /* REAL, VISIBLE SHADOWS */
+  --shadow-2xs: 0px 1px 2px 0px rgba(11,31,58,0.06);
+  --shadow-xs: 0px 2px 4px 0px rgba(11,31,58,0.08);
+  --shadow-sm: 0px 2px 4px 0px rgba(11,31,58,0.06), 0px 4px 8px -2px rgba(11,31,58,0.08);
+  --shadow: 0px 4px 6px -1px rgba(11,31,58,0.08), 0px 8px 16px -4px rgba(11,31,58,0.10);
+  --shadow-md: 0px 6px 12px -2px rgba(11,31,58,0.10), 0px 12px 24px -4px rgba(11,31,58,0.12);
+  --shadow-lg: 0px 10px 20px -4px rgba(11,31,58,0.12), 0px 20px 40px -8px rgba(11,31,58,0.14);
+  --shadow-xl: 0px 16px 32px -6px rgba(11,31,58,0.16), 0px 32px 64px -12px rgba(11,31,58,0.18);
+  --shadow-2xl: 0px 24px 48px -8px rgba(11,31,58,0.20), 0px 48px 96px -16px rgba(11,31,58,0.24);
+  --shadow-gold: 0px 4px 20px rgba(184, 142, 56, 0.35);
+  --shadow-glow: 0px 0px 40px rgba(11,31,58,0.15);
+
+  --tracking-normal: -0.01em;
   --spacing: 0.25rem;
 
 /* Fallback for older browsers */
@@ -89,53 +123,69 @@
 
 /* DARK MODE - Aashley International School Colors */
 .dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
+  --button-outline: rgba(250,248,244, 0.14);
+  --badge-outline: rgba(250,248,244, 0.08);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
-  --background: 220 30% 8%;
-  --foreground: 210 15% 95%;
-  --border: 220 25% 18%;
-  --card: 220 25% 12%;
-  --card-foreground: 210 15% 95%;
-  --card-border: 220 25% 16%;
-  --sidebar: 220 35% 10%;
-  --sidebar-foreground: 45 10% 95%;
-  --sidebar-border: 220 30% 15%;
-  --sidebar-primary: 43 96% 56%;
-  --sidebar-primary-foreground: 220 30% 12%;
-  --sidebar-accent: 220 30% 18%;
-  --sidebar-accent-foreground: 45 10% 95%;
-  --sidebar-ring: 43 96% 56%;
-  --popover: 220 25% 14%;
-  --popover-foreground: 210 15% 95%;
-  --popover-border: 220 25% 20%;
-  --primary: 220 55% 45%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 20% 20%;
-  --secondary-foreground: 210 15% 88%;
-  --muted: 220 20% 16%;
-  --muted-foreground: 210 15% 60%;
-  --accent: 43 96% 50%;
-  --accent-foreground: 220 30% 12%;
-  --destructive: 0 72% 42%;
-  --destructive-foreground: 0 0% 100%;
-  --input: 220 20% 28%;
-  --ring: 220 55% 45%;
-  --chart-1: 220 65% 55%;
-  --chart-2: 43 96% 60%;
-  --chart-3: 160 65% 55%;
-  --chart-4: 195 75% 58%;
-  --chart-5: 280 70% 58%;
-  --shadow-2xs: 0px 2px 0px 0px hsl(210 5% 95% / 0.00);
-  --shadow-xs: 0px 2px 0px 0px hsl(210 5% 95% / 0.00);
-  --shadow-sm: 0px 2px 0px 0px hsl(210 5% 95% / 0.00), 0px 1px 2px -1px hsl(210 5% 95% / 0.00);
-  --shadow: 0px 2px 0px 0px hsl(210 5% 95% / 0.00), 0px 1px 2px -1px hsl(210 5% 95% / 0.00);
-  --shadow-md: 0px 2px 0px 0px hsl(210 5% 95% / 0.00), 0px 2px 4px -1px hsl(210 5% 95% / 0.00);
-  --shadow-lg: 0px 2px 0px 0px hsl(210 5% 95% / 0.00), 0px 4px 6px -1px hsl(210 5% 95% / 0.00);
-  --shadow-xl: 0px 2px 0px 0px hsl(210 5% 95% / 0.00), 0px 8px 10px -1px hsl(210 5% 95% / 0.00);
-  --shadow-2xl: 0px 2px 0px 0px hsl(210 5% 95% / 0.00);
+  --elevate-1: rgba(250,248,244, 0.05);
+  --elevate-2: rgba(250,248,244, 0.10);
+
+  /* Deep navy surfaces */
+  --background: 214 51% 8%;
+  --foreground: 40 35% 95%;
+  --border: 214 35% 18%;
+  --card: 214 40% 12%;
+  --card-foreground: 40 35% 96%;
+  --card-border: 214 35% 18%;
+
+  --sidebar: 214 40% 10%;
+  --sidebar-foreground: 40 35% 96%;
+  --sidebar-border: 214 35% 18%;
+
+  --primary: 214 71% 18%;
+  --primary-foreground: 40 55% 98%;
+
+  --secondary: 214 25% 17%;
+  --secondary-foreground: 40 35% 96%;
+
+  --muted: 214 22% 14%;
+  --muted-foreground: 40 18% 65%;
+
+  --accent: 350 68% 35%;
+  --accent-foreground: 40 55% 98%;
+
+  --destructive: 350 68% 35%;
+  --destructive-foreground: 40 55% 98%;
+
+  --input: 214 25% 24%;
+  --ring: 214 71% 18%;
+
+  --sidebar-primary: 350 68% 35%;
+  --sidebar-primary-foreground: 40 55% 98%;
+  --sidebar-accent: 214 40% 18%;
+  --sidebar-accent-foreground: 40 55% 98%;
+  --sidebar-ring: 350 68% 35%;
+
+  --popover: 214 40% 14%;
+  --popover-foreground: 40 35% 96%;
+  --popover-border: 214 35% 20%;
+
+  --chart-1: 214 71% 18%;
+  --chart-2: 350 68% 35%;
+  --chart-3: 160 45% 42%;
+  --chart-4: 195 55% 38%;
+  --chart-5: 280 55% 45%;
+
+  /* Dark mode shadows */
+  --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,0.20);
+  --shadow-xs: 0px 2px 4px 0px rgba(0,0,0,0.25);
+  --shadow-sm: 0px 2px 4px 0px rgba(0,0,0,0.20), 0px 4px 8px -2px rgba(0,0,0,0.28);
+  --shadow: 0px 4px 6px -1px rgba(0,0,0,0.28), 0px 8px 16px -4px rgba(0,0,0,0.32);
+  --shadow-md: 0px 6px 12px -2px rgba(0,0,0,0.32), 0px 12px 24px -4px rgba(0,0,0,0.36);
+  --shadow-lg: 0px 10px 20px -4px rgba(0,0,0,0.36), 0px 20px 40px -8px rgba(0,0,0,0.40);
+  --shadow-xl: 0px 16px 32px -6px rgba(0,0,0,0.40), 0px 32px 64px -12px rgba(0,0,0,0.44);
+  --shadow-2xl: 0px 24px 48px -8px rgba(0,0,0,0.44), 0px 48px 96px -16px rgba(0,0,0,0.48);
+  --shadow-gold: 0px 4px 20px rgba(184, 142, 56, 0.25);
+  --shadow-glow: 0px 0px 40px rgba(184, 142, 56, 0.08);
 
 /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -173,29 +223,19 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
 }
 
-/**
- * Using the elevate system.
- * Automatic contrast adjustment.
- *
- * <element className="hover-elevate" />
- * <element className="active-elevate-2" />
- *
- * // Using the tailwind utility when a data attribute is "on"
- * <element className="toggle-elevate data-[state=on]:toggle-elevated" />
- * // Or manually controlling the toggle state
- * <element className="toggle-elevate toggle-elevated" />
- *
- * Elevation systems have to handle many states.
- * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)
- * - toggled or not
- * - focused or not (this is not handled with these utilities)
- *
- * Even without handling focused or not, this is six possible combinations that
- * need to be distinguished from eachother visually.
- */
+/* ============================================
+   PREMIUM UTILITY CLASSES
+   ============================================ */
+
 @layer utilities {
 
   /* Hide ugly search cancel button in Chrome until we can style it properly */
@@ -210,42 +250,30 @@
     pointer-events: none;
   }
 
-  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
-   * buttons/badges can remove the automatic brightness adjustment on interactions
-   * and program their own. */
+  /* No default hover/active elevate escape hatches */
   .no-default-hover-elevate {}
-
   .no-default-active-elevate {}
 
-
-  /**
-   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
-   * This way they can stack/compound. Both will overlap the parent's borders!
-   * So borders will be automatically adjusted both on toggle, and hover/active,
-   * and they will be compounded.
-   */
+  /* ── Toggle elevate ── */
   .toggle-elevate::before,
   .toggle-elevate-2::before {
     content: "";
     pointer-events: none;
     position: absolute;
     inset: 0px;
-    /*border-radius: inherit;   match rounded corners */
     border-radius: inherit;
     z-index: -1;
-    /* sits behind content but above backdrop */
   }
 
   .toggle-elevate.toggle-elevated::before {
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
   .border.toggle-elevate::before {
     inset: -1px;
   }
 
-  /* Does not work on elements with overflow:hidden! */
+  /* ── Hover / active elevate ── */
   .hover-elevate:not(.no-default-hover-elevate),
   .active-elevate:not(.no-default-active-elevate),
   .hover-elevate-2:not(.no-default-hover-elevate),
@@ -262,10 +290,8 @@
     pointer-events: none;
     position: absolute;
     inset: 0px;
-    /*border-radius: inherit;   match rounded corners */
     border-radius: inherit;
     z-index: 999;
-    /* sits in front of content */
   }
 
   .hover-elevate:hover:not(.no-default-hover-elevate)::after,
@@ -278,7 +304,6 @@
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
   .border.active-elevate:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
@@ -286,16 +311,258 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* ── GLASSMORPHISM ── */
+  .glass {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-dark {
+    background: rgba(11, 31, 58, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-light {
+    background: rgba(250, 248, 244, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(11, 31, 58, 0.08);
+    box-shadow: 0 4px 32px rgba(11,31,58,0.08);
+  }
+
+  /* ── PREMIUM CARD ── */
+  .premium-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+  }
+
+  .premium-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* ── GOLD LINE DECORATOR ── */
+  .gold-line-top {
+    position: relative;
+  }
+  .gold-line-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--gold-dark)), hsl(var(--gold)), hsl(var(--gold-light)), hsl(var(--gold)));
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .gold-line-left {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .gold-line-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+    border-radius: 2px;
+  }
+
+  /* ── GRADIENT TEXT ── */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold-dark)) 0%, hsl(var(--gold)) 50%, hsl(var(--gold-light)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-navy {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(214 60% 35%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── SHIMMER ── */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255,255,255,0.25) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* ── GOLD DOT PATTERN ── */
+  .dot-pattern {
+    background-image: radial-gradient(hsl(var(--gold) / 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    width: 64px;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)));
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  /* ── STAT NUMBER BG ── */
+  .stat-bg-number {
+    position: absolute;
+    font-size: 8rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: hsl(var(--primary-foreground) / 0.06);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  /* ── GLOW EFFECT ── */
+  .glow-gold {
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.4), 0 0 60px hsl(var(--gold) / 0.15);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  /* ── FLOATING ANIMATION ── */
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* ── PULSE GLOW ── */
+  .pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* ── WIDE SHADOW ── */
+  .shadow-premium {
+    box-shadow: var(--shadow-xl);
+  }
+
+  .shadow-premium-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .shadow-premium-hover:hover {
+    box-shadow: var(--shadow-2xl);
+    transform: translateY(-4px);
+  }
+
+  /* ── DECORATIVE QUOTE MARK ── */
+  .quote-mark {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 6rem;
+    line-height: 0.8;
+    color: hsl(var(--gold) / 0.25);
+    font-weight: 900;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── UNDERLINE SLIDE ── */
+  .underline-slide {
+    position: relative;
+  }
+  .underline-slide::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--gold));
+    transition: width 0.3s ease;
+  }
+  .underline-slide:hover::after {
+    width: 100%;
+  }
+
+  /* ── GRADIENT BORDER ── */
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius);
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: calc(var(--radius) + 1px);
+    background: linear-gradient(135deg, hsl(var(--gold)), hsl(var(--primary)), hsl(var(--accent)));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
 }
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
 
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -308,21 +575,451 @@
   }
 }
 
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px hsl(var(--gold) / 0.3); }
+  50% { box-shadow: 0 0 30px hsl(var(--gold) / 0.6), 0 0 60px hsl(var(--gold) / 0.2); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   PRE-BUILT ANIMATION CLASSES
+   ============================================ */
+
 .animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
+  animation: fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fade-in-right {
+  animation: fade-in-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .animate-slow-zoom {
   animation: slow-zoom 20s ease-out forwards;
 }
 
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.animate-count-up {
+  animation: count-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scroll-reveal.scroll-revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal-left.scroll-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal-right.scroll-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================
+   TYPOGRAPHY ENHANCEMENTS
+   ============================================ */
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.heading-xl {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heading-lg {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.subheading {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   HERO GRADIENT CINEMATIC
+   ============================================ */
+
+.hero-gradient-cinema {
+  background: linear-gradient(
+    105deg,
+    rgba(11, 31, 58, 0.95) 0%,
+    rgba(11, 31, 58, 0.80) 40%,
+    rgba(11, 31, 58, 0.40) 70%,
+    rgba(11, 31, 58, 0.10) 100%
+  );
+}
+
+.hero-gradient-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(11, 31, 58, 0.85) 0%,
+    rgba(11, 31, 58, 0.40) 40%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   PREMIUM SECTION STYLES
+   ============================================ */
+
+.section-navy-premium {
+  background: linear-gradient(135deg,
+    hsl(214 71% 12%) 0%,
+    hsl(214 65% 16%) 40%,
+    hsl(214 55% 18%) 100%
+  );
+  position: relative;
+}
+
+.section-ivory-premium {
+  background: linear-gradient(135deg,
+    hsl(40 45% 97%) 0%,
+    hsl(40 35% 96%) 100%
+  );
+}
+
+/* ============================================
+   CARD ENHANCEMENTS
+   ============================================ */
+
+.card-premium {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(11,31,58,0.06), 0 10px 20px -4px rgba(11,31,58,0.08);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    hsl(var(--gold-dark)),
+    hsl(var(--gold)),
+    hsl(var(--gold-light)));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -8px rgba(11,31,58,0.18), 0 8px 16px -4px rgba(11,31,58,0.12);
+}
+
+.card-premium:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   GOLD ACCENT BAR (used in header)
+   ============================================ */
+
+.gold-accent-bar {
+  height: 3px;
+  background: linear-gradient(90deg,
+    hsl(var(--gold-dark)) 0%,
+    hsl(var(--gold)) 35%,
+    hsl(var(--gold-light)) 65%,
+    hsl(var(--gold)) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ============================================
+   NAV LINK PREMIUM
+   ============================================ */
+
+.nav-link-premium {
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.nav-link-premium::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--gold));
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-premium[data-active="true"]::after {
+  width: 100%;
+}
+
+.nav-link-premium:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   TESTIMONIAL STAR RATINGS
+   ============================================ */
+
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-rating .star {
+  width: 14px;
+  height: 14px;
+  fill: hsl(var(--gold));
+  color: hsl(var(--gold));
+}
+
+/* ============================================
+   BADGE PREMIUM
+   ============================================ */
+
+/* ============================================
+   BADGE GOLD
+   ============================================ */
+
+.badge-gold {
+  background: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 2rem;
+  box-shadow: 0 2px 8px hsl(var(--gold) / 0.35);
+  display: inline-block;
+}
+
+/* ============================================
+   GOLD ACCENT BAR (header)
+   ============================================ */
+
+.gold-accent-bar {
+  height: 3px;
+  background: linear-gradient(90deg,
+    hsl(var(--gold-dark)) 0%,
+    hsl(var(--gold)) 35%,
+    hsl(var(--gold-light)) 65%,
+    hsl(var(--gold)) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ============================================
+   NAV LINK PREMIUM
+   ============================================ */
+
+.nav-link-premium {
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.nav-link-premium::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--gold));
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-premium[data-active="true"]::after,
+.nav-link-premium:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   SECTION DIVIDER (standalone, left-aligned variant)
+   ============================================ */
+
+.section-divider-left {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)));
+  border-radius: 2px;
+  margin: 0;
+}
+
+/* ============================================
+   HERO GRADIENT CINEMATIC
+   ============================================ */
+
+.hero-gradient-cinema {
+  background: linear-gradient(
+    105deg,
+    rgba(11, 31, 58, 0.96) 0%,
+    rgba(11, 31, 58, 0.82) 40%,
+    rgba(11, 31, 58, 0.45) 70%,
+    rgba(11, 31, 58, 0.12) 100%
+  );
+}
+
+.hero-gradient-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(11, 31, 58, 0.88) 0%,
+    rgba(11, 31, 58, 0.45) 40%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   PREMIUM SECTION BACKGROUNDS
+   ============================================ */
+
+.section-navy-premium {
+  background: linear-gradient(135deg,
+    hsl(214 71% 10%) 0%,
+    hsl(214 65% 14%) 40%,
+    hsl(214 55% 16%) 100%
+  );
+  position: relative;
+}
+
+.section-ivory-premium {
+  background: linear-gradient(135deg,
+    hsl(40 45% 97%) 0%,
+    hsl(40 35% 96%) 100%
+  );
+}
+
+/* ============================================
+   CARD PREMIUM
+   ============================================ */
+
+.card-premium {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 2px 4px -1px rgba(11,31,58,0.05),
+              0 6px 16px -4px rgba(11,31,58,0.07);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    hsl(var(--gold-dark)),
+    hsl(var(--gold)),
+    hsl(var(--gold-light)));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-premium:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 16px 40px -8px rgba(11,31,58,0.16),
+              0 6px 14px -4px rgba(11,31,58,0.10);
+}
+
+.card-premium:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   STAR RATING
+   ============================================ */
+
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-rating .star {
+  width: 14px;
+  height: 14px;
+  fill: hsl(var(--gold));
+  color: hsl(var(--gold));
 }

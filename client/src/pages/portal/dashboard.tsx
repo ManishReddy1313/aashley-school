@@ -23,13 +23,21 @@ import {
   ChevronRight,
   AlertCircle,
   Download,
-  Home
+  Home,
+  ShieldCheck,
+  BarChart3,
+  Briefcase,
+  MessageSquare,
+  UserCog,
+  Megaphone
 } from "lucide-react";
 import { formatDistanceToNow, format, differenceInDays } from "date-fns";
 
 export default function PortalDashboard() {
-  const { user, isLoading: authLoading, isAuthenticated, logout } = useAuth();
+  const { user, isLoading: authLoading, isAuthenticated, logout, isAdmin, isSuperAdmin, isStaff, can } = useAuth();
   const [, setLocation] = useLocation();
+  const isAdminRole = !!(isAdmin || isSuperAdmin);
+  const isTeacherRole = !!(isStaff && can("students.read"));
 
   // Fetch announcements
   const { data: announcements, isLoading: announcementsLoading } = useQuery<Announcement[]>({
@@ -47,6 +55,26 @@ export default function PortalDashboard() {
   const { data: resources, isLoading: resourcesLoading } = useQuery<Resource[]>({
     queryKey: ["/api/portal/resources"],
     enabled: isAuthenticated,
+  });
+
+  const { data: adminUsers } = useQuery<any[]>({
+    queryKey: ["/api/admin/users"],
+    enabled: isAuthenticated && isAdminRole,
+  });
+
+  const { data: admissionEnquiries } = useQuery<any[]>({
+    queryKey: ["/api/admin/admission-enquiries"],
+    enabled: isAuthenticated && isAdminRole,
+  });
+
+  const { data: contactMessages } = useQuery<any[]>({
+    queryKey: ["/api/admin/contact-messages"],
+    enabled: isAuthenticated && isAdminRole,
+  });
+
+  const { data: jobApplications } = useQuery<any[]>({
+    queryKey: ["/api/admin/applications"],
+    enabled: isAuthenticated && isAdminRole,
   });
 
   useEffect(() => {
@@ -73,6 +101,7 @@ export default function PortalDashboard() {
   const userInitials = user?.firstName && user?.lastName 
     ? `${user.firstName[0]}${user.lastName[0]}` 
     : user?.email?.[0]?.toUpperCase() || "U";
+  const roleLabel = (user?.role || "student").replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 
   // Calculate days left for events
   const upcomingEventsWithDays = events?.slice(0, 3).map(event => ({
@@ -100,6 +129,33 @@ export default function PortalDashboard() {
     { id: 2, title: "Fee Structure 2024-25", fileType: "PDF", category: "Accounts" },
     { id: 3, title: "Holiday List", fileType: "PDF", category: "Calendar" },
     { id: 4, title: "Bus Route Map", fileType: "PDF", category: "Transport" },
+  ];
+
+  const adminStats = [
+    {
+      label: "Total Users",
+      value: String(adminUsers?.length ?? 0),
+      icon: UserCog,
+      color: "text-primary",
+    },
+    {
+      label: "Admissions",
+      value: String(admissionEnquiries?.length ?? 0),
+      icon: Users,
+      color: "text-amber-600",
+    },
+    {
+      label: "Contact Messages",
+      value: String(contactMessages?.length ?? 0),
+      icon: MessageSquare,
+      color: "text-blue-600",
+    },
+    {
+      label: "Applications",
+      value: String(jobApplications?.length ?? 0),
+      icon: Briefcase,
+      color: "text-green-600",
+    },
   ];
 
   return (
@@ -155,7 +211,7 @@ export default function PortalDashboard() {
                 </Avatar>
                 <div className="hidden md:block text-sm">
                   <div className="font-medium" data-testid="text-user-name">{user?.firstName || user?.email}</div>
-                  <Badge variant="secondary" size="sm" data-testid="badge-user-role">Student</Badge>
+                  <Badge variant="secondary" data-testid="badge-user-role">{roleLabel}</Badge>
                 </div>
               </div>
               <Button 
@@ -180,10 +236,161 @@ export default function PortalDashboard() {
             Welcome back, {user?.firstName || "Student"}!
           </h1>
           <p className="text-muted-foreground">
-            Here's what's happening at Aashley today.
+            {isAdminRole
+              ? "Manage operations, users, and communications from one place."
+              : "Here's what's happening at Aashley today."}
           </p>
         </div>
 
+        {isAdminRole ? (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between gap-4">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart3 className="h-5 w-5 text-primary" />
+                    Admin Overview
+                  </CardTitle>
+                  <CardDescription>
+                    Dynamic role-based view for {roleLabel}
+                  </CardDescription>
+                </div>
+                <Badge variant="secondary" data-testid="badge-dashboard-role">
+                  {isSuperAdmin ? "Super Admin Access" : "Admin Access"}
+                </Badge>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {adminStats.map((stat) => (
+                    <Card key={stat.label} data-testid={`admin-stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}>
+                      <CardContent className="p-4 text-center">
+                        <stat.icon className={`h-6 w-6 mx-auto mb-2 ${stat.color}`} />
+                        <div className={`text-xl font-bold ${stat.color}`}>{stat.value}</div>
+                        <div className="text-xs text-muted-foreground">{stat.label}</div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <UserCog className="h-5 w-5 text-primary" />
+                    User Management
+                  </CardTitle>
+                  <CardDescription>Create users and assign roles/permissions</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <Link href="/portal/admin/users">
+                    <Button variant="outline" className="w-full justify-start" data-testid="button-admin-manage-users">
+                      Manage Users
+                    </Button>
+                  </Link>
+                  <div className="text-sm text-muted-foreground">
+                    {isSuperAdmin
+                      ? "You can manage all roles including Super Admin."
+                      : "You can manage Staff and Student accounts."}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Megaphone className="h-5 w-5 text-primary" />
+                    Content Management
+                  </CardTitle>
+                  <CardDescription>Announcements, resources, events, and stories</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <Button variant="outline" className="w-full justify-start" data-testid="button-admin-manage-content">
+                    Create or Publish Content
+                  </Button>
+                  <Link href="/portal/admin/classes">
+                    <Button variant="outline" className="w-full justify-start" data-testid="button-admin-manage-classes">
+                      Manage Classes
+                    </Button>
+                  </Link>
+                  <div className="text-sm text-muted-foreground">
+                    Use admin APIs to manage content by role visibility.
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-primary" />
+                    Admissions
+                  </CardTitle>
+                  <CardDescription>Review admission enquiries</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold mb-1" data-testid="text-admin-admissions-count">
+                    {admissionEnquiries?.length ?? 0}
+                  </div>
+                  <p className="text-sm text-muted-foreground">Pending and recent records</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5 text-primary" />
+                    Contact Inbox
+                  </CardTitle>
+                  <CardDescription>Monitor incoming contact messages</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold mb-1" data-testid="text-admin-contact-count">
+                    {contactMessages?.length ?? 0}
+                  </div>
+                  <p className="text-sm text-muted-foreground">All website contact submissions</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-primary" />
+                  Admin Notes
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground space-y-1">
+                <p>Dashboard loads dynamically based on your role and permissions.</p>
+                <p>Super Admin has full access; Admin has scoped user-management controls.</p>
+              </CardContent>
+            </Card>
+          </div>
+        ) : isTeacherRole ? (
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                Teacher Workspace
+              </CardTitle>
+              <CardDescription>
+                Manage students assigned to your classes.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Link href="/portal/teacher/students">
+                <Button variant="outline" className="w-full justify-start" data-testid="button-teacher-manage-students">
+                  Manage My Students
+                </Button>
+              </Link>
+              <p className="text-sm text-muted-foreground">
+                Access is limited to students in your assigned classes.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        ) : (
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column - Announcements & Events */}
           <div className="lg:col-span-2 space-y-6">
@@ -227,7 +434,7 @@ export default function PortalDashboard() {
                           </div>
                         </div>
                         {ann.priority === "high" && (
-                          <Badge variant="destructive" size="sm">Urgent</Badge>
+                          <Badge variant="destructive">Urgent</Badge>
                         )}
                       </div>
                     ))}
@@ -372,6 +579,7 @@ export default function PortalDashboard() {
             </Card>
           </div>
         </div>
+        )}
       </main>
     </div>
   );

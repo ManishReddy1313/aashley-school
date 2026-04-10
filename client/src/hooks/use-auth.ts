@@ -9,6 +9,7 @@ type AuthUser = {
   lastName: string | null;
   profileImageUrl: string | null;
   role: string;
+  effectivePermissions?: string[];
   createdAt: string | null;
   updatedAt: string | null;
 };
@@ -48,16 +49,6 @@ export function useAuth() {
     },
   });
 
-  const registerMutation = useMutation({
-    mutationFn: async (data: { username: string; password: string; email?: string; firstName?: string; lastName?: string }) => {
-      const res = await apiRequest("POST", "/api/auth/register", data);
-      return res.json();
-    },
-    onSuccess: (data) => {
-      queryClient.setQueryData(["/api/auth/user"], data);
-    },
-  });
-
   const logoutMutation = useMutation({
     mutationFn: async () => {
       await apiRequest("POST", "/api/auth/logout");
@@ -67,16 +58,22 @@ export function useAuth() {
     },
   });
 
+  const can = (permission: string) => !!user?.effectivePermissions?.includes(permission);
+  const isSuperAdmin = user?.role === "super_admin";
+  const isAdmin = user?.role === "admin" || isSuperAdmin;
+  const isStaff = user?.role === "staff";
+
   return {
     user,
     isLoading,
     isAuthenticated: !!user,
+    isSuperAdmin,
+    isAdmin,
+    isStaff,
+    can,
     login: loginMutation.mutateAsync,
     loginError: loginMutation.error,
     isLoggingIn: loginMutation.isPending,
-    register: registerMutation.mutateAsync,
-    registerError: registerMutation.error,
-    isRegistering: registerMutation.isPending,
     logout: logoutMutation.mutate,
     isLoggingOut: logoutMutation.isPending,
   };
