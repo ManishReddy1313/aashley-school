@@ -11,10 +11,10 @@
   --elevate-1: rgba(11, 31, 58, 0.04);
   --elevate-2: rgba(11, 31, 58, 0.10);
 
-  /* Brand palette: Premium Warm Academic */
-  /* Primary: Deep Navy #0B1F3A */
-  --primary: 214 71% 16%;
-  --primary-foreground: 40 55% 98%;
+  /* Brand palette: Edupreme Academic Style */
+  /* Primary: Deep Navy #1C2A38 */
+  --primary: 210 33% 16%;
+  --primary-foreground: 0 0% 100%;
   --primary-border: hsl(var(--primary));
 
   /* Secondary: Soft Gray #F3F5F8 */
@@ -22,25 +22,25 @@
   --secondary-foreground: 215 25% 15%;
   --secondary-border: hsl(var(--secondary));
 
-  /* Background: Ivory White #FAF8F4 */
-  --background: 40 45% 97%;
-  --foreground: 215 25% 15%;
-  --border: 207 26% 87%;
-  --card: 40 40% 99%;
-  --card-foreground: 215 25% 15%;
-  --card-border: 207 26% 88%;
+  /* Background: White #FFFFFF / Light Blue-Gray #F4F7F9 */
+  --background: 0 0% 100%;
+  --foreground: 210 33% 16%;
+  --border: 200 15% 90%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 33% 16%;
+  --card-border: 200 15% 90%;
 
   --muted: 215 20% 95%;
   --muted-foreground: 214 15% 40%;
 
-  /* Accent: Premium Maroon #8B1E2D (controlled usage only) */
-  --accent: 350 68% 30%;
-  --accent-foreground: 40 55% 98%;
+  /* Accent: Deep Crimson #A9222B */
+  --accent: 356 66% 40%;
+  --accent-foreground: 0 0% 100%;
 
-  /* GOLD — Premium school tradition color */
-  --gold: 43 74% 49%;
-  --gold-light: 43 85% 65%;
-  --gold-dark: 38 70% 35%;
+  /* Maps gold to crimson for backwards compat or global overrides */
+  --gold: 356 66% 40%;
+  --gold-light: 356 70% 50%;
+  --gold-dark: 356 75% 30%;
 
   /* Sidebar uses calm navy/ivory tones */
   --sidebar: 214 40% 14%;
@@ -69,13 +69,13 @@
   --chart-4: 195 65% 35%;
   --chart-5: 280 55% 40%;
 
-  /* Typography */
-  --font-sans: Inter, Poppins, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  /* Typography - Edupreme Style */
+  --font-sans: Poppins, sans-serif;
+  --font-serif: 'Playfair Display', serif;
   --font-mono: JetBrains Mono, monospace;
 
-  /* Geometry */
-  --radius: 1rem;
+  /* Geometry - Edupreme represents sharp edges */
+  --radius: 0rem;
 
   /* REAL, VISIBLE SHADOWS */
   --shadow-2xs: 0px 1px 2px 0px rgba(11,31,58,0.06);

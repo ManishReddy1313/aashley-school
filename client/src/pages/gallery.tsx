@@ -37,7 +37,7 @@ function useScrollReveal() {
 }
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useScrollReveal();
-  return <div ref={ref} className={`scroll-reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
+  return <div ref={ref} className={`scroll-reveal ${className}`} style={{ transitionDelay: `${delay}ms`, transitionDuration: '0.5s', transform: 'translateY(15px)' }}>{children}</div>;
 }
 
 const categories = ["All", "Campus", "Daily Life", "Sports", "Academics", "Labs", "Faculty"];
@@ -93,13 +93,12 @@ export default function GalleryPage() {
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl">
-            <span className="badge-gold mb-5 inline-block">Photo Stories</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-5 leading-tight">
+            <span className="bg-accent text-white px-3 py-1 font-bold uppercase tracking-widest text-[10px] mb-5 inline-block">Photo Stories</span>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
               Moments of
-              <br /><span className="text-gradient-gold">Learning & Joy</span>
+              <br /><span className="text-accent underline decoration-4 underline-offset-8">Learning & Joy</span>
             </h1>
-            <div className="w-16 h-1 bg-gradient-to-r from-gold to-gold/30 rounded mb-5" />
-            <p className="text-lg text-white/80 leading-relaxed max-w-xl">
+            <p className="text-lg text-white/80 leading-relaxed max-w-xl font-sans mt-8">
               Capturing the essence of life at Aashley — where every day brings new experiences and lasting memories.
             </p>
           </div>
@@ -114,10 +113,10 @@ export default function GalleryPage() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-250 border ${
+                className={`px-6 py-2.5 rounded-none text-sm font-semibold transition-all duration-250 border font-sans ${
                   selectedCategory === category
-                    ? "bg-gold text-white border-gold shadow-gold"
-                    : "bg-background text-foreground/70 border-border/60 hover:border-gold/40 hover:text-foreground"
+                    ? "bg-accent text-white border-accent shadow-sm"
+                    : "bg-white text-foreground/70 border-border hover:border-accent hover:text-primary"
                 }`}
                 data-testid={`filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
               >
@@ -129,13 +128,13 @@ export default function GalleryPage() {
       </section>
 
       {/* ── GALLERY GRID ── */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <section className="py-10">
+        <div className="container-fluid mx-auto px-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0">
             {filteredItems.map((item, index) => (
-              <Reveal key={item.id} delay={index * 40}>
+              <Reveal key={item.id} delay={index * 30}>
                 <div
-                  className={`group relative cursor-pointer overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-400 hover:-translate-y-0.5 ${
+                  className={`group relative cursor-pointer overflow-hidden transition-all duration-300 ${
                     item.size === "large" ? "col-span-2 row-span-2" :
                     item.size === "medium" ? "col-span-1 row-span-2 md:col-span-1" : ""
                   }`}
@@ -146,19 +145,19 @@ export default function GalleryPage() {
                     item.size === "large" ? "aspect-square" :
                     item.size === "medium" ? "aspect-[3/4]" : "aspect-square"
                   }`}>
-                    <img src={item.image} alt={`${item.title} - Aashley International School`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+                    <img src={item.image} alt={`${item.title} - Aashley International School`} className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                    {/* Gold top accent */}
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-gold to-gold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                    {/* Top accent */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     {/* Caption on hover */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-400">
-                      <h4 className="font-bold text-white text-sm mb-1">{item.title}</h4>
-                      <span className="badge-gold text-[9px]">{item.category}</span>
+                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-400 text-left">
+                      <h4 className="font-bold text-white text-xl mb-2 font-serif">{item.title}</h4>
+                      <span className="text-accent text-[10px] uppercase font-bold tracking-widest">{item.category}</span>
                     </div>
                     {/* Category chip (always visible) */}
-                    <div className="absolute top-3 right-3 opacity-90 group-hover:opacity-0 transition-opacity duration-300">
-                      <span className="text-[10px] bg-black/40 backdrop-blur-sm text-white px-2 py-1 rounded-full font-medium">{item.category}</span>
+                    <div className="absolute top-4 right-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                      <span className="text-[10px] bg-white border border-border text-primary px-3 py-1 font-bold uppercase tracking-widest">{item.category}</span>
                     </div>
                   </div>
                 </div>
@@ -168,8 +167,8 @@ export default function GalleryPage() {
 
           {filteredItems.length === 0 && (
             <div className="text-center py-20">
-              <div className="w-20 h-20 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center mx-auto mb-4">
-                <Camera className="h-10 w-10 text-gold" />
+              <div className="w-20 h-20 bg-primary/5 flex items-center justify-center mx-auto mb-6">
+                <Camera className="h-10 w-10 text-accent" />
               </div>
               <p className="text-muted-foreground text-lg">No images found in this category.</p>
             </div>
@@ -179,17 +178,17 @@ export default function GalleryPage() {
 
       {/* ── LIGHTBOX ── */}
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-5xl p-0 bg-black/97 border-0 rounded-2xl overflow-hidden">
+        <DialogContent className="max-w-5xl p-0 bg-black/95 border border-white/10 rounded-none overflow-hidden">
           <div className="relative">
-            {/* Gold top bar */}
-            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light z-20" />
-            <Button variant="ghost" size="icon" className="absolute top-4 right-4 z-10 text-white hover:bg-white/15 rounded-xl" onClick={() => setSelectedImage(null)} data-testid="button-close-lightbox">
+            {/* Top bar */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-accent z-20" />
+            <Button variant="ghost" size="icon" className="absolute top-4 right-4 z-10 text-white hover:bg-white/10 rounded-none" onClick={() => setSelectedImage(null)} data-testid="button-close-lightbox">
               <X className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white hover:bg-white/15 rounded-xl" onClick={() => navigateImage("prev")} data-testid="button-prev-image">
+            <Button variant="ghost" size="icon" className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white hover:bg-white/10 rounded-none" onClick={() => navigateImage("prev")} data-testid="button-prev-image">
               <ChevronLeft className="h-8 w-8" />
             </Button>
-            <Button variant="ghost" size="icon" className="absolute right-14 top-1/2 -translate-y-1/2 z-10 text-white hover:bg-white/15 rounded-xl" onClick={() => navigateImage("next")} data-testid="button-next-image">
+            <Button variant="ghost" size="icon" className="absolute right-14 top-1/2 -translate-y-1/2 z-10 text-white hover:bg-white/10 rounded-none" onClick={() => navigateImage("next")} data-testid="button-next-image">
               <ChevronRight className="h-8 w-8" />
             </Button>
             {selectedImage && (() => {
@@ -197,9 +196,9 @@ export default function GalleryPage() {
               return item ? (
                 <div className="flex flex-col items-center">
                   <img src={item.image} alt={item.title} className="max-h-[80vh] w-full object-contain" />
-                  <div className="p-5 text-center">
-                    <h3 className="text-xl font-bold text-white mb-1 font-serif">{item.title}</h3>
-                    <span className="badge-gold text-[10px]">{item.category}</span>
+                  <div className="p-6 text-center border-t border-white/10 w-full bg-black/50">
+                    <h3 className="text-2xl font-bold text-white mb-2 font-serif">{item.title}</h3>
+                    <span className="text-accent text-xs font-bold uppercase tracking-widest">{item.category}</span>
                   </div>
                 </div>
               ) : null;
@@ -209,23 +208,22 @@ export default function GalleryPage() {
       </Dialog>
 
       {/* ── INSTAGRAM STRIP ── */}
-      <section className="py-20 bg-muted/25">
+      <section className="py-24 bg-[#F4F7F9]">
         <div className="container mx-auto px-4">
           <Reveal>
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="badge-gold mb-4 inline-block">Social</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 leading-tight">
-                Follow Us on <span className="text-gradient-gold">Instagram</span>
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Social</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
+                Follow Us on <span className="text-accent underline decoration-4 underline-offset-8">Instagram</span>
               </h2>
-              <div className="section-divider mt-4 mb-5" />
-              <p className="text-muted-foreground text-lg">Stay updated with daily moments from #AashleyLife</p>
+              <p className="text-muted-foreground text-xl font-sans mt-4">Stay updated with daily moments from #AashleyLife</p>
             </div>
           </Reveal>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-0">
             {[assemblyImg2, sportsImg2, classroomImg1, prayerImg, labImg1, exerciseImg].map((img, index) => (
-              <Reveal key={index} delay={index * 60}>
-                <div className="aspect-square overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-0.5" data-testid={`instagram-item-${index}`}>
-                  <img src={img} alt={`Aashley International School campus life - ${index + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+              <Reveal key={index} delay={index * 40}>
+                <div className="aspect-square overflow-hidden transition-all duration-300 cursor-pointer group" data-testid={`instagram-item-${index}`}>
+                  <img src={img} alt={`Aashley International School campus life - ${index + 1}`} className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                 </div>
               </Reveal>
             ))}
@@ -236,11 +234,10 @@ export default function GalleryPage() {
                 href="https://www.instagram.com/aashley__2009/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-3 rounded-full font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-                style={{ background: "linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #fda085 100%)" }}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold uppercase tracking-widest text-sm hover:-translate-y-1 transition-transform duration-300 border-b-4 border-accent shadow-md"
                 data-testid="button-follow-instagram"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-5 w-5 text-accent" />
                 Follow @aashley__2009
               </a>
             </div>

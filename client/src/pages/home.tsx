@@ -259,7 +259,7 @@ function HeroSlider() {
             <Link href="/admissions">
               <Button
                 size="lg"
-                className="bg-gold text-white hover:bg-gold-dark border-0 transition-all duration-300 hover:shadow-gold hover:-translate-y-1 font-semibold text-base px-8"
+                className="bg-accent text-white hover:bg-accent/90 border-0 transition-all duration-300 font-semibold text-base px-8 h-14"
                 data-testid="button-hero-admissions"
               >
                 Apply for Admission
@@ -270,7 +270,7 @@ function HeroSlider() {
               <Button
                 size="lg"
                 variant="outline"
-                className="bg-white/10 border-white/25 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 font-medium text-base px-8"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-300 font-medium text-base px-8 h-14"
                 data-testid="button-hero-learn-more"
               >
                 Explore Our School
@@ -312,44 +312,38 @@ export default function HomePage() {
     <PublicLayout>
       <HeroSlider />
 
-      {/* ── STATS BAND ── */}
-      <section className="relative overflow-hidden section-navy-premium noise-overlay" data-testid="stats-section">
-        {/* Ambient blob */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {stats.map((stat, index) => (
-              <RevealSection key={index} delay={index * 120}>
+      {/* ── EDUPREME OVERLAPPING FEATURE CARDS ── */}
+      <section className="relative z-30 -mt-20 md:-mt-32 max-w-7xl mx-auto px-4" data-testid="stats-section">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
+          {features.map((feature, index) => {
+            // Apply alternative colors (e.g., Accent / Navy / Accent)
+            const bgClass = index % 2 === 0 ? "bg-accent text-white" : "bg-primary text-white";
+            return (
+              <RevealSection key={index} delay={index * 120} direction="up">
                 <div
-                  className="relative text-center group py-6 px-4 rounded-2xl border border-primary-foreground/6 bg-primary-foreground/4 hover:bg-primary-foreground/8 transition-all duration-300 hover:border-gold/20 overflow-hidden"
-                  data-testid={`stat-${index}`}
+                  className={`p-10 lg:p-14 h-full flex flex-col justify-center transition-all hover:-translate-y-2 ${bgClass}`}
                 >
-                  {/* Decorative bg number */}
-                  <div className="stat-bg-number">{stat.bg}</div>
-                  {/* Icon with gold glow */}
-                  <div className="relative z-10 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gold/10 border border-gold/20 mb-4 mx-auto group-hover:bg-gold/20 transition-all duration-300">
-                    <stat.icon className="h-7 w-7 text-gold" />
+                  <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-6">
+                    <feature.icon className="h-8 w-8 text-white" />
                   </div>
-                  <div className="relative z-10 text-3xl md:text-4xl font-bold text-primary-foreground mb-1 font-serif">{stat.value}</div>
-                  <div className="relative z-10 text-sm text-primary-foreground/55 tracking-wide">{stat.label}</div>
+                  <h3 className="text-2xl font-serif font-bold mb-4">{feature.title}</h3>
+                  <p className="text-white/80 leading-relaxed font-sans">{feature.description}</p>
                 </div>
               </RevealSection>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
       {/* ── ABOUT CALLOUT (2-col split) ── */}
-      <section className="py-24 relative overflow-hidden" aria-labelledby="best-school-bangarpet">
+      <section className="py-24 md:py-32 relative overflow-hidden bg-background" aria-labelledby="best-school-bangarpet">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             {/* Image Column */}
             <RevealSection direction="left">
               <div className="relative">
-                {/* Main image */}
-                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
+                {/* Main image with sharp edges and subtle shadow */}
+                <div className="relative aspect-[4/3] overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
                   <img
                     src={buildingImage}
                     alt="Aashley International School Campus Bangarpet"
@@ -358,26 +352,17 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <span className="badge-gold text-[10px]">Our Campus · Bangarpet, Kolar</span>
+                    <span className="bg-accent text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest">Our Campus · Bangarpet, Kolar</span>
                   </div>
                 </div>
-                {/* Floating stat cards */}
-                <div className="absolute -bottom-5 -right-4 md:-right-8 bg-card border border-border rounded-2xl p-4 shadow-xl flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
-                    <Trophy className="h-6 w-6 text-gold" />
+                {/* Sharp floating stat cards */}
+                <div className="absolute -bottom-8 -right-4 md:-right-8 bg-white border border-border p-6 shadow-[0px_10px_30px_rgba(0,0,0,0.07)] flex items-center gap-5">
+                  <div className="w-14 h-14 bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Trophy className="h-7 w-7 text-accent" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold font-serif">4.6/5</div>
-                    <div className="text-xs text-muted-foreground">Parent Rating • 388+ Reviews</div>
-                  </div>
-                </div>
-                <div className="absolute -top-5 -left-4 md:-left-8 bg-card border border-border rounded-2xl p-4 shadow-xl flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0">
-                    <GraduationCap className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold font-serif">2000+</div>
-                    <div className="text-xs text-muted-foreground">Happy Students</div>
+                    <div className="text-2xl font-bold font-serif text-primary">4.6/5</div>
+                    <div className="text-sm text-muted-foreground font-sans">Parent Rating • 388+ Reviews</div>
                   </div>
                 </div>
               </div>
@@ -386,35 +371,27 @@ export default function HomePage() {
             {/* Text Column */}
             <RevealSection direction="right">
               <div>
-                <span className="badge-gold mb-5 inline-block">About Our School</span>
-                <h2 id="best-school-bangarpet" className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight">
-                  Best School in{" "}
-                  <span className="text-gradient-gold">Bangarpet</span>{" "}
-                  &amp; Kolar District
+                <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">About Our School</span>
+                <h2 id="best-school-bangarpet" className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary leading-tight">
+                  Best School in Bangarpet
+                  <br /> &amp; Kolar District
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-gold to-gold/30 rounded mb-7" />
-                <div className="space-y-4 text-muted-foreground text-base md:text-lg leading-relaxed">
+                <div className="space-y-5 text-muted-foreground text-lg leading-relaxed font-sans">
                   <p>
-                    <strong className="text-foreground font-semibold">Aashley International School</strong> is recognized as one of the{" "}
-                    <strong className="text-foreground font-semibold">top schools in Bangarpet</strong> and the wider Kolar District. 
+                    <strong className="text-primary font-semibold">Aashley International School</strong> is recognized as one of the{" "}
+                    <strong className="text-primary font-semibold">top schools in Bangarpet</strong> and the wider Kolar District. 
                     Located on Bangarpet Road in Budikote, we serve families from Bangarpet, Kolar, KGF, Malur, and surrounding areas. 
-                    Our commitment to <strong className="text-foreground font-semibold">quality ICSE (CISCE) education</strong> combined 
+                    Our commitment to <strong className="text-primary font-semibold">quality ICSE (CISCE) education</strong> combined 
                     with modern infrastructure makes us a leading choice for parents.
                   </p>
                   <p>
                     Our experienced teachers, well-equipped classrooms, science and computer labs, sports facilities, and 
                     value-based curriculum create a nurturing environment for holistic development.
                   </p>
-                  <p>
-                    Parents choosing <strong className="text-foreground font-semibold">schools near Bangarpet</strong> consistently 
-                    select Aashley for our dedicated faculty, safe campus, and focus on each child's unique potential. 
-                    We invite you to visit our campus and experience why we are among the{" "}
-                    <strong className="text-foreground font-semibold">best schools in Kolar District</strong>.
-                  </p>
                 </div>
 
-                {/* Trust signals */}
-                <div className="mt-8 grid grid-cols-2 gap-3">
+                {/* Trust signals - Sharp edges */}
+                <div className="mt-10 grid grid-cols-2 gap-4">
                   {[
                     "ICSE Affiliated (CISCE)",
                     "English Medium",
@@ -423,12 +400,20 @@ export default function HomePage() {
                   ].map((item) => (
                     <div
                       key={item}
-                      className="flex items-center gap-2.5 p-3.5 rounded-xl bg-primary/5 border border-primary/8 hover:border-gold/20 hover:bg-gold/5 transition-all duration-200"
+                      className="flex items-center gap-3 p-4 bg-[#F4F7F9] border-l-4 border-accent transition-all duration-200"
                     >
-                      <CheckCircle className="h-4 w-4 text-gold flex-shrink-0" />
-                      <span className="text-sm font-medium text-foreground/80">{item}</span>
+                      <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
+                      <span className="text-sm font-semibold text-primary">{item}</span>
                     </div>
                   ))}
+                </div>
+                
+                <div className="mt-10">
+                   <Link href="/about">
+                      <Button size="lg" className="bg-primary text-white hover:bg-primary/90 h-14 px-8 font-semibold rounded-none">
+                         Discover More <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                   </Link>
                 </div>
               </div>
             </RevealSection>
@@ -436,60 +421,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHY AASHLEY ── */}
-      <section className="py-24 bg-muted/25">
-        <div className="container mx-auto px-4">
-          <RevealSection>
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="badge-gold mb-4 inline-block">Why Choose Us</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 leading-tight">
-                Why Choose{" "}
-                <span className="text-gradient-gold">Aashley?</span>
-              </h2>
-              <div className="section-divider mt-4 mb-5" />
-              <p className="text-muted-foreground text-lg">
-                We provide a nurturing environment where children discover their passions and develop skills for life.
-              </p>
+      {/* ── ALUMNI STATS BAND ── */}
+      <section className="py-20 bg-primary text-white text-center">
+         <div className="container mx-auto px-4 max-w-7xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+               {stats.map((stat, index) => (
+                  <RevealSection key={index} delay={index * 120} direction="up">
+                     <div className="space-y-4">
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 text-accent mb-2">
+                           <stat.icon className="h-8 w-8" />
+                        </div>
+                        <div className="text-4xl md:text-5xl font-serif font-bold">{stat.value}</div>
+                        <div className="text-sm font-bold uppercase tracking-widest text-white/70">{stat.label}</div>
+                     </div>
+                  </RevealSection>
+               ))}
             </div>
-          </RevealSection>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <RevealSection key={index} delay={index * 150}>
-                <div
-                  className="card-premium group"
-                  data-testid={`card-feature-${index}`}
-                >
-                  {/* Image */}
-                  <div className="aspect-[4/3] relative overflow-hidden rounded-t-[calc(var(--radius)-1px)]">
-                    <img
-                      src={feature.image}
-                      alt={`${feature.title} at Aashley International School Bangarpet`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-                    {/* Badge on image */}
-                    <div className="absolute top-4 left-4">
-                      <span className="badge-gold text-[10px]">{feature.badge}</span>
-                    </div>
-                  </div>
-                  {/* Content */}
-                  <div className="p-7">
-                    <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-gold/20 group-hover:scale-110">
-                      <feature.icon className="h-6 w-6 text-gold" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-200">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                    <div className="mt-5 flex items-center gap-1.5 text-gold text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Learn more <ArrowRight className="h-4 w-4" />
-                    </div>
-                  </div>
-                </div>
-              </RevealSection>
-            ))}
-          </div>
-        </div>
+         </div>
       </section>
 
       {/* ── PHOTO STORIES ── */}
@@ -584,36 +532,36 @@ export default function HomePage() {
             {growthStories.map((story, index) => (
               <RevealSection key={index} delay={index * 150}>
                 <div
-                  className="card-premium h-full flex flex-col p-8 relative"
+                  className="bg-white shadow-[0px_10px_30px_rgba(0,0,0,0.07)] h-full flex flex-col p-10 relative overflow-hidden group"
                   data-testid={`testimonial-${index}`}
                 >
                   {/* Decorative quote mark */}
-                  <div className="absolute top-4 right-6 text-5xl font-serif font-black text-gold/15 leading-none select-none pointer-events-none">
+                  <div className="absolute top-4 right-6 text-7xl font-serif font-black text-accent/10 leading-none select-none pointer-events-none group-hover:text-accent/20 transition-colors">
                     "
                   </div>
 
                   {/* Star rating */}
                   <div className="flex gap-1 mb-5">
                     {Array.from({ length: story.stars }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+                      <Star key={i} className="h-4 w-4 fill-accent text-accent" />
                     ))}
                   </div>
 
                   {/* Quote */}
-                  <blockquote className="text-foreground/80 leading-relaxed italic flex-1 mb-6 relative z-10">
+                  <blockquote className="text-primary leading-relaxed italic flex-1 mb-6 relative z-10 font-sans">
                     "{story.quote}"
                   </blockquote>
 
                   {/* Author */}
-                  <div className="flex items-center gap-4 pt-4 border-t border-border/50">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-primary font-bold text-lg font-serif">
+                  <div className="flex items-center gap-4 pt-6 border-t border-border">
+                    <div className="w-12 h-12 rounded-none bg-primary flex items-center justify-center flex-shrink-0">
+                      <span className="text-white font-bold text-lg font-serif">
                         {story.name.charAt(0)}
                       </span>
                     </div>
                     <div>
-                      <div className="font-bold text-sm">{story.name}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{story.role}</div>
+                      <div className="font-bold text-primary text-sm font-sans">{story.name}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5 uppercase tracking-wide">{story.role}</div>
                     </div>
                   </div>
                 </div>
@@ -621,17 +569,16 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Overall rating */}
           <RevealSection delay={300}>
             <div className="mt-14 text-center">
-              <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold/10 border border-gold/20">
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-white border-l-4 border-accent shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-gold text-gold" />
+                    <Star key={i} className="h-5 w-5 fill-accent text-accent" />
                   ))}
                 </div>
-                <span className="font-bold text-xl text-foreground">4.6 / 5</span>
-                <span className="text-muted-foreground text-sm">from 388+ parent reviews</span>
+                <span className="font-bold text-xl text-primary">4.6 / 5</span>
+                <span className="text-muted-foreground text-sm uppercase font-semibold">from 388+ parent reviews</span>
               </div>
             </div>
           </RevealSection>
@@ -657,24 +604,22 @@ export default function HomePage() {
         <div className="absolute top-1/2 right-20 -translate-y-1/2 w-56 h-56 rounded-full border border-gold/6 hidden xl:block" />
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             <RevealSection direction="left">
-              <div className="text-primary-foreground">
-                <span className="badge-gold mb-4 inline-block">School Life</span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight">
+              <div className="text-white bg-primary/95 p-10 md:p-14 border-l-4 border-accent shadow-[0px_10px_30px_rgba(0,0,0,0.15)] backdrop-blur-sm">
+                <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">School Life</span>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
                   Experience
-                  <br />
-                  <span className="text-gradient-gold">A Day at Aashley</span>
+                  <br /> A Day at Aashley
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-gold to-gold/30 rounded mb-6" />
-                <p className="text-primary-foreground/75 mb-8 text-lg leading-relaxed">
+                <p className="text-white/80 mb-8 text-lg leading-relaxed font-sans">
                   From the morning bell to the afternoon dispersal, every moment at Aashley is 
                   designed to inspire curiosity, build character, and create lasting memories.
                 </p>
                 <Link href="/day-at-aashley">
                   <Button
                     size="lg"
-                    className="bg-gold text-white hover:bg-gold-dark border-0 font-semibold hover:shadow-gold hover:-translate-y-1 transition-all duration-300"
+                    className="bg-accent text-white hover:bg-accent/90 border-0 font-semibold h-14 transition-all duration-300 rounded-none px-8"
                     data-testid="button-day-at-aashley"
                   >
                     See the Full Day
@@ -685,17 +630,17 @@ export default function HomePage() {
             </RevealSection>
 
             <RevealSection direction="right">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 {daySchedule.map((item, index) => (
                   <div
                     key={index}
-                    className="group glass rounded-2xl p-5 text-primary-foreground hover:scale-[1.03] transition-all duration-300 hover:border-gold/30 cursor-pointer"
+                    className="group bg-white p-8 text-primary shadow-[0px_10px_30px_rgba(0,0,0,0.07)] hover:-translate-y-2 transition-transform duration-300 cursor-pointer border-t-2 border-transparent hover:border-accent"
                   >
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-3 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className="h-5 w-5 text-white" />
+                    <div className={`w-12 h-12 bg-primary/5 flex items-center justify-center mb-5 text-accent`}>
+                      <item.icon className="h-6 w-6" />
                     </div>
-                    <div className="text-xs text-gold font-semibold tracking-wider mb-1">{item.time}</div>
-                    <div className="font-semibold text-sm leading-snug">{item.label}</div>
+                    <div className="text-xs text-accent font-bold tracking-widest mb-2">{item.time}</div>
+                    <div className="font-bold text-lg font-serif leading-snug">{item.label}</div>
                   </div>
                 ))}
               </div>
@@ -712,28 +657,26 @@ export default function HomePage() {
 
         <div className="container mx-auto px-4 relative z-10">
           <RevealSection>
-            <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-3xl overflow-hidden shadow-premium-hover shadow-lg">
-                {/* Card gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/85" />
-                <div className="noise-overlay absolute inset-0" />
-                {/* Gold top line */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
-                {/* Decorative circles */}
-                <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gold/8" />
-                <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-accent/8" />
+            <div className="max-w-5xl mx-auto">
+              <div className="relative overflow-hidden bg-primary shadow-[0px_20px_50px_rgba(0,0,0,0.15)] border-l-8 border-accent">
+                {/* Minimal geometry graphic */}
+                <div className="absolute right-0 bottom-0 opacity-10">
+                  <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M400 400H0L400 0V400Z" fill="white"/>
+                  </svg>
+                </div>
 
-                <div className="relative z-10 p-10 md:p-16 text-center text-primary-foreground">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/15 border border-gold/25 mb-6">
-                    <Sparkles className="h-4 w-4 text-gold" />
-                    <span className="text-xs font-semibold tracking-widest text-gold uppercase">Admissions Open</span>
+                <div className="relative z-10 p-12 md:p-20 text-center text-white">
+                  <div className="inline-flex items-center gap-2 px-6 py-2 bg-accent text-white font-bold uppercase tracking-widest text-xs mb-8">
+                    <Sparkles className="h-4 w-4" />
+                    Admissions Open
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight">
+                  <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
                     Are You Ready to Join the{" "}
-                    <span className="text-gradient-gold">Aashley Family?</span>
+                    <span className="text-accent underline decoration-4 underline-offset-8">Aashley Family?</span>
                   </h2>
-                  <p className="text-primary-foreground/75 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
+                  <p className="text-white/80 max-w-2xl mx-auto mb-10 text-lg leading-relaxed font-sans">
                     Give your child the gift of quality ICSE education, experienced faculty, and a nurturing 
                     environment designed for success. Start your journey with us today.
                   </p>
@@ -742,7 +685,7 @@ export default function HomePage() {
                     <Link href="/admissions">
                       <Button
                         size="lg"
-                        className="bg-gold text-white hover:bg-gold-dark border-0 font-bold text-base px-10 hover:shadow-gold hover:-translate-y-1 transition-all duration-300"
+                        className="bg-white text-primary hover:bg-white/90 border-0 font-bold text-base px-10 h-14 rounded-none shadow-[0px_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300"
                         data-testid="button-cta-apply"
                       >
                         Apply Now
@@ -753,7 +696,7 @@ export default function HomePage() {
                       <Button
                         size="lg"
                         variant="outline"
-                        className="border-primary-foreground/25 text-primary-foreground hover:bg-primary-foreground/10 font-medium text-base px-8 hover:-translate-y-1 transition-all duration-300"
+                        className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-medium text-base px-8 h-14 rounded-none transition-all duration-300"
                         data-testid="button-cta-contact"
                       >
                         Schedule a Visit
