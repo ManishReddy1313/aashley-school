@@ -2,10 +2,10 @@ import { PublicLayout } from "@/components/public-layout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { 
-  Calendar, 
-  Clock, 
-  MapPin, 
+import {
+  Calendar,
+  Clock,
+  MapPin,
   ArrowRight,
   Newspaper,
   Trophy,
@@ -102,7 +102,7 @@ const upcomingEvents = [
 
 const announcements = [
   { id: 1, title: "Winter Vacation: Dec 25 - Jan 5", priority: "normal" },
-  { id: 2, title: "Admission Open for 2025-26 Academic Year", priority: "high" },
+  { id: 2, title: "Admission Open for 2026-27 Academic Year", priority: "high" },
   { id: 3, title: "Term 2 Examination Schedule Released", priority: "high" },
   { id: 4, title: "School Bus Route Changes from January", priority: "normal" },
 ];
@@ -268,9 +268,9 @@ export default function NewsPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-5">
             <a href="https://www.instagram.com/aashley__2009/" target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-               style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #fda085 100%)' }}
-               data-testid="button-follow-us">
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #fda085 100%)' }}
+              data-testid="button-follow-us">
               Follow @aashley__2009
             </a>
             <Button variant="outline" className="border-primary-foreground/25 text-primary-foreground hover:bg-primary-foreground/10 px-8 rounded-xl" data-testid="button-portal-updates">Login to Portal</Button>

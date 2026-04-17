@@ -106,7 +106,7 @@ export default function DayAtAashleyPage() {
               <div className="aspect-video relative bg-black">
                 <iframe 
                   className="absolute inset-0 w-full h-full opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                  src="https://www.youtube.com/embed/ZxopP6oYJU0?rel=0" 
+                  src="https://www.youtube.com/embed/6TxeWBw_8QQ?rel=0" 
                   title="A Day at Aashley International School" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen

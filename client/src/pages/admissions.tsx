@@ -40,9 +40,9 @@ const admissionSteps = [
 
 const grades = ["Nursery", "LKG", "UKG", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10"];
 const documents = [
-  { name: "Admission Prospectus 2025-26", size: "2.4 MB" },
-  { name: "Fee Structure 2025-26", size: "0.5 MB" },
-  { name: "School Calendar 2025-26", size: "1.2 MB" },
+  { name: "Admission Prospectus 2026-27", size: "2.4 MB" },
+  { name: "Fee Structure 2026-27", size: "0.5 MB" },
+  { name: "School Calendar 2026-27", size: "1.2 MB" },
 ];
 
 const formSchema = insertAdmissionEnquirySchema.extend({

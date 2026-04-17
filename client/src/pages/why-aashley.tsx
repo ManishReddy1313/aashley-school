@@ -374,15 +374,15 @@ export default function WhyAashleyPage() {
         <div className="container mx-auto px-4">
           <Reveal direction="scale">
             <div className="max-w-5xl mx-auto rounded-none relative shadow-[0px_20px_50px_rgba(0,0,0,0.1)] overflow-hidden bg-white flex flex-col">
-              
+
               {/* Top Video Profile (Native Video) */}
               <div className="relative aspect-video w-full bg-black overflow-hidden border-b border-border">
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 flex items-center justify-center bg-black"
                   initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, ease: "easeOut" }}
                   viewport={{ once: true }}
                 >
-                  <video 
+                  <video
                     ref={principalVideoRef}
                     src={principalVideo}
                     className="w-full h-full object-contain opacity-95 transition-opacity"
@@ -432,7 +432,7 @@ export default function WhyAashleyPage() {
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <Reveal direction="up">
-            <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Admissions Open 2025-26</span>
+            <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Admissions Open 2026-27</span>
             <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight text-white">
               Give Your Child the <br /><span className="text-accent underline decoration-4 underline-offset-8">Best Start</span>
             </h2>
