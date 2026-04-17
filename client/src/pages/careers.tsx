@@ -46,6 +46,8 @@ import {
   GraduationCap,
   BookOpen,
   CheckCircle,
+  Mail,
+  Phone,
 } from "lucide-react";
 import teachersImage from "@assets/teachers_group.jpg";
 import classroomImage from "@assets/classroom_1.jpg";
@@ -373,6 +375,9 @@ export default function CareersPage() {
       </section>
 
       {/* Why Work Here */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
               Why Work at <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley?</span>
             </h2>
