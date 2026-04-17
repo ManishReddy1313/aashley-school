@@ -91,7 +91,7 @@ export default function ContactPage() {
               Get In Touch
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-tight tracking-tight">
-              We'd Love To<br /><span className="text-accent underline decoration-4 underline-offset-8">Hear From You</span>
+              We'd Love To<br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Hear From You</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-lg md:text-xl text-white/85 leading-relaxed font-medium font-sans mt-8">
               Have questions about admissions, academics, or anything else? We are here to help — reach out and we'll respond promptly.
@@ -112,14 +112,14 @@ export default function ContactPage() {
             <div className="lg:col-span-5 space-y-10">
               <Reveal direction="scale">
                 <div className="p-8 md:p-10 rounded-none bg-white border border-border shadow-[0px_20px_50px_rgba(0,0,0,0.1)]">
-                  <h3 className="text-3xl font-black font-serif mb-8 text-primary">Direct <span className="text-accent underline decoration-2 underline-offset-4">Contacts</span></h3>
+                  <h3 className="text-3xl font-black font-serif mb-8 text-primary">Direct <span className="text-gradient-gold underline decoration-2 underline-offset-4">Contacts</span></h3>
                   
                   <div className="space-y-6">
                     {contactInfo.map((info, index) => {
                       const content = (
                         <div className="flex items-start gap-5 group">
-                          <div className={`w-14 h-14 bg-primary/5 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-all duration-300`}>
-                            <info.icon className="h-6 w-6 text-accent" />
+                          <div className={`w-14 h-14 bg-primary/5 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/10 transition-all duration-300`}>
+                            <info.icon className="h-6 w-6 text-gold" />
                           </div>
                           <div>
                             <h4 className="font-bold text-sm text-foreground/60 tracking-wider uppercase mb-1 font-sans">{info.title}</h4>
@@ -177,7 +177,7 @@ export default function ContactPage() {
                      <div className="mb-10">
                         <span className="bg-primary/5 text-primary font-bold px-3 py-1 text-[10px] uppercase tracking-widest inline-block mb-4">Online Inquiry</span>
                         <h2 className="text-4xl md:text-5xl font-serif font-black leading-tight text-primary">
-                          Send Us a <span className="text-accent underline decoration-4 underline-offset-8">Message</span>
+                          Send Us a <span className="text-gradient-gold underline decoration-4 underline-offset-8">Message</span>
                         </h2>
                      </div>
                      
@@ -218,13 +218,13 @@ export default function ContactPage() {
                          <FormField control={form.control} name="message" render={({ field }) => (
                            <FormItem className="flex-grow flex flex-col">
                              <FormLabel className="font-bold text-primary tracking-widest text-xs uppercase">Message *</FormLabel>
-                             <FormControl><Textarea placeholder="How can we assist you today?" rows={6} {...field} className="rounded-none bg-transparent border-border flex-grow resize-none pt-4 focus-visible:ring-1 focus-visible:ring-accent focus-visible:border-accent" /></FormControl>
+                             <FormControl><Textarea placeholder="How can we assist you today?" rows={6} {...field} className="rounded-none bg-transparent border-border flex-grow resize-none pt-4 focus-visible:ring-1 focus-visible:ring-gold focus-visible:border-gold" /></FormControl>
                              <FormMessage />
                            </FormItem>
                          )} />
-                         <Button type="submit" className="w-full mt-auto bg-accent hover:bg-accent/90 text-white font-bold tracking-widest uppercase text-sm h-16 rounded-none shadow-none transition-all duration-300" disabled={submitMessage.isPending}>
-                           {submitMessage.isPending ? "Transmitting..." : <><Send className="mr-3 h-5 w-5" /> Send Message</>}
-                         </Button>
+                          <Button type="submit" className="w-full mt-auto bg-primary hover:bg-primary/95 text-white font-bold tracking-widest uppercase text-sm h-16 rounded-none shadow-none transition-all duration-300 border-b-4 border-gold" disabled={submitMessage.isPending}>
+                            {submitMessage.isPending ? "Transmitting..." : <><Send className="mr-3 h-5 w-5 text-gold" /> Send Message</>}
+                          </Button>
                        </form>
                      </Form>
                    </div>

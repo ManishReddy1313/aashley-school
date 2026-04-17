@@ -86,10 +86,10 @@ export default function DayAtAashleyPage() {
             </motion.span>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
               A Day at
-              <br /><span className="text-accent underline decoration-4 underline-offset-8">Aashley</span>
+              <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley</span>
             </h1>
             <motion.div initial={{ width: 0 }} animate={{ width: "4rem" }} transition={{ delay: 0.5, duration: 0.6 }} className="h-1 bg-gradient-to-r from-gold to-gold/30 rounded mb-6" />
-            <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl font-medium mt-8 border-l-4 border-accent pl-5 font-sans">
+            <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-xl font-medium mt-8 border-l-4 border-gold pl-5 font-sans">
               From the morning bell to the afternoon dispersal, every moment is purposefully designed to inspire learning, build character, and create lasting memories.
             </p>
           </motion.div>
@@ -124,7 +124,7 @@ export default function DayAtAashleyPage() {
             <div className="text-center max-w-3xl mx-auto mb-20">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Rhythm of Learning</span>
               <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
-                Daily <span className="text-accent underline decoration-4 underline-offset-8">Schedule</span>
+                Daily <span className="text-gradient-gold underline decoration-4 underline-offset-8">Schedule</span>
               </h2>
               <p className="text-muted-foreground text-lg px-4 font-sans">Trace the vibrant journey of a typical day at Aashley International School.</p>
             </div>
@@ -146,7 +146,7 @@ export default function DayAtAashleyPage() {
                   <div className="absolute left-8 md:left-1/2 -mt-4 md:mt-0 md:-translate-x-1/2 flex items-center justify-center z-20 hidden md:flex">
                      <motion.div 
                         initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-200px" }}
-                        className="w-5 h-5 rounded-none bg-accent shadow-[0px_0px_0px_6px_rgba(255,255,255,1),0px_0px_0px_8px_rgba(169,34,43,0.2)]" 
+                        className="w-5 h-5 rounded-none bg-gold shadow-[0px_0px_0px_6px_rgba(255,255,255,1),0px_0px_0px_8px_rgba(11,31,58,0.1)]" 
                      />
                   </div>
 
@@ -174,11 +174,11 @@ export default function DayAtAashleyPage() {
                          <div className="relative z-10 flex flex-col h-full justify-center">
                             <div className="flex items-center gap-6 mb-6">
                               <div className={`w-14 h-14 bg-primary/5 flex items-center justify-center`}>
-                                <item.icon className="h-7 w-7 text-accent" />
+                                <item.icon className="h-7 w-7 text-gold" />
                               </div>
                               <div>
                                 <h3 className="font-bold text-2xl font-serif text-primary">{item.title}</h3>
-                                <div className="text-xs text-accent font-bold tracking-widest mt-2 uppercase font-sans">
+                                <div className="text-xs text-gold font-bold tracking-widest mt-2 uppercase font-sans">
                                   {item.time}
                                 </div>
                               </div>
@@ -204,9 +204,9 @@ export default function DayAtAashleyPage() {
         <div className="container mx-auto px-4">
           <Reveal>
              <div className="text-center max-w-2xl mx-auto mb-16">
-               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Weekly Rhythms</span>
+               <span className="text-gold font-bold uppercase tracking-widest text-sm mb-4 block">Weekly Rhythms</span>
                <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
-                 Activity <span className="text-accent underline decoration-4 underline-offset-8">Focus</span>
+                 Activity <span className="text-gradient-gold underline decoration-4 underline-offset-8">Focus</span>
                </h2>
                <p className="text-muted-foreground text-lg font-sans">Every day brings a unique co-curricular flavor to foster well-rounded growth.</p>
              </div>
@@ -229,9 +229,9 @@ export default function DayAtAashleyPage() {
                    
                    {/* Content Area */}
                    <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                      <div className="bg-white border-l-4 border-accent shadow-sm p-5 transform group-hover:-translate-y-4 transition-transform duration-500">
+                      <div className="bg-white border-l-4 border-gold shadow-sm p-5 transform group-hover:-translate-y-4 transition-transform duration-500">
                          <div className={`w-12 h-12 bg-primary/5 flex items-center justify-center mb-4`}>
-                            <item.icon className="h-6 w-6 text-accent" />
+                            <item.icon className="h-6 w-6 text-gold" />
                          </div>
                          <div className="font-bold text-xl text-primary font-serif mb-1">{item.day}</div>
                          <div className="text-sm font-medium text-muted-foreground font-sans">{item.activity}</div>
@@ -255,7 +255,7 @@ export default function DayAtAashleyPage() {
             <div className="text-center mb-16">
               <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Why Every Day Matters</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
-                What Makes It <span className="text-accent underline decoration-4 underline-offset-8">Special</span>
+                What Makes It <span className="text-gradient-gold underline decoration-4 underline-offset-8">Special</span>
               </h2>
             </div>
           </Reveal>
@@ -268,8 +268,8 @@ export default function DayAtAashleyPage() {
             ].map((item, index) => (
               <Reveal key={index} delay={index * 120} direction="up">
                 <div className="text-center group p-10 bg-white/5 border border-white/10 hover:border-accent transition-all duration-300">
-                  <div className={`w-20 h-20 bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:-translate-y-2 group-hover:border-accent transition-all duration-300`}>
-                    <item.icon className="h-10 w-10 text-white drop-shadow-sm group-hover:text-accent transition-colors" />
+                  <div className={`w-20 h-20 bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:-translate-y-2 group-hover:border-gold transition-all duration-300`}>
+                    <item.icon className="h-10 w-10 text-white drop-shadow-sm group-hover:text-gold transition-colors" />
                   </div>
                   <h3 className="text-2xl font-bold font-serif mb-4 text-white">{item.title}</h3>
                   <p className="text-white/70 leading-relaxed text-lg font-sans">{item.description}</p>

@@ -134,10 +134,10 @@ export default function WhyAashleyPage() {
 
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.1] tracking-tight">
               Why Choose<br />
-              <span className="text-accent underline decoration-4 underline-offset-8">Aashley International?</span>
+              <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley International?</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/85 mb-10 leading-relaxed max-w-2xl font-sans mt-8 border-l-4 border-accent pl-5">
+            <p className="text-lg md:text-xl text-white/85 mb-10 leading-relaxed max-w-2xl font-sans mt-8 border-l-4 border-gold pl-5">
               Since 2008, we've been shaping young minds in Bangarpet, Kolar with an ICSE curriculum, values-driven education, and a commitment to every child's success.
             </p>
 
@@ -184,7 +184,7 @@ export default function WhyAashleyPage() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">The Premium Approach</span>
               <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
-                What Makes Aashley <br /><span className="text-accent underline decoration-4 underline-offset-8">Unique</span>
+                What Makes Aashley <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Unique</span>
               </h2>
               <p className="text-muted-foreground text-lg px-4 font-sans">Every facet of our institution is carefully crafted to deliver world-class education.</p>
             </div>
@@ -204,7 +204,7 @@ export default function WhyAashleyPage() {
                     {/* Subtle glowing orb in background on hover */}
                     <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${featureColors[index]} rounded-full blur-[50px] opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${featureColors[index]} flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform duration-300 ring-4 ring-background z-10`}>
+                    <div className={`w-12 h-12 rounded-none bg-gradient-to-br ${featureColors[index]} flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform duration-300 ring-4 ring-background z-10`}>
                       <feature.icon className="h-6 w-6 text-white" />
                     </div>
 
@@ -225,7 +225,7 @@ export default function WhyAashleyPage() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Visual Tour</span>
               <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 leading-tight text-primary">
-                Experience <span className="text-accent underline decoration-4 underline-offset-8">Campus Life</span>
+                Experience <span className="text-gradient-gold underline decoration-4 underline-offset-8">Campus Life</span>
               </h2>
             </div>
           </Reveal>
@@ -336,7 +336,7 @@ export default function WhyAashleyPage() {
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Parent Voices</span>
               <h2 className="text-4xl md:text-5xl font-serif font-black text-primary mb-4 leading-tight tracking-tight">
-                What <span className="text-accent underline decoration-4 underline-offset-8">Parents Say</span>
+                What <span className="text-gradient-gold underline decoration-4 underline-offset-8">Parents Say</span>
               </h2>
             </div>
           </Reveal>
@@ -400,7 +400,7 @@ export default function WhyAashleyPage() {
 
                 <div className="mb-8 border-b border-border pb-6">
                   <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary">
-                    A Message from the <span className="text-accent underline decoration-4 underline-offset-8">Principal</span>
+                    A Message from the <span className="text-gradient-gold underline decoration-4 underline-offset-8">Principal</span>
                   </h2>
                 </div>
 
@@ -410,7 +410,7 @@ export default function WhyAashleyPage() {
 
                 <div className="mt-12 flex items-center gap-6">
                   <div className="w-16 h-16 bg-primary/5 flex items-center justify-center flex-shrink-0">
-                    <GraduationCap className="h-8 w-8 text-accent" />
+                    <GraduationCap className="h-8 w-8 text-gold" />
                   </div>
                   <div>
                     <div className="font-black text-2xl font-serif text-primary mb-1">Mrs. Veenarani B C</div>
@@ -434,7 +434,7 @@ export default function WhyAashleyPage() {
           <Reveal direction="up">
             <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Admissions Open 2026-27</span>
             <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight text-white">
-              Give Your Child the <br /><span className="text-accent underline decoration-4 underline-offset-8">Best Start</span>
+              Give Your Child the <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Best Start</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-10 text-xl leading-relaxed font-sans">
               Join hundreds of families who have trusted Aashley International School with their children's future. Discover an environment designed for excellence.

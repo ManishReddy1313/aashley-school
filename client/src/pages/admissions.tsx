@@ -14,7 +14,7 @@ import { useEffect, useRef } from "react";
 import { insertAdmissionEnquirySchema } from "@shared/schema";
 import { z } from "zod";
 import { FileText, Calendar, ClipboardCheck, UserCheck, Download, CheckCircle, ArrowRight, Phone, Mail, Sparkles } from "lucide-react";
-import assemblyImage from "@assets/hero_assembly.jpg";
+import home_4 from "@assets/home_4.jpg";
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   return <div ref={ref} className={`scroll-reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
 }
 
-const stepColors = ["from-blue-400 to-blue-600", "from-emerald-400 to-emerald-600", "from-purple-400 to-purple-600", "from-gold-dark to-gold"];
+const stepColors = ["from-gold-dark to-gold", "from-primary to-primary-light", "from-gold-dark to-gold", "from-primary to-primary-light"];
 const admissionSteps = [
   { icon: FileText, step: "Step 1", title: "Submit Enquiry", description: "Fill out the online enquiry form with student and parent details." },
   { icon: Calendar, step: "Step 2", title: "Schedule Visit", description: "Book a campus tour to experience our learning environment firsthand." },
@@ -80,7 +80,7 @@ export default function AdmissionsPage() {
       {/* ── HERO ── */}
       <section className="relative min-h-[58vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={assemblyImage} alt="Students at Aashley International School" className="w-full h-full object-cover" />
+          <img src={home_4} alt="Students at Aashley International School" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/50" />
           <div className="absolute inset-0 dot-pattern opacity-20" />
         </div>
@@ -89,7 +89,7 @@ export default function AdmissionsPage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/20 border border-gold/30 mb-5">
               <Sparkles className="h-4 w-4 text-gold" />
-              <span className="text-xs font-semibold tracking-widest text-gold uppercase">Admissions Open 2025–26</span>
+              <span className="text-xs font-semibold tracking-widest text-gold uppercase">Admissions Open 2026–27</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-5 leading-tight">
               Join the
@@ -100,6 +100,42 @@ export default function AdmissionsPage() {
               Begin your child's journey to excellence. We welcome students who are eager to learn, grow, and make a difference.
             </p>
           </div>
+        </div>
+      </section>
+      
+      {/* ── VIDEO SECTION ── */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <Reveal>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="badge-gold mb-4 inline-block">Experience Aashley</span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
+                Discover Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Vibrant Campus</span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed font-sans mt-6">
+                Take a direct look into the daily life, academic excellence, and holistic growth 
+                that define the Aashley International School experience.
+              </p>
+            </div>
+          </Reveal>
+          
+          <Reveal delay={200} direction="scale">
+            <div className="max-w-5xl mx-auto shadow-[0px_20px_60px_rgba(0,0,0,0.15)] relative group">
+              {/* Gold decorative frame corner */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-gold group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-gold group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
+              
+              <div className="aspect-video relative overflow-hidden bg-black border border-border">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/7Ow8uuZAAVk?autoplay=0&rel=0"
+                  title="Experience Aashley International School"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -156,14 +192,14 @@ export default function AdmissionsPage() {
                       <FormField control={form.control} name="studentName" render={({ field }) => (
                         <FormItem>
                           <FormLabel className="font-semibold">Student Name *</FormLabel>
-                          <FormControl><Input placeholder="Enter student name" {...field} data-testid="input-student-name" className="rounded-xl" /></FormControl>
+                          <FormControl><Input placeholder="Enter student name" {...field} data-testid="input-student-name" className="rounded-none" /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="parentName" render={({ field }) => (
                         <FormItem>
                           <FormLabel className="font-semibold">Parent/Guardian Name *</FormLabel>
-                          <FormControl><Input placeholder="Enter parent name" {...field} data-testid="input-parent-name" className="rounded-xl" /></FormControl>
+                          <FormControl><Input placeholder="Enter parent name" {...field} data-testid="input-parent-name" className="rounded-none" /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
@@ -172,14 +208,14 @@ export default function AdmissionsPage() {
                       <FormField control={form.control} name="email" render={({ field }) => (
                         <FormItem>
                           <FormLabel className="font-semibold">Email Address *</FormLabel>
-                          <FormControl><Input type="email" placeholder="Enter email" {...field} data-testid="input-email" className="rounded-xl" /></FormControl>
+                          <FormControl><Input type="email" placeholder="Enter email" {...field} data-testid="input-email" className="rounded-none" /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="phone" render={({ field }) => (
                         <FormItem>
                           <FormLabel className="font-semibold">Phone Number *</FormLabel>
-                          <FormControl><Input placeholder="Enter phone number" {...field} data-testid="input-phone" className="rounded-xl" /></FormControl>
+                          <FormControl><Input placeholder="Enter phone number" {...field} data-testid="input-phone" className="rounded-none" /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
@@ -188,7 +224,7 @@ export default function AdmissionsPage() {
                       <FormItem>
                         <FormLabel className="font-semibold">Grade Seeking Admission *</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl><SelectTrigger data-testid="select-grade" className="rounded-xl"><SelectValue placeholder="Select grade" /></SelectTrigger></FormControl>
+                          <FormControl><SelectTrigger data-testid="select-grade" className="rounded-none"><SelectValue placeholder="Select grade" /></SelectTrigger></FormControl>
                           <SelectContent>{grades.map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}</SelectContent>
                         </Select>
                         <FormMessage />
@@ -197,11 +233,11 @@ export default function AdmissionsPage() {
                     <FormField control={form.control} name="message" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="font-semibold">Additional Message (Optional)</FormLabel>
-                        <FormControl><Textarea placeholder="Any specific questions or requirements?" rows={4} {...field} value={field.value || ""} data-testid="textarea-message" className="rounded-xl" /></FormControl>
+                        <FormControl><Textarea placeholder="Any specific questions or requirements?" rows={4} {...field} value={field.value || ""} data-testid="textarea-message" className="rounded-none" /></FormControl>
                         <FormMessage />
                       </FormItem>
                     )} />
-                    <Button type="submit" className="w-full bg-gold text-white hover:bg-gold-dark border-0 font-bold text-base py-3 rounded-xl hover:shadow-gold transition-all duration-300" disabled={submitEnquiry.isPending} data-testid="button-submit-enquiry">
+                    <Button type="submit" className="w-full bg-primary text-white hover:bg-primary/95 border-0 font-bold text-base py-3 rounded-none border-b-4 border-gold transition-all duration-300 shadow-none" disabled={submitEnquiry.isPending} data-testid="button-submit-enquiry">
                       {submitEnquiry.isPending ? "Submitting…" : "Submit Enquiry →"}
                     </Button>
                   </form>
@@ -220,7 +256,7 @@ export default function AdmissionsPage() {
                     {documents.map((doc, index) => (
                       <div key={index} className="card-premium group flex items-center justify-between gap-4 p-5" data-testid={`download-${index}`}>
                         <div className="flex items-center gap-4">
-                          <div className="w-11 h-11 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/20 transition-colors duration-200">
+                          <div className="w-11 h-11 rounded-none bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/20 transition-colors duration-200">
                             <FileText className="h-5 w-5 text-gold" />
                           </div>
                           <div>
@@ -229,7 +265,7 @@ export default function AdmissionsPage() {
                           </div>
                         </div>
                         <a href={doc.url} download={doc.name} className="flex-shrink-0">
-                          <Button variant="ghost" size="icon" className="rounded-xl hover:bg-gold/10 hover:text-gold transition-colors duration-200" data-testid={`button-download-${index}`}>
+                          <Button variant="ghost" size="icon" className="rounded-none hover:bg-gold/10 hover:text-gold transition-colors duration-200" data-testid={`button-download-${index}`}>
                             <Download className="h-5 w-5" />
                           </Button>
                         </a>
@@ -245,14 +281,14 @@ export default function AdmissionsPage() {
                     <p className="text-muted-foreground mb-6 leading-relaxed">Our admissions team is here to assist you with any queries about joining Aashley.</p>
                     <div className="space-y-4">
                       <a href="tel:+919480330967" className="flex items-center gap-4 group" data-testid="contact-phone">
-                        <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-200">
-                          <Phone className="h-5 w-5 text-primary" />
+                        <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-200">
+                          <Phone className="h-5 w-5 text-gold" />
                         </div>
                         <span className="font-medium group-hover:text-primary transition-colors duration-200">+91 94803 30967</span>
                       </a>
                       <a href="mailto:contact@aashleyinternationalschool.in" className="flex items-center gap-4 group" data-testid="contact-email">
-                        <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-200">
-                          <Mail className="h-5 w-5 text-primary" />
+                        <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-200">
+                          <Mail className="h-5 w-5 text-gold" />
                         </div>
                         <span className="font-medium group-hover:text-primary transition-colors duration-200 text-sm">contact@aashleyinternationalschool.in</span>
                       </a>
@@ -289,7 +325,7 @@ export default function AdmissionsPage() {
             ].map((item, index) => (
               <Reveal key={index} delay={index * 80}>
                 <div className="card-premium flex items-center gap-4 p-5" data-testid={`eligibility-${index}`}>
-                  <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-none bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="h-5 w-5 text-gold" />
                   </div>
                   <div>

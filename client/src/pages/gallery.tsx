@@ -98,7 +98,7 @@ export default function GalleryPage() {
         
         <div className="container mx-auto px-4 relative z-10 py-20">
           <div className="max-w-2xl reveal">
-            <span className="bg-[#AA1D2A] text-white px-4 py-1.5 font-bold uppercase tracking-[0.2em] text-[11px] mb-6 inline-block shadow-md">
+            <span className="badge-gold mb-6 inline-block">
               Photo Stories
             </span>
             <h1 className="heading-xl text-white mb-6 font-serif">

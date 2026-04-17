@@ -72,7 +72,7 @@ function RevealSection({ children, className = "", delay = 0, direction = "up" }
 const heroSlides = [
   {
     image: heroImage1,
-    eyebrow: "ICSE (CISCE) Affiliated · Bangarpet, Kolar",
+    eyebrow: "ICSE (CISCE) Affiliated · Admissions Open 2026-27",
     title: "Nurturing Young Minds,",
     highlight: "Building Tomorrow's Leaders",
     subtitle: "At Aashley International School, we nurture every child's unique potential through ICSE (CISCE) curriculum, value-based education, and a caring learning environment.",
@@ -312,18 +312,23 @@ export default function HomePage() {
       <section className="relative z-30 -mt-20 md:-mt-32 max-w-7xl mx-auto px-4" data-testid="stats-section">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
           {features.map((feature, index) => {
-            // Apply alternative colors (e.g., Accent / Navy / Accent)
-            const bgClass = index % 2 === 0 ? "bg-accent text-white" : "bg-primary text-white";
+            const isWhite = index === 1;
+            const bgClass = isWhite ? "bg-white text-primary border-t-4 border-gold" : "bg-primary text-white";
+            const iconBg = isWhite ? "bg-primary/5" : "bg-white/10";
+            const iconColor = isWhite ? "text-primary" : "text-white";
+            const descColor = isWhite ? "text-muted-foreground" : "text-white/80";
+
             return (
               <RevealSection key={index} delay={index * 120} direction="up">
                 <div
-                  className={`p-10 lg:p-14 h-full flex flex-col justify-center transition-all hover:-translate-y-2 ${bgClass}`}
+                  className={`p-10 lg:p-14 h-full flex flex-col justify-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${bgClass}`}
                 >
-                  <div className="w-16 h-16 bg-white/10 flex items-center justify-center mb-6">
-                    <feature.icon className="h-8 w-8 text-white" />
+                  <div className={`w-16 h-16 ${iconBg} flex items-center justify-center mb-6`}>
+                    <feature.icon className={`h-8 w-8 ${iconColor}`} />
                   </div>
-                  <h3 className="text-2xl font-serif font-bold mb-4">{feature.title}</h3>
-                  <p className="text-white/80 leading-relaxed font-sans">{feature.description}</p>
+                  <div className={`badge-gold mb-3 inline-block w-fit`}>{feature.badge}</div>
+                  <h3 className={`text-2xl font-serif font-bold mb-4`}>{feature.title}</h3>
+                  <p className={`${descColor} leading-relaxed font-sans`}>{feature.description}</p>
                 </div>
               </RevealSection>
             );
@@ -423,12 +428,12 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
                {stats.map((stat, index) => (
                   <RevealSection key={index} delay={index * 120} direction="up">
-                     <div className="space-y-4">
-                        <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 text-accent mb-2">
-                           <stat.icon className="h-8 w-8" />
+                     <div className="space-y-4 group">
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-white/5 border border-white/10 text-gold mb-2 transition-transform duration-500 group-hover:scale-110">
+                           <stat.icon className="h-9 w-9" />
                         </div>
-                        <div className="text-4xl md:text-5xl font-serif font-bold">{stat.value}</div>
-                        <div className="text-sm font-bold uppercase tracking-widest text-white/70">{stat.label}</div>
+                        <div className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">{stat.value}</div>
+                        <div className="text-xs font-bold uppercase tracking-[0.2em] text-gold/80">{stat.label}</div>
                      </div>
                   </RevealSection>
                ))}
@@ -632,10 +637,10 @@ export default function HomePage() {
                     key={index}
                     className="group bg-white p-8 text-primary shadow-[0px_10px_30px_rgba(0,0,0,0.07)] hover:-translate-y-2 transition-transform duration-300 cursor-pointer border-t-2 border-transparent hover:border-accent"
                   >
-                    <div className={`w-12 h-12 bg-primary/5 flex items-center justify-center mb-5 text-accent`}>
+                    <div className={`w-12 h-12 bg-primary/5 flex items-center justify-center mb-5 text-gold`}>
                       <item.icon className="h-6 w-6" />
                     </div>
-                    <div className="text-xs text-accent font-bold tracking-widest mb-2">{item.time}</div>
+                    <div className="text-xs text-gold font-bold tracking-widest mb-2">{item.time}</div>
                     <div className="font-bold text-lg font-serif leading-snug">{item.label}</div>
                   </div>
                 ))}
@@ -670,7 +675,7 @@ export default function HomePage() {
 
                   <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
                     Are You Ready to Join the{" "}
-                    <span className="text-accent underline decoration-4 underline-offset-8">Aashley Family?</span>
+                    <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley Family?</span>
                   </h2>
                   <p className="text-white/80 max-w-2xl mx-auto mb-10 text-lg leading-relaxed font-sans">
                     Give your child the gift of quality ICSE education, experienced faculty, and a nurturing 

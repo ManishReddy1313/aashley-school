@@ -106,7 +106,7 @@ export default function AcademicsPage() {
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
               Shaping<br />
-              <span className="text-accent underline decoration-4 underline-offset-8">Brilliant Minds</span>
+              <span className="text-gradient-gold underline decoration-4 underline-offset-8">Brilliant Minds</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-xl text-white/85 leading-relaxed max-w-2xl font-medium tracking-wide mt-8 border-l-4 border-accent pl-5 font-sans">
               Our comprehensive ICSE curriculum is masterfully designed to nurture intellectual curiosity, hone critical thinking,
@@ -132,7 +132,7 @@ export default function AcademicsPage() {
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">ICSE Board Pattern</span>
               <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
-                Academic <span className="text-accent underline decoration-4 underline-offset-8">Progressions</span>
+                Academic <span className="text-gradient-gold underline decoration-4 underline-offset-8">Progressions</span>
               </h2>
               <p className="text-muted-foreground text-xl font-sans">Developing extraordinarily well-rounded individuals by engaging multiple facets of creativity and athleticism.</p>
             </div>
@@ -201,7 +201,7 @@ export default function AcademicsPage() {
                       <div className="space-y-6">
                         <h4 className="font-bold flex items-center gap-4 text-lg font-serif">
                           <div className="w-12 h-12 rounded-none bg-primary/5 flex items-center justify-center flex-shrink-0">
-                            <Trophy className="h-6 w-6 text-accent" />
+                            <Trophy className="h-8 w-8 text-gold" />
                           </div>
                           Key Priorities
                         </h4>
@@ -250,7 +250,7 @@ export default function AcademicsPage() {
                 <span className="bg-accent text-white px-3 py-1 font-bold uppercase tracking-widest text-[10px] mb-4 inline-block">Pedagogical Framework</span>
                 <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif font-black leading-tight tracking-tight text-primary">
                   Our Inspiring
-                  <br /><span className="text-accent underline decoration-4 underline-offset-8">Methodology</span>
+                  <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Methodology</span>
                 </h2>
                 <p className="text-muted-foreground text-xl leading-relaxed font-sans mt-6">
                   We passionately believe in fostering an immersive learning environment where students seamlessly transition from passive listeners to active architects of their own educational destiny.
@@ -292,7 +292,7 @@ export default function AcademicsPage() {
             <div className="text-center max-w-3xl mx-auto mb-20">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Beyond Academics</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
-                Co-curricular <span className="text-accent underline decoration-4 underline-offset-8">Enrichment</span>
+                Co-curricular <span className="text-gradient-gold underline decoration-4 underline-offset-8">Enrichment</span>
               </h2>
               <p className="text-muted-foreground text-xl font-sans">Developing extraordinarily well-rounded individuals by engaging multiple facets of creativity and athleticism.</p>
             </div>
@@ -324,7 +324,7 @@ export default function AcademicsPage() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Experience It Live</span>
               <h2 className="text-4xl md:text-5xl font-serif font-black mb-6 text-primary">
-                Explore Our <span className="text-accent underline decoration-4 underline-offset-8">Programs</span>
+                Explore Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Programs</span>
               </h2>
             </div>
           </Reveal>
@@ -366,7 +366,7 @@ export default function AcademicsPage() {
             <div className="text-center max-w-3xl mx-auto mb-20 text-white">
               <span className="bg-accent text-white px-3 py-1 text-[10px] uppercase font-bold tracking-widest mb-4 inline-block tracking-widest">Infrastructure Elite</span>
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white">
-                World-Class <span className="text-accent underline decoration-4 underline-offset-8">Facilities</span>
+                World-Class <span className="text-gradient-gold underline decoration-4 underline-offset-8">Facilities</span>
               </h2>
               <p className="text-white/80 mt-6 text-xl max-w-2xl mx-auto font-sans">State-of-the-art infrastructure methodically engineered to radically elevate every conceivable dimension of the learning architecture.</p>
             </div>

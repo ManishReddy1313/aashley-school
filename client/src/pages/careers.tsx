@@ -361,8 +361,8 @@ export default function CareersPage() {
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-careers">
               Careers at Aashley
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our <span className="text-accent">Teaching Family</span>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold mb-6 text-white leading-tight tracking-tight">
+              Join Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Teaching Family</span>
             </h1>
             <p className="text-lg opacity-90">
               Be part of a school that values its educators as much as its students.
@@ -376,8 +376,8 @@ export default function CareersPage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Work at <span className="text-primary">Aashley?</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+              Why Work at <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley?</span>
             </h2>
             <p className="text-muted-foreground">
               We offer more than just a job — we offer a purpose-driven career where you can truly make a difference.
@@ -388,8 +388,8 @@ export default function CareersPage() {
             {benefits.map((benefit, index) => (
               <Card key={index} className="hover-elevate" data-testid={`card-benefit-${index}`}>
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                    <benefit.icon className="h-6 w-6 text-accent" />
+                  <div className="w-12 h-12 rounded-none bg-accent/10 flex items-center justify-center mb-4">
+                    <benefit.icon className="h-6 w-6 text-gold" />
                   </div>
                   <h3 className="font-semibold mb-2">{benefit.title}</h3>
                   <p className="text-sm text-muted-foreground">{benefit.description}</p>
@@ -404,8 +404,8 @@ export default function CareersPage() {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Current <span className="text-primary">Openings</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+              Current <span className="text-gradient-gold underline decoration-4 underline-offset-8">Openings</span>
             </h2>
             <p className="text-muted-foreground">
               Explore our available positions and find the right fit for your skills and passion
@@ -488,8 +488,8 @@ export default function CareersPage() {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What Our <span className="text-accent">Teachers Say</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-white">
+              What Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Teachers Say</span>
             </h2>
             <p className="opacity-90">
               Hear directly from the educators who make Aashley a special place to work and learn.
@@ -504,13 +504,13 @@ export default function CareersPage() {
                 data-testid={`teacher-review-${index}`}
               >
                 <CardContent className="p-6">
-                  <Quote className="h-8 w-8 text-accent mb-4" />
+                  <Quote className="h-8 w-8 text-gold mb-4" />
                   <p className="text-primary-foreground/90 mb-6 leading-relaxed italic">
                     "{review.quote}"
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                      <Users className="h-5 w-5 text-accent" />
+                    <div className="w-10 h-10 rounded-none bg-gold/20 flex items-center justify-center">
+                      <Users className="h-5 w-5 text-gold" />
                     </div>
                     <div>
                       <div className="font-semibold text-primary-foreground text-sm">
@@ -531,18 +531,23 @@ export default function CareersPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Shape <span className="text-primary">Young Minds?</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+            Ready to Shape <span className="text-gradient-gold underline decoration-4 underline-offset-8">Young Minds?</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             If you're passionate about education and want to make a real difference in children's lives,
-            we'd love to hear from you. Join Aashley International School today.
+            we'd love to hear from you. Join the Aashley International community today.
           </p>
-          <div className="text-sm text-muted-foreground">
-            For inquiries, reach us at{" "}
-            <span className="font-semibold text-primary">contact@aashleyinternationalschool.in</span>{" "}
-            or call{" "}
-            <span className="font-semibold text-primary">+91 94803 30967</span>
+          <div className="inline-flex flex-wrap justify-center gap-x-8 gap-y-4 px-10 py-6 bg-white border-l-8 border-gold shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
+            <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Contact HR:</div>
+            <div className="flex items-center gap-2">
+               <Mail className="h-4 w-4 text-gold" />
+               <span className="font-bold text-primary">contact@aashleyinternationalschool.in</span>
+            </div>
+            <div className="flex items-center gap-2">
+               <Phone className="h-4 w-4 text-gold" />
+               <span className="font-bold text-primary">+91 94803 30967</span>
+            </div>
           </div>
         </div>
       </section>

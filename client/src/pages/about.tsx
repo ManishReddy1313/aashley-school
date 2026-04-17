@@ -105,7 +105,7 @@ export default function AboutPage() {
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-[1.1] tracking-tight">
               Shaping Futures
               <br />
-              <span className="text-accent underline decoration-4 underline-offset-8">Since 2008</span>
+              <span className="text-gradient-gold underline decoration-4 underline-offset-8">Since 2008</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl font-medium font-sans mt-8 border-l-4 border-accent pl-5">
               Located in Bangarpet, Karnataka, Aashley International School 
@@ -132,7 +132,7 @@ export default function AboutPage() {
             <div className="text-center mb-16">
                <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Our Foundation</span>
                <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
-                 Vision & <span className="text-accent underline decoration-4 underline-offset-8">Mission</span>
+                 Vision & <span className="text-gradient-gold underline decoration-4 underline-offset-8">Mission</span>
                </h2>
             </div>
           </Reveal>
@@ -202,7 +202,7 @@ export default function AboutPage() {
             <div className="text-center max-w-2xl mx-auto mb-16 text-foreground">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">What We Stand For</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
-                Our Core <span className="text-accent underline decoration-4 underline-offset-8">Values</span>
+                Our Core <span className="text-gradient-gold underline decoration-4 underline-offset-8">Values</span>
               </h2>
             </div>
           </Reveal>
@@ -241,7 +241,7 @@ export default function AboutPage() {
             <div className="text-center max-w-3xl mx-auto mb-20">
               <span className="bg-accent text-white px-3 py-1 font-bold tracking-widest text-[10px] uppercase mb-4 inline-block">Our Legacy</span>
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-                A Journey of <span className="text-accent underline decoration-4 underline-offset-8">Excellence</span>
+                A Journey of <span className="text-gradient-gold underline decoration-4 underline-offset-8">Excellence</span>
               </h2>
             </div>
           </Reveal>
@@ -278,7 +278,7 @@ export default function AboutPage() {
                          whileHover={{ y: -5, scale: 1.02 }}
                          className={`max-w-md w-full bg-white/5 backdrop-blur-md border border-white/10 border-l-4 hover:border-l-accent rounded-none p-8 md:p-10 transition-all duration-300 relative group text-left ${isEven ? 'md:mr-8' : 'md:ml-8'}`}
                       >
-                         <h3 className="text-accent font-black text-5xl font-serif mb-4 flex items-center tracking-tighter drop-shadow-md">
+                         <h3 className="text-gold font-black text-5xl font-serif mb-4 flex items-center tracking-tighter drop-shadow-md">
                            {milestone.year}
                          </h3>
                          <h4 className="font-bold text-2xl text-white mb-3 tracking-tight">{milestone.title}</h4>
@@ -303,7 +303,7 @@ export default function AboutPage() {
             <div className="text-center mb-20">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Executive Leadership</span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
-                Principal's <span className="text-accent underline decoration-4 underline-offset-8">Message</span>
+                Principal's <span className="text-gradient-gold underline decoration-4 underline-offset-8">Message</span>
               </h2>
             </div>
           </Reveal>

@@ -135,8 +135,8 @@ export default function AlumniPage() {
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-alumni">
               Alumni Network
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Once an <span className="text-accent">Aashleyite</span>, Always an Aashleyite
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold mb-6 text-white leading-tight tracking-tight">
+              Once an <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashleyite</span>, Always an Aashleyite
             </h1>
             <p className="text-lg opacity-90">
               Connect with fellow alumni, share your success stories, and stay connected 
@@ -147,14 +147,16 @@ export default function AlumniPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-12 bg-accent">
+      <section className="py-16 bg-white border-y border-border">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center" data-testid={`stat-${index}`}>
-                <stat.icon className="h-8 w-8 mx-auto mb-2 text-accent-foreground" />
-                <div className="text-2xl font-bold text-accent-foreground">{stat.value}</div>
-                <div className="text-sm text-accent-foreground/80">{stat.label}</div>
+              <div key={index} className="text-center group" data-testid={`stat-${index}`}>
+                <div className="w-16 h-16 bg-primary/5 flex items-center justify-center mx-auto mb-5 group-hover:-translate-y-1 transition-transform">
+                  <stat.icon className="h-8 w-8 text-gold" />
+                </div>
+                <div className="text-4xl md:text-5xl font-serif font-bold text-primary tracking-tight">{stat.value}</div>
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mt-3">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -164,10 +166,13 @@ export default function AlumniPage() {
       {/* Alumni Achievers */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Alumni Achievers</h2>
-            <p className="text-muted-foreground">
-              Real journeys from Aashley alumni whose achievements span engineering, design, psychology, IT and aviation.
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="badge-gold mb-4 inline-block">Real Journeys</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+              Alumni <span className="text-gradient-gold underline decoration-4 underline-offset-8">Achievers</span>
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed font-sans mt-6">
+              Aashley graduates whose achievements span engineering, design, psychology, IT, and aviation across the globe.
             </p>
           </div>
 
@@ -210,8 +215,8 @@ export default function AlumniPage() {
                   "Opportunity to mentor current students",
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3" data-testid={`benefit-${index}`}>
-                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                      <ArrowRight className="h-3 w-3 text-accent" />
+                    <div className="w-6 h-6 rounded-none bg-gold/15 border border-gold/30 flex items-center justify-center flex-shrink-0">
+                      <ArrowRight className="h-3 w-3 text-gold" />
                     </div>
                     <span>{benefit}</span>
                   </div>
@@ -235,6 +240,7 @@ export default function AlumniPage() {
                                 placeholder="Enter your name" 
                                 {...field} 
                                 data-testid="input-alumni-name"
+                                className="rounded-none border-border h-12"
                               />
                             </FormControl>
                             <FormMessage />
@@ -253,6 +259,7 @@ export default function AlumniPage() {
                                 placeholder="Enter email" 
                                 {...field} 
                                 data-testid="input-alumni-email"
+                                className="rounded-none border-border h-12"
                               />
                             </FormControl>
                             <FormMessage />
@@ -344,7 +351,7 @@ export default function AlumniPage() {
 
                     <Button 
                       type="submit" 
-                      className="w-full" 
+                      className="w-full bg-primary hover:bg-primary/95 text-white font-bold tracking-widest uppercase text-sm h-14 rounded-none border-b-4 border-gold shadow-none transition-all duration-300" 
                       disabled={submitAlumni.isPending}
                       data-testid="button-submit-alumni"
                     >
