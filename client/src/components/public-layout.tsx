@@ -158,7 +158,7 @@ function Header() {
 
           {/* Mobile menu */}
           {mobileMenuOpen && (
-            <nav className="md:hidden py-4 border-t border-border/60">
+            <nav className="md:hidden py-6 border-t border-border/60 max-h-[80vh] overflow-y-auto">
               <div className="flex flex-col gap-1">
                 {allNavLinks.map((link) => (
                   <Link key={link.href} href={link.href}>
@@ -235,7 +235,7 @@ function Footer() {
         </div>
 
         {/* Grid */}
-        <div className="container mx-auto px-4 py-14">
+        <div className="container mx-auto px-4 py-12 md:py-14 lg:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Brand column */}
             <div>
@@ -371,7 +371,7 @@ function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-primary-foreground/10">
-          <div className="container mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+          <div className="container mx-auto px-4 py-6 md:py-5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-3">
             <p className="text-xs text-primary-foreground/45">
               © {new Date().getFullYear()} Aashley International School, Bangarpet. All rights reserved.
             </p>

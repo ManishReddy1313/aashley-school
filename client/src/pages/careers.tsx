@@ -351,7 +351,7 @@ export default function CareersPage() {
   return (
     <PublicLayout>
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-12 md:py-20">
         <div className="absolute inset-0">
           <img src={teachersImage} alt="Teaching faculty of Aashley International School" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-primary/85" />
@@ -361,10 +361,10 @@ export default function CareersPage() {
             <Badge className="mb-4 bg-accent text-accent-foreground" data-testid="badge-careers">
               Careers at Aashley
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold mb-6 text-white leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight tracking-tight">
               Join Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Teaching Family</span>
             </h1>
-            <p className="text-lg opacity-90">
+            <p className="text-base md:text-lg opacity-90">
               Be part of a school that values its educators as much as its students.
               At Aashley International, we believe great teachers create great futures.
             </p>
@@ -373,10 +373,7 @@ export default function CareersPage() {
       </section>
 
       {/* Why Work Here */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
               Why Work at <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley?</span>
             </h2>
             <p className="text-muted-foreground">
@@ -404,7 +401,7 @@ export default function CareersPage() {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
               Current <span className="text-gradient-gold underline decoration-4 underline-offset-8">Openings</span>
             </h2>
             <p className="text-muted-foreground">
@@ -488,7 +485,7 @@ export default function CareersPage() {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-white">
               What Our <span className="text-gradient-gold underline decoration-4 underline-offset-8">Teachers Say</span>
             </h2>
             <p className="opacity-90">
@@ -531,18 +528,18 @@ export default function CareersPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 text-primary">
             Ready to Shape <span className="text-gradient-gold underline decoration-4 underline-offset-8">Young Minds?</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             If you're passionate about education and want to make a real difference in children's lives,
             we'd love to hear from you. Join the Aashley International community today.
           </p>
-          <div className="inline-flex flex-wrap justify-center gap-x-8 gap-y-4 px-10 py-6 bg-white border-l-8 border-gold shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
+          <div className="inline-flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-8 gap-y-4 px-6 sm:px-10 py-6 bg-white border-l-8 border-gold shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
             <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Contact HR:</div>
             <div className="flex items-center gap-2">
                <Mail className="h-4 w-4 text-gold" />
-               <span className="font-bold text-primary">contact@aashleyinternationalschool.in</span>
+               <span className="font-bold text-primary break-all">contact@aashleyinternationalschool.in</span>
             </div>
             <div className="flex items-center gap-2">
                <Phone className="h-4 w-4 text-gold" />

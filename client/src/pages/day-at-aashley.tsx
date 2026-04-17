@@ -84,7 +84,7 @@ export default function DayAtAashleyPage() {
             <motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="bg-white text-accent px-4 py-2 font-serif font-bold uppercase tracking-widest text-sm mb-6 inline-block shadow-sm">
               Experience Aashley
             </motion.span>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
               A Day at
               <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley</span>
             </h1>
@@ -123,7 +123,7 @@ export default function DayAtAashleyPage() {
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-20">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Rhythm of Learning</span>
-              <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
                 Daily <span className="text-gradient-gold underline decoration-4 underline-offset-8">Schedule</span>
               </h2>
               <p className="text-muted-foreground text-lg px-4 font-sans">Trace the vibrant journey of a typical day at Aashley International School.</p>
@@ -132,7 +132,7 @@ export default function DayAtAashleyPage() {
 
           <div className="max-w-6xl mx-auto relative cursor-default">
             {/* Scroll-filling timeline center line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-border md:-translate-x-1/2 hidden md:block">
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-border md:-translate-x-1/2">
               <motion.div className="w-full bg-accent origin-top" style={{ height: smoothHeight }} />
             </div>
 
@@ -142,11 +142,11 @@ export default function DayAtAashleyPage() {
               
               return (
                 <div key={index} className="relative flex flex-col md:flex-row gap-4 md:gap-8 mb-16 items-center">
-                  {/* Timeline Dot (Desktop focus) */}
-                  <div className="absolute left-8 md:left-1/2 -mt-4 md:mt-0 md:-translate-x-1/2 flex items-center justify-center z-20 hidden md:flex">
+                  {/* Timeline Dot */}
+                  <div className="absolute left-8 md:left-1/2 -mt-4 md:mt-0 md:-translate-x-1/2 flex items-center justify-center z-20">
                      <motion.div 
                         initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, margin: "-200px" }}
-                        className="w-5 h-5 rounded-none bg-gold shadow-[0px_0px_0px_6px_rgba(255,255,255,1),0px_0px_0px_8px_rgba(11,31,58,0.1)]" 
+                        className="w-4 h-4 md:w-5 md:h-5 rounded-none bg-gold shadow-[0px_0px_0px_4px_white,0px_0px_0px_6px_rgba(11,31,58,0.1)] md:shadow-[0px_0px_0px_6px_white,0px_0px_0px_8px_rgba(11,31,58,0.1)]" 
                      />
                   </div>
 
@@ -161,7 +161,7 @@ export default function DayAtAashleyPage() {
                     <div className="max-w-xl w-full">
                       <motion.div 
                         whileHover={{ y: -5 }}
-                        className={`bg-white group relative p-10 border-l-4 border-accent shadow-[0px_10px_30px_rgba(0,0,0,0.07)] ${hasImage ? 'min-h-[22rem]' : ''} overflow-hidden`}
+                        className={`bg-white group relative p-6 md:p-10 border-l-4 border-accent shadow-[0px_10px_30px_rgba(0,0,0,0.07)] ${hasImage ? 'min-h-[16rem] md:min-h-[22rem]' : ''} overflow-hidden`}
                       >
                          {/* Optional Image Background with Z-space overlap effect */}
                          {hasImage && (
@@ -205,7 +205,7 @@ export default function DayAtAashleyPage() {
           <Reveal>
              <div className="text-center max-w-2xl mx-auto mb-16">
                <span className="text-gold font-bold uppercase tracking-widest text-sm mb-4 block">Weekly Rhythms</span>
-               <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
+               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
                  Activity <span className="text-gradient-gold underline decoration-4 underline-offset-8">Focus</span>
                </h2>
                <p className="text-muted-foreground text-lg font-sans">Every day brings a unique co-curricular flavor to foster well-rounded growth.</p>
@@ -220,9 +220,9 @@ export default function DayAtAashleyPage() {
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true }}
                    transition={{ delay: index * 0.1, ease: "easeOut" }}
-                   className="relative rounded-none overflow-hidden group cursor-pointer border border-border shadow-[0px_10px_30px_rgba(0,0,0,0.07)] hover:shadow-[0px_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500 bg-white"
+                   className="relative rounded-none overflow-hidden group cursor-pointer border border-border shadow-[0px_10px_30px_rgba(0,0,0,0.07)] hover:shadow-[0px_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500 bg-white min-h-[150px] md:min-h-0"
                    whileHover={{ flexGrow: 1.5, zIndex: 10 }}
-                   style={{ flexGrow: 1, display: 'flex', flexBasis: 0 }}
+                   style={{ flexGrow: 1, display: 'flex', flexBasis: 'auto' }}
                 >
                    {/* Background Highlight */}
                    <div className={`absolute inset-0 bg-primary opacity-0 group-hover:opacity-[0.02] transition-opacity duration-500`} />
@@ -254,7 +254,7 @@ export default function DayAtAashleyPage() {
           <Reveal>
             <div className="text-center mb-16">
               <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Why Every Day Matters</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
                 What Makes It <span className="text-gradient-gold underline decoration-4 underline-offset-8">Special</span>
               </h2>
             </div>
@@ -267,7 +267,7 @@ export default function DayAtAashleyPage() {
               { title: "Secure Environment", description: "A highly secure campus with trained staff ensuring absolute student safety at all times.", icon: Shield },
             ].map((item, index) => (
               <Reveal key={index} delay={index * 120} direction="up">
-                <div className="text-center group p-10 bg-white/5 border border-white/10 hover:border-accent transition-all duration-300">
+                <div className="text-center group p-6 md:p-10 bg-white/5 border border-white/10 hover:border-accent transition-all duration-300">
                   <div className={`w-20 h-20 bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-8 shadow-lg group-hover:-translate-y-2 group-hover:border-gold transition-all duration-300`}>
                     <item.icon className="h-10 w-10 text-white drop-shadow-sm group-hover:text-gold transition-colors" />
                   </div>

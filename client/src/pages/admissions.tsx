@@ -90,7 +90,7 @@ export default function AdmissionsPage() {
               <Sparkles className="h-4 w-4 text-gold" />
               <span className="text-xs font-semibold tracking-widest text-gold uppercase">Admissions Open 2026–27</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-5 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-5 leading-tight">
               Join the
               <br /><span className="text-gradient-gold">Aashley Family</span>
             </h1>
@@ -103,7 +103,7 @@ export default function AdmissionsPage() {
       </section>
       
       {/* ── VIDEO SECTION ── */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -139,7 +139,7 @@ export default function AdmissionsPage() {
       </section>
 
       {/* ── ADMISSION PROCESS ── */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -176,15 +176,15 @@ export default function AdmissionsPage() {
       </section>
 
       {/* ── FORM & DOWNLOADS ── */}
-      <section className="py-24 bg-muted/25">
+      <section className="py-16 md:py-24 bg-muted/25">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-14">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             {/* Form */}
             <Reveal>
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 leading-tight">
                 Admission <span className="text-gradient-gold">Enquiry</span>
               </h2>
-              <div className="card-premium p-8">
+              <div className="card-premium p-6 sm:p-8">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-5" noValidate>
                     <div className="grid md:grid-cols-2 gap-5">
@@ -301,7 +301,7 @@ export default function AdmissionsPage() {
       </section>
 
       {/* ── ELIGIBILITY ── */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-14">

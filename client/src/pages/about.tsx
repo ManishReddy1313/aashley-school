@@ -60,14 +60,14 @@ const accreditations = [
 // Headmaster Message Component for cleaner rendering
 function HeadmasterMessage() {
   return (
-    <section className="py-24 bg-primary text-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-primary text-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
       <div className="absolute top-[20%] right-[-5%] w-[30rem] h-[30rem] bg-gold/5 rounded-none blur-[100px] pointer-events-none" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16 lg:gap-24">
             
             {/* Image Profile with Premium Frame */}
             <Reveal direction="scale" className="w-full lg:w-1/2 flex-shrink-0">
@@ -171,7 +171,7 @@ export default function AboutPage() {
             <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white text-accent px-4 py-2 font-serif font-bold uppercase tracking-widest text-sm mb-6 inline-block shadow-sm">
               About Us
             </motion.span>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-[1.1] tracking-tight">
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-[1.1] tracking-tight">
               Shaping Futures
               <br />
               <span className="text-gradient-gold underline decoration-4 underline-offset-8">Since 2008</span>
@@ -200,7 +200,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="text-center mb-16">
                <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Our Foundation</span>
-               <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
+               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
                  Vision & <span className="text-gradient-gold underline decoration-4 underline-offset-8">Mission</span>
                </h2>
             </div>
@@ -270,7 +270,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-16 text-foreground">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">What We Stand For</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
                 Our Core <span className="text-gradient-gold underline decoration-4 underline-offset-8">Values</span>
               </h2>
             </div>
@@ -309,7 +309,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-20">
               <span className="bg-accent text-white px-3 py-1 font-bold tracking-widest text-[10px] uppercase mb-4 inline-block">Our Legacy</span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
                 A Journey of <span className="text-gradient-gold underline decoration-4 underline-offset-8">Excellence</span>
               </h2>
             </div>
@@ -370,7 +370,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="text-center mb-20">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Executive Leadership</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-black mb-6 leading-tight tracking-tight text-primary">
                 Principal's <span className="text-gradient-gold underline decoration-4 underline-offset-8">Message</span>
               </h2>
             </div>
@@ -432,7 +432,7 @@ export default function AboutPage() {
       <HeadmasterMessage />
 
       {/* ── ACCREDITATIONS ── */}
-      <section className="py-24 bg-[#F4F7F9] relative">
+      <section className="py-16 md:py-24 bg-[#F4F7F9] relative">
         <div className="absolute top-0 right-1/2 translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">

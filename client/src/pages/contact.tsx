@@ -90,7 +90,7 @@ export default function ContactPage() {
             <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-accent text-white px-3 py-1 font-bold uppercase tracking-widest text-[10px] mb-6 inline-block">
               Get In Touch
             </motion.span>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-tight tracking-tight">
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-black text-white mb-6 leading-tight tracking-tight">
               We'd Love To<br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Hear From You</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-lg md:text-xl text-white/85 leading-relaxed font-medium font-sans mt-8">
@@ -102,7 +102,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── FLOATING SPLIT SCREEN: CONNECT & MAP ── */}
-      <section className="py-16 md:py-24 bg-background relative -mt-16 z-20">
+      <section className="py-16 md:py-24 bg-background relative -mt-10 md:-mt-16 z-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
         
         <div className="container mx-auto px-4 relative">
@@ -111,7 +111,7 @@ export default function ContactPage() {
             {/* Left: Contact Info & Premium Interactive Map */}
             <div className="lg:col-span-5 space-y-10">
               <Reveal direction="scale">
-                <div className="p-8 md:p-10 rounded-none bg-white border border-border shadow-[0px_20px_50px_rgba(0,0,0,0.1)]">
+                <div className="p-6 md:p-10 rounded-none bg-white border border-border shadow-[0px_20px_50px_rgba(0,0,0,0.1)]">
                   <h3 className="text-3xl font-black font-serif mb-8 text-primary">Direct <span className="text-gradient-gold underline decoration-2 underline-offset-4">Contacts</span></h3>
                   
                   <div className="space-y-6">
@@ -171,12 +171,12 @@ export default function ContactPage() {
             {/* Right: Message Form */}
             <div className="lg:col-span-7">
               <Reveal direction="scale" delay={100} className="h-full">
-                <div className="h-full rounded-none border border-border border-l-[12px] border-l-primary shadow-[0px_20px_50px_rgba(0,0,0,0.1)] bg-white relative p-8 md:p-14">
+                <div className="h-full rounded-none border border-border border-l-[8px] md:border-l-[12px] border-l-primary shadow-[0px_20px_50px_rgba(0,0,0,0.1)] bg-white relative p-6 md:p-14">
                    
                    <div className="relative z-10 flex flex-col h-full">
                      <div className="mb-10">
                         <span className="bg-primary/5 text-primary font-bold px-3 py-1 text-[10px] uppercase tracking-widest inline-block mb-4">Online Inquiry</span>
-                        <h2 className="text-4xl md:text-5xl font-serif font-black leading-tight text-primary">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black leading-tight text-primary">
                           Send Us a <span className="text-gradient-gold underline decoration-4 underline-offset-8">Message</span>
                         </h2>
                      </div>

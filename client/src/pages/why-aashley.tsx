@@ -132,7 +132,7 @@ export default function WhyAashleyPage() {
               Discover the Aashley Difference
             </motion.span>
 
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.1] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.1] tracking-tight">
               Why Choose<br />
               <span className="text-gradient-gold underline decoration-4 underline-offset-8">Aashley International?</span>
             </h1>
@@ -168,7 +168,7 @@ export default function WhyAashleyPage() {
                 <div className="w-16 h-16 rounded-none bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6 group-hover:-translate-y-2 transition-transform">
                   <stat.icon className="h-8 w-8 text-white drop-shadow-sm" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-white font-serif tracking-tight">{stat.value}</div>
+                <div className="text-2xl md:text-4xl font-bold text-white font-serif tracking-tight">{stat.value}</div>
                 <div className="text-xs text-white/50 mt-3 tracking-widest uppercase font-semibold font-sans">{stat.label}</div>
               </motion.div>
             ))}
@@ -177,20 +177,20 @@ export default function WhyAashleyPage() {
       </section>
 
       {/* ── BENTO GRID FEATURES ── */}
-      <section className="py-16 md:py-24 bg-background relative">
+      <section className="py-12 md:py-24 bg-background relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="container mx-auto px-4">
           <Reveal direction="up">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">The Premium Approach</span>
-              <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
                 What Makes Aashley <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Unique</span>
               </h2>
               <p className="text-muted-foreground text-lg px-4 font-sans">Every facet of our institution is carefully crafted to deliver world-class education.</p>
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)] max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-6 auto-rows-[minmax(180px,auto)] max-w-7xl mx-auto">
             {uniqueFeatures.map((feature, index) => {
               // Bento Logic: Make the first two items larger (col-span-2)
               const isLarge = index === 0 || index === 1;
@@ -200,7 +200,7 @@ export default function WhyAashleyPage() {
                   key={index} delay={index * 50} direction="scale"
                   className={`h-full ${isLarge ? 'md:col-span-2' : ''} ${isTall ? 'md:row-span-2' : ''}`}
                 >
-                  <div className={`card-premium group p-8 h-full flex flex-col justify-center relative overflow-hidden backdrop-blur-xl border border-border/60 ${isLarge ? 'bg-gradient-to-br from-card to-muted/30' : 'bg-card'}`}>
+                  <div className={`card-premium group p-6 md:p-8 h-full flex flex-col justify-center relative overflow-hidden backdrop-blur-xl border border-border/60 ${isLarge ? 'bg-gradient-to-br from-card to-muted/30' : 'bg-card'}`}>
                     {/* Subtle glowing orb in background on hover */}
                     <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${featureColors[index]} rounded-full blur-[50px] opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
@@ -219,12 +219,12 @@ export default function WhyAashleyPage() {
       </section>
 
       {/* ── INTERACTIVE PHOTO SHOWCASE (Masonry-like overlap) ── */}
-      <section className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
+      <section className="py-12 md:py-24 bg-muted/30 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Visual Tour</span>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 leading-tight text-primary">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-4 leading-tight text-primary">
                 Experience <span className="text-gradient-gold underline decoration-4 underline-offset-8">Campus Life</span>
               </h2>
             </div>
@@ -278,7 +278,7 @@ export default function WhyAashleyPage() {
       </section>
 
       {/* ── THE ADVANTAGE (Animated Comparison Table) ── */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-12 md:py-24 relative">
         <div className="container mx-auto px-4 z-10 relative">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-14">
@@ -330,12 +330,12 @@ export default function WhyAashleyPage() {
       </section>
 
       {/* ── TESTIMONIALS (Frosted Cards) ── */}
-      <section className="py-16 md:py-32 relative overflow-hidden bg-[#F4F7F9]">
+      <section className="py-12 md:py-32 relative overflow-hidden bg-[#F4F7F9]">
         <div className="container mx-auto px-4 relative z-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Parent Voices</span>
-              <h2 className="text-4xl md:text-5xl font-serif font-black text-primary mb-4 leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-primary mb-4 leading-tight tracking-tight">
                 What <span className="text-gradient-gold underline decoration-4 underline-offset-8">Parents Say</span>
               </h2>
             </div>
@@ -344,7 +344,7 @@ export default function WhyAashleyPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {parentFeedback.map((item, index) => (
               <Reveal key={index} delay={index * 150} direction="up" className="h-full">
-                <div className="relative h-full bg-white shadow-[0px_10px_30px_rgba(0,0,0,0.07)] rounded-none p-10 transition-all duration-500 hover:-translate-y-2 group border-t-2 border-transparent hover:border-accent">
+                <div className="relative h-full bg-white shadow-[0px_10px_30px_rgba(0,0,0,0.07)] rounded-none p-6 md:p-10 transition-all duration-500 hover:-translate-y-2 group border-t-2 border-transparent hover:border-accent">
                   <div className="absolute top-6 right-8 text-8xl font-serif font-black text-accent/10 leading-none select-none pointer-events-none group-hover:text-accent/20 transition-colors">"</div>
 
                   <div className="mb-6 flex space-x-1">
@@ -433,7 +433,7 @@ export default function WhyAashleyPage() {
         <div className="container mx-auto px-4 text-center relative z-10">
           <Reveal direction="up">
             <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Admissions Open 2026-27</span>
-            <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight text-white">
               Give Your Child the <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Best Start</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-10 text-xl leading-relaxed font-sans">

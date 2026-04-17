@@ -101,7 +101,7 @@ export default function GalleryPage() {
             <span className="badge-gold mb-6 inline-block">
               Photo Stories
             </span>
-            <h1 className="heading-xl text-white mb-6 font-serif">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white mb-6 font-serif font-black leading-tight tracking-tight">
               Moments of
               <br />
               <span className="font-serif italic text-gradient-gold">Learning & Joy</span>
@@ -128,7 +128,7 @@ export default function GalleryPage() {
       </section>
 
       {/* ── CATEGORY FILTER ── */}
-      <section className="py-6 border-b sticky top-[88px] bg-background/95 backdrop-blur-md z-40 shadow-sm">
+      <section className="py-6 border-b sticky top-[64px] md:top-[88px] bg-background/95 backdrop-blur-md z-40 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
@@ -241,7 +241,7 @@ export default function GalleryPage() {
               <p className="text-muted-foreground text-xl font-sans mt-4">Stay updated with daily moments from #AashleyLife</p>
             </div>
           </Reveal>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-0">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-0">
             {[assemblyImg2, sportsImg2, classroomImg1, prayerImg, labImg1, exerciseImg].map((img, index) => (
               <Reveal key={index} delay={index * 40}>
                 <div className="aspect-square overflow-hidden transition-all duration-300 cursor-pointer group" data-testid={`instagram-item-${index}`}>

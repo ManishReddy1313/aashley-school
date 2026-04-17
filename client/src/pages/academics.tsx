@@ -104,7 +104,7 @@ export default function AcademicsPage() {
             <motion.span initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="bg-white text-accent px-4 py-2 font-serif font-bold uppercase tracking-widest text-sm mb-6 inline-block shadow-sm">
               Academics & Programs
             </motion.span>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
               Shaping<br />
               <span className="text-gradient-gold underline decoration-4 underline-offset-8">Brilliant Minds</span>
             </motion.h1>
@@ -126,12 +126,12 @@ export default function AcademicsPage() {
       </section>
 
       {/* ── CURRICULUM OVERVIEW (Custom Premium Tabs) ── */}
-      <section className="py-16 md:py-24 bg-background relative overflow-hidden" id="curriculum">
+      <section className="py-12 md:py-24 bg-background relative overflow-hidden" id="curriculum">
         <div className="container mx-auto px-4 relative z-10">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">ICSE Board Pattern</span>
-              <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
                 Academic <span className="text-gradient-gold underline decoration-4 underline-offset-8">Progressions</span>
               </h2>
               <p className="text-muted-foreground text-xl font-sans">Developing extraordinarily well-rounded individuals by engaging multiple facets of creativity and athleticism.</p>
@@ -147,7 +147,7 @@ export default function AcademicsPage() {
                    <button
                      key={index}
                      onClick={() => setActiveTab(index)}
-                     className={`text-left relative px-6 py-5 rounded-none transition-all duration-300 font-serif flex items-center justify-between min-w-[200px] md:min-w-0 border-l-4 ${isActive ? 'text-primary border-accent bg-white shadow-sm' : 'text-muted-foreground border-transparent hover:text-foreground hover:bg-muted/40'}`}
+                     className={`text-left relative px-5 py-4 md:px-6 md:py-5 rounded-none transition-all duration-300 font-serif flex items-center justify-between min-w-[180px] md:min-w-0 border-l-4 ${isActive ? 'text-primary border-accent bg-white shadow-sm' : 'text-muted-foreground border-transparent hover:text-foreground hover:bg-muted/40'}`}
                    >
                      {/* Active Background Pill */}
                      {isActive && (
@@ -176,7 +176,7 @@ export default function AcademicsPage() {
                     animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                     exit={{ opacity: 0, x: -20, filter: "blur(10px)" }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="bg-white h-full p-8 md:p-12 border-t-8 border-accent shadow-[0px_20px_50px_rgba(0,0,0,0.1)] rounded-none"
+                    className="bg-white h-full p-6 sm:p-8 md:p-12 border-t-8 border-accent shadow-[0px_20px_50px_rgba(0,0,0,0.1)] rounded-none"
                  >
                     <div className="mb-10">
                       <h3 className="text-3xl font-bold font-serif mb-6 text-primary">{curriculumLevels[activeTab].fullTitle}</h3>
@@ -223,7 +223,7 @@ export default function AcademicsPage() {
       </section>
 
       {/* ── TEACHING METHODOLOGY (Split-Screen Parallax) ── */}
-      <section ref={methodologyRef} className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
+      <section ref={methodologyRef} className="py-12 md:py-24 bg-muted/20 relative overflow-hidden">
         <div className="absolute inset-0 noise-overlay opacity-30" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto">
@@ -248,7 +248,7 @@ export default function AcademicsPage() {
             <div className="order-1 lg:order-2 space-y-8 relative z-20">
               <Reveal direction="left">
                 <span className="bg-accent text-white px-3 py-1 font-bold uppercase tracking-widest text-[10px] mb-4 inline-block">Pedagogical Framework</span>
-                <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif font-black leading-tight tracking-tight text-primary">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-black leading-tight tracking-tight text-primary">
                   Our Inspiring
                   <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Methodology</span>
                 </h2>
@@ -286,7 +286,7 @@ export default function AcademicsPage() {
       </section>
 
       {/* ── CO-CURRICULAR (Geometric Bento Grids) ── */}
-      <section className="py-32 bg-background relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-background relative overflow-hidden">
         <div className="container mx-auto px-4 z-10 relative">
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-20">
@@ -303,7 +303,7 @@ export default function AcademicsPage() {
               <Reveal key={index} delay={index * 100} direction="up" className="h-full">
                 <div className="group relative h-full rounded-none p-1 overflow-hidden bg-white shadow-[0px_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_10px_30px_rgba(0,0,0,0.1)] transition-all duration-500 border border-border hover:border-accent">
                    <div className="absolute inset-0 bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                   <div className="relative z-10 p-8 md:p-10 h-full flex flex-col justify-center text-center">
+                   <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-center text-center">
                       <div className={`w-20 h-20 bg-primary flex items-center justify-center mx-auto mb-8 group-hover:bg-accent transition-all duration-500`}>
                         <activity.icon className="h-10 w-10 text-white" />
                       </div>
@@ -359,13 +359,13 @@ export default function AcademicsPage() {
       </section>
 
       {/* ── FACILITIES (Hover Expansion Gallery) ── */}
-      <section className="py-20 md:py-32 relative overflow-hidden bg-primary text-white">
+      <section className="py-16 md:py-32 relative overflow-hidden bg-primary text-white">
         
         <div className="container mx-auto px-4 relative z-10">
           <Reveal>
             <div className="text-center max-w-3xl mx-auto mb-20 text-white">
               <span className="bg-accent text-white px-3 py-1 text-[10px] uppercase font-bold tracking-widest mb-4 inline-block tracking-widest">Infrastructure Elite</span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-black mb-6 leading-tight tracking-tight text-white">
                 World-Class <span className="text-gradient-gold underline decoration-4 underline-offset-8">Facilities</span>
               </h2>
               <p className="text-white/80 mt-6 text-xl max-w-2xl mx-auto font-sans">State-of-the-art infrastructure methodically engineered to radically elevate every conceivable dimension of the learning architecture.</p>
@@ -383,7 +383,7 @@ export default function AcademicsPage() {
                   
                   <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
                     <div className="w-12 h-1 bg-accent rounded-none mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100" />
-                    <h4 className="font-bold text-3xl font-serif text-white mb-3 tracking-tight">{facility.name}</h4>
+                    <h4 className="font-bold text-2xl md:text-3xl font-serif text-white mb-3 tracking-tight">{facility.name}</h4>
                     <p className="text-lg text-white/80 font-sans leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{facility.description}</p>
                   </div>
                 </div>

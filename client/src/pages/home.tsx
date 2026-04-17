@@ -222,7 +222,7 @@ function HeroSlider() {
           ))}
 
           {/* Main H1 — static for SEO */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white mb-4 leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white mb-4 leading-tight tracking-tight">
             Aashley International School
             <span className="block text-2xl md:text-3xl lg:text-4xl font-light mt-2 text-white/70 font-sans">
               Best School in Bangarpet
@@ -240,11 +240,11 @@ function HeroSlider() {
               }`}
               aria-hidden={index !== current}
             >
-              <p className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4">
                 <span className="text-gold">{slide.title} </span>
                 <span className="text-white">{slide.highlight}</span>
               </p>
-              <p className="text-base md:text-lg text-white/80 mb-8 leading-relaxed max-w-2xl">
+              <p className="text-sm md:text-lg text-white/80 mb-8 leading-relaxed max-w-2xl">
                 {slide.subtitle}
               </p>
             </div>
@@ -309,7 +309,7 @@ export default function HomePage() {
       <HeroSlider />
 
       {/* ── EDUPREME OVERLAPPING FEATURE CARDS ── */}
-      <section className="relative z-30 -mt-20 md:-mt-32 max-w-7xl mx-auto px-4" data-testid="stats-section">
+      <section className="relative z-30 -mt-12 md:-mt-32 max-w-7xl mx-auto px-4" data-testid="stats-section">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 shadow-[0px_10px_30px_rgba(0,0,0,0.07)]">
           {features.map((feature, index) => {
             const isWhite = index === 1;
@@ -337,7 +337,7 @@ export default function HomePage() {
       </section>
 
       {/* ── ABOUT CALLOUT (2-col split) ── */}
-      <section className="py-24 md:py-32 relative overflow-hidden bg-background" aria-labelledby="best-school-bangarpet">
+      <section className="py-16 md:py-32 relative overflow-hidden bg-background" aria-labelledby="best-school-bangarpet">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             {/* Image Column */}
@@ -432,7 +432,7 @@ export default function HomePage() {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-white/5 border border-white/10 text-gold mb-2 transition-transform duration-500 group-hover:scale-110">
                            <stat.icon className="h-9 w-9" />
                         </div>
-                        <div className="text-5xl md:text-6xl font-serif font-bold text-white tracking-tight">{stat.value}</div>
+                        <div className="text-4xl md:text-6xl font-serif font-bold text-white tracking-tight">{stat.value}</div>
                         <div className="text-xs font-bold uppercase tracking-[0.2em] text-gold/80">{stat.label}</div>
                      </div>
                   </RevealSection>
@@ -519,7 +519,7 @@ export default function HomePage() {
           <RevealSection>
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="badge-gold mb-4 inline-block">Parent Testimonials</span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
                 Real <span className="text-gradient-gold">Journeys</span>
               </h2>
               <div className="section-divider mt-4 mb-5" />
@@ -667,7 +667,7 @@ export default function HomePage() {
                   </svg>
                 </div>
 
-                <div className="relative z-10 p-12 md:p-20 text-center text-white">
+                <div className="relative z-10 p-10 md:p-20 text-center text-white">
                   <div className="inline-flex items-center gap-2 px-6 py-2 bg-accent text-white font-bold uppercase tracking-widest text-xs mb-8">
                     <Sparkles className="h-4 w-4" />
                     Admissions Open
