@@ -20,7 +20,6 @@ import {
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { sendContactFormEmail, sendAdmissionEnquiryEmail } from "./services/emailService";
-import { logSubmissionToFile } from "./services/fileLogger";
 import { authStorage } from "./replit_integrations/auth/storage";
 import { type PermissionKey, PERMISSION_KEYS, isPermissionKey, normalizeRole } from "@shared/authz";
 import { ensureCanAssignRole, ensureCanManageUser, getRole, requirePermission } from "./authz";
@@ -56,9 +55,9 @@ export async function registerRoutes(
       const data = insertAdmissionEnquirySchema.parse(normalized);
       
       try {
-        await logSubmissionToFile("admission_enquiries.json", data);
-      } catch (logErr) {
-        console.error("[api] Failed to log admission enquiry to file:", logErr);
+        await storage.createAdmissionEnquiry(data);
+      } catch (dbErr) {
+        console.error("[api] Failed to save admission enquiry to database:", dbErr);
       }
 
       try {
@@ -110,9 +109,9 @@ export async function registerRoutes(
       const data = insertContactMessageSchema.parse(normalized);
 
       try {
-        await logSubmissionToFile("contact_messages.json", data);
-      } catch (logErr) {
-        console.error("[api] Failed to log contact message to file:", logErr);
+        await storage.createContactMessage(data);
+      } catch (dbErr) {
+        console.error("[api] Failed to save contact message to database:", dbErr);
       }
 
       try {

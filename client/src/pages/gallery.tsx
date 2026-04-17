@@ -87,21 +87,43 @@ export default function GalleryPage() {
       <section className="relative min-h-[55vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={buildingImg2} alt="Aashley International School Bangarpet campus" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/92 via-primary/78 to-primary/50" />
-          <div className="absolute inset-0 dot-pattern opacity-20" />
+          {/* Proper cinematic navy overlay to ensure text legibility */}
+          <div className="absolute inset-0 hero-gradient-cinema" />
+          <div className="absolute inset-0 noise-overlay" />
+          <div className="absolute inset-0 dot-pattern opacity-30" />
         </div>
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
+        
+        {/* Premium Gold Accent Bar */}
+        <div className="absolute top-0 left-0 right-0 gold-accent-bar" />
+        
         <div className="container mx-auto px-4 relative z-10 py-20">
-          <div className="max-w-2xl">
-            <span className="bg-accent text-white px-3 py-1 font-bold uppercase tracking-widest text-[10px] mb-5 inline-block">Photo Stories</span>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight tracking-tight">
+          <div className="max-w-2xl reveal">
+            <span className="bg-[#AA1D2A] text-white px-4 py-1.5 font-bold uppercase tracking-[0.2em] text-[11px] mb-6 inline-block shadow-md">
+              Photo Stories
+            </span>
+            <h1 className="heading-xl text-white mb-6 font-serif">
               Moments of
-              <br /><span className="text-accent underline decoration-4 underline-offset-8">Learning & Joy</span>
+              <br />
+              <span className="font-serif italic text-gradient-gold">Learning & Joy</span>
             </h1>
-            <p className="text-lg text-white/80 leading-relaxed max-w-xl font-sans mt-8">
+            <p className="text-xl text-white/80 leading-relaxed max-w-xl font-sans mt-4 font-light">
               Capturing the essence of life at Aashley — where every day brings new experiences and lasting memories.
             </p>
           </div>
+        </div>
+        
+        {/* Decorative graphic bottom right */}
+        <div className="absolute bottom-0 right-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
+          <svg width="400" height="400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" stroke="url(#goldGrad)" strokeWidth="1" strokeDasharray="4 4" />
+            <circle cx="50" cy="50" r="30" stroke="url(#goldGrad)" strokeWidth="0.5" />
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#D4AF37" />
+                <stop offset="1" stopColor="#FFDF73" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
       </section>
 
