@@ -40,9 +40,9 @@ const admissionSteps = [
 
 const grades = ["Nursery", "LKG", "UKG", "Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10"];
 const documents = [
-  { name: "Admission Prospectus 2026-27", size: "2.4 MB" },
-  { name: "Fee Structure 2026-27", size: "0.5 MB" },
-  { name: "School Calendar 2026-27", size: "1.2 MB" },
+  { name: "Admission Brochure 2026-27 (Part 1)", size: "11.3 MB", url: "/admission brochure(1) - 26-27.pdf" },
+  { name: "Admission Brochure 2026-27 (Part 2)", size: "7.5 MB", url: "/admission brochure(2) - 26-27.pdf" },
+  { name: "Instructions 2026-27", size: "0.1 MB", url: "/Instructions for 26-27.pdf" },
 ];
 
 const formSchema = insertAdmissionEnquirySchema.extend({
@@ -228,9 +228,11 @@ export default function AdmissionsPage() {
                             <div className="text-xs text-muted-foreground mt-0.5">PDF — {doc.size}</div>
                           </div>
                         </div>
-                        <Button variant="ghost" size="icon" className="rounded-xl hover:bg-gold/10 hover:text-gold transition-colors duration-200" data-testid={`button-download-${index}`}>
-                          <Download className="h-5 w-5" />
-                        </Button>
+                        <a href={doc.url} download={doc.name} className="flex-shrink-0">
+                          <Button variant="ghost" size="icon" className="rounded-xl hover:bg-gold/10 hover:text-gold transition-colors duration-200" data-testid={`button-download-${index}`}>
+                            <Download className="h-5 w-5" />
+                          </Button>
+                        </a>
                       </div>
                     ))}
                   </div>
