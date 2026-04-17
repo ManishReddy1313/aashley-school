@@ -14,6 +14,7 @@ import exerciseImage from "@assets/home_6.jpg";
 import buildingImage from "@assets/home_entrance.jpg";
 import heroStudents from "@assets/hero_1.jpg";
 import assemblyImage from "@assets/hero_5.jpg";
+import heroVideo from "@assets/Aashley-Hero-Video-loop.mp4";
 import { 
   GraduationCap, 
   Users, 
@@ -184,27 +185,22 @@ function HeroSlider() {
 
   return (
     <section className="relative min-h-[92vh] flex items-center overflow-hidden" data-testid="hero-slider">
-      {/* Background slides */}
-      {heroSlides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1200 ease-in-out ${
-            index === current ? "opacity-100 scale-100" : "opacity-0 scale-105"
-          }`}
-          style={{ transitionDuration: "1200ms" }}
-        >
-          <img
-            src={slide.image}
-            alt={`Aashley International School - ${slide.title}`}
-            className="w-full h-full object-cover"
-            loading={index === 0 ? "eager" : "lazy"}
-          />
-          {/* Cinematic gradient overlay */}
-          <div className="absolute inset-0 hero-gradient-cinema" />
-          {/* Bottom vignette */}
-          <div className="absolute bottom-0 left-0 right-0 h-40 hero-gradient-bottom" />
-        </div>
-      ))}
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 bg-black">
+        <video
+          src={heroVideo}
+          className="w-full h-full object-cover opacity-90"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        {/* Cinematic gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/50 to-transparent" />
+        <div className="absolute inset-0 hero-gradient-cinema" />
+        {/* Bottom vignette */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 hero-gradient-bottom" />
+      </div>
 
       {/* Subtle dot pattern overlay */}
       <div className="absolute inset-0 dot-pattern opacity-20 pointer-events-none" />

@@ -1,10 +1,11 @@
 import { PublicLayout } from "@/components/public-layout";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import buildingImage from "@assets/home_entrance.jpg";
 import teachersImage from "@assets/teachers_group.jpg";
 import classroomImage from "@assets/classroom_1.jpg";
 import assemblyImage from "@assets/hero_2.jpg";
+import principalVideo from "@assets/Principal Message.mp4";
 import { 
   Target, Eye, Heart, Star, Award, Users, BookOpen, GraduationCap, Lightbulb, Shield
 } from "lucide-react";
@@ -69,6 +70,17 @@ export default function AboutPage() {
     offset: ["start center", "end center"]
   });
   const lineScaleY = useTransform(timelineProgress, [0, 1], [0, 1]);
+
+  const principalVideoRef = useRef<HTMLVideoElement>(null);
+  const isVideoInView = useInView(principalVideoRef, { once: false, margin: "-100px" });
+
+  useEffect(() => {
+    if (isVideoInView && principalVideoRef.current) {
+      principalVideoRef.current.play().catch(e => console.log("Auto-play prevented", e));
+    } else if (principalVideoRef.current) {
+      principalVideoRef.current.pause();
+    }
+  }, [isVideoInView]);
 
   return (
     <PublicLayout>
@@ -296,26 +308,32 @@ export default function AboutPage() {
             </div>
           </Reveal>
 
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <Reveal direction="up">
-              <div className="overflow-hidden rounded-none shadow-[0px_20px_50px_rgba(0,0,0,0.1)] border border-border bg-white">
-                <div className="grid md:grid-cols-12 gap-0 relative">
-                  
-                  {/* Left Abstract Masked Image */}
-                  <div className="md:col-span-5 relative min-h-[400px] md:min-h-0 bg-muted/50 overflow-hidden">
-                    <motion.div 
-                      className="absolute inset-0"
-                      initial={{ scale: 1.1 }} whileInView={{ scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }}
-                      viewport={{ once: true }}
-                    >
-                      <img src={teachersImage} alt="Principal" className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-700" />
-                    </motion.div>
-                    <div className="absolute inset-y-0 right-0 w-1 bg-accent hidden md:block" />
-                  </div>
-                  
-                  {/* Right Content */}
-                  <div className="md:col-span-7 p-10 md:p-14 lg:p-20 relative flex flex-col justify-center">
-                    <div className="absolute top-10 right-10 text-9xl font-serif font-black text-primary/[0.03] leading-none select-none pointer-events-none">"</div>
+              <div className="overflow-hidden rounded-none shadow-[0px_20px_50px_rgba(0,0,0,0.1)] border border-border bg-white flex flex-col">
+                
+                {/* Top Video Profile (Horizontal Video) */}
+                <div className="relative aspect-video w-full bg-black overflow-hidden border-b border-border">
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center bg-black"
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                  >
+                    <video 
+                      ref={principalVideoRef}
+                      src={principalVideo}
+                      className="w-full h-full object-contain opacity-95 transition-opacity"
+                      controls
+                      playsInline
+                      muted
+                      preload="metadata"
+                    />
+                  </motion.div>
+                </div>
+                
+                {/* Bottom Content */}
+                <div className="p-10 md:p-14 lg:p-16 relative flex flex-col justify-center">
+                  <div className="absolute top-8 right-8 text-8xl font-serif font-black text-primary/[0.03] leading-none select-none pointer-events-none">"</div>
 
                     <blockquote className="text-primary/90 leading-relaxed italic text-2xl relative z-10 font-serif font-medium">
                       "At Aashley International School, we don't just educate — we nurture. Every child who 
@@ -333,12 +351,11 @@ export default function AboutPage() {
                          <div className="text-3xl font-black font-serif text-primary mb-1 tracking-tight">Mrs. Veenarani B C</div>
                          <div className="text-accent font-bold text-sm tracking-widest uppercase font-sans">Principal</div>
                          <div className="text-muted-foreground font-sans mt-1">Aashley International School</div>
-                       </div>
-                    </div>
+                        </div>
+                     </div>
                   </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
           </div>
         </div>
       </section>

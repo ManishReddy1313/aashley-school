@@ -1,13 +1,14 @@
 import { Link } from "wouter";
 import { PublicLayout } from "@/components/public-layout";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import heroImage from "@assets/home_entrance2.jpg";
 import classroomImage from "@assets/classroom_1.jpg";
 import sportsImage from "@assets/sports_2.jpg";
 import labImage from "@assets/lab_3.jpg";
 import teachersImage from "@assets/teachers_group.jpg";
+import principalVideo from "@assets/Principal Message.mp4";
 import {
   GraduationCap, Users, BookOpen, Trophy, Heart, Star, Shield,
   Lightbulb, Globe, Palette, Dumbbell, Monitor, ArrowRight,
@@ -21,7 +22,7 @@ function Reveal({ children, className = "", delay = 0, direction = "up" }: { chi
   if (direction === "left") x = -20;
   if (direction === "right") x = 20;
   if (direction === "scale") scale = 0.95;
-  
+
   return (
     <motion.div
       initial={{ opacity, y, x, scale }}
@@ -98,6 +99,17 @@ export default function WhyAashleyPage() {
   const yImage = useTransform(heroScroll, [0, 1], ["0%", "20%"]);
   const opacityHero = useTransform(heroScroll, [0, 0.8], [1, 0]);
 
+  const principalVideoRef = useRef<HTMLVideoElement>(null);
+  const isVideoInView = useInView(principalVideoRef, { once: false, margin: "-100px" });
+
+  useEffect(() => {
+    if (isVideoInView && principalVideoRef.current) {
+      principalVideoRef.current.play().catch(e => console.log("Auto-play prevented", e));
+    } else if (principalVideoRef.current) {
+      principalVideoRef.current.pause();
+    }
+  }, [isVideoInView]);
+
   return (
     <PublicLayout>
       {/* ── HERO WITH PARALLAX ── */}
@@ -107,11 +119,11 @@ export default function WhyAashleyPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40 backdrop-blur-[2px]" />
           <div className="absolute inset-0 dot-pattern opacity-30" />
         </motion.div>
-        
+
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light z-20" />
-        
+
         <div className="container mx-auto px-4 relative z-10 py-20">
-          <motion.div 
+          <motion.div
             className="max-w-3xl"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}
             style={{ opacity: opacityHero }}
@@ -119,16 +131,16 @@ export default function WhyAashleyPage() {
             <motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="bg-white text-accent px-4 py-2 font-serif font-bold uppercase tracking-widest text-sm mb-6 inline-block shadow-sm">
               Discover the Aashley Difference
             </motion.span>
-            
+
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.1] tracking-tight">
               Why Choose<br />
               <span className="text-accent underline decoration-4 underline-offset-8">Aashley International?</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-white/85 mb-10 leading-relaxed max-w-2xl font-sans mt-8 border-l-4 border-accent pl-5">
               Since 2008, we've been shaping young minds in Bangarpet, Kolar with an ICSE curriculum, values-driven education, and a commitment to every child's success.
             </p>
-            
+
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <Link href="/admissions">
                 <Button size="lg" className="bg-accent text-white hover:bg-accent/90 border-0 font-bold px-10 rounded-none transition-all duration-300 h-14 text-lg shadow-[0px_10px_30px_rgba(0,0,0,0.1)]">
@@ -138,7 +150,7 @@ export default function WhyAashleyPage() {
             </motion.div>
           </motion.div>
         </div>
-        
+
         {/* Cinematic gradient overlay at bottom to blend into next section */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0B1F3A] to-transparent z-10" />
       </section>
@@ -147,7 +159,7 @@ export default function WhyAashleyPage() {
       <section className="relative overflow-hidden section-navy-premium pt-4 pb-16">
         <div className="absolute top-0 right-1/4 w-[30rem] h-[30rem] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
+          <motion.div
             variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6"
           >
@@ -172,30 +184,30 @@ export default function WhyAashleyPage() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">The Premium Approach</span>
               <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-primary">
-                What Makes Aashley <br/><span className="text-accent underline decoration-4 underline-offset-8">Unique</span>
+                What Makes Aashley <br /><span className="text-accent underline decoration-4 underline-offset-8">Unique</span>
               </h2>
               <p className="text-muted-foreground text-lg px-4 font-sans">Every facet of our institution is carefully crafted to deliver world-class education.</p>
             </div>
           </Reveal>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[minmax(180px,auto)] max-w-7xl mx-auto">
             {uniqueFeatures.map((feature, index) => {
               // Bento Logic: Make the first two items larger (col-span-2)
               const isLarge = index === 0 || index === 1;
               const isTall = index === 2; // Make the third one tall
               return (
-                <Reveal 
-                   key={index} delay={index * 50} direction="scale"
-                   className={`h-full ${isLarge ? 'md:col-span-2' : ''} ${isTall ? 'md:row-span-2' : ''}`}
+                <Reveal
+                  key={index} delay={index * 50} direction="scale"
+                  className={`h-full ${isLarge ? 'md:col-span-2' : ''} ${isTall ? 'md:row-span-2' : ''}`}
                 >
                   <div className={`card-premium group p-8 h-full flex flex-col justify-center relative overflow-hidden backdrop-blur-xl border border-border/60 ${isLarge ? 'bg-gradient-to-br from-card to-muted/30' : 'bg-card'}`}>
                     {/* Subtle glowing orb in background on hover */}
                     <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${featureColors[index]} rounded-full blur-[50px] opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-                    
+
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${featureColors[index]} flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform duration-300 ring-4 ring-background z-10`}>
                       <feature.icon className="h-6 w-6 text-white" />
                     </div>
-                    
+
                     <h3 className={`${isLarge ? 'text-2xl' : 'text-lg'} font-bold mb-3 group-hover:text-primary transition-colors duration-200 z-10 font-serif`}>{feature.title}</h3>
                     <p className={`text-muted-foreground leading-relaxed z-10 ${isLarge ? 'text-base' : 'text-sm'}`}>{feature.description}</p>
                   </div>
@@ -217,7 +229,7 @@ export default function WhyAashleyPage() {
               </h2>
             </div>
           </Reveal>
-          
+
           <div className="grid md:grid-cols-12 gap-2 max-w-6xl mx-auto">
             {/* Left Big Image */}
             <div className="md:col-span-8 relative group rounded-none overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.07)] aspect-[16/10]">
@@ -229,36 +241,36 @@ export default function WhyAashleyPage() {
                 <p className="text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 font-sans">Student-centered education focused on active participation.</p>
               </div>
             </div>
-            
+
             {/* Right Stack */}
             <div className="md:col-span-4 flex flex-col gap-2">
               <div className="flex-1 relative group rounded-none overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.07)] aspect-square md:aspect-auto">
                 <img src={labImage} alt="Lab" className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent opacity-80" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                   <h4 className="font-bold text-white text-xl font-serif">Hands-on Science</h4>
-                   <p className="text-white/70 text-sm mt-1 font-sans">Fully equipped dedicated laboratories.</p>
+                  <h4 className="font-bold text-white text-xl font-serif">Hands-on Science</h4>
+                  <p className="text-white/70 text-sm mt-1 font-sans">Fully equipped dedicated laboratories.</p>
                 </div>
               </div>
               <div className="flex-1 relative group rounded-none overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.07)] aspect-square md:aspect-auto">
                 <img src={sportsImage} alt="Sports" className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent opacity-80" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
-                   <h4 className="font-bold text-white text-xl font-serif">Sports Excellence</h4>
-                   <p className="text-white/70 text-sm mt-1 font-sans">Championship-winning sports teams.</p>
+                  <h4 className="font-bold text-white text-xl font-serif">Sports Excellence</h4>
+                  <p className="text-white/70 text-sm mt-1 font-sans">Championship-winning sports teams.</p>
                 </div>
               </div>
             </div>
-            
+
             {/* Bottom Full Wide Image */}
             <div className="md:col-span-12 relative group rounded-none overflow-hidden shadow-[0px_10px_30px_rgba(0,0,0,0.15)] aspect-[21/7]">
               <img src={teachersImage} alt="Faculty" className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
               <div className="absolute left-0 bottom-0 top-0 w-2 bg-accent" />
               <div className="absolute left-0 inset-y-0 flex flex-col justify-center p-10 max-w-2xl">
-                 <span className="bg-accent text-white px-3 py-1 text-[10px] uppercase font-bold tracking-widest mb-4 inline-block w-max">Our Team</span>
-                 <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-3">Dedicated, Expert Faculty</h3>
-                 <p className="text-white/80 text-lg font-sans">Individual Attention · Homely Care · A Promising Future</p>
+                <span className="bg-accent text-white px-3 py-1 text-[10px] uppercase font-bold tracking-widest mb-4 inline-block w-max">Our Team</span>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-3">Dedicated, Expert Faculty</h3>
+                <p className="text-white/80 text-lg font-sans">Individual Attention · Homely Care · A Promising Future</p>
               </div>
             </div>
           </div>
@@ -278,7 +290,7 @@ export default function WhyAashleyPage() {
               <p className="text-muted-foreground text-lg">See how Aashley International stands strictly apart.</p>
             </div>
           </Reveal>
-          
+
           <div className="max-w-4xl mx-auto">
             <Reveal direction="scale">
               <div className="bg-white overflow-hidden rounded-none shadow-[0px_20px_50px_rgba(0,0,0,0.08)] border-t-4 border-accent">
@@ -293,8 +305,8 @@ export default function WhyAashleyPage() {
                     </thead>
                     <tbody>
                       {whyNotOthers.map((item, index) => (
-                        <motion.tr 
-                          key={index} 
+                        <motion.tr
+                          key={index}
                           initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}
                           viewport={{ once: true, margin: "-50px" }}
                           className="border-b border-border last:border-0 hover:bg-muted/50 group transition-colors"
@@ -328,19 +340,19 @@ export default function WhyAashleyPage() {
               </h2>
             </div>
           </Reveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {parentFeedback.map((item, index) => (
               <Reveal key={index} delay={index * 150} direction="up" className="h-full">
                 <div className="relative h-full bg-white shadow-[0px_10px_30px_rgba(0,0,0,0.07)] rounded-none p-10 transition-all duration-500 hover:-translate-y-2 group border-t-2 border-transparent hover:border-accent">
                   <div className="absolute top-6 right-8 text-8xl font-serif font-black text-accent/10 leading-none select-none pointer-events-none group-hover:text-accent/20 transition-colors">"</div>
-                  
+
                   <div className="mb-6 flex space-x-1">
                     {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-5 w-5 fill-accent text-accent" />)}
                   </div>
-                  
+
                   <blockquote className="text-primary italic leading-relaxed mb-8 relative z-10 text-lg font-serif">"{item.quote}"</blockquote>
-                  
+
                   <div className="flex items-center gap-4 mt-auto border-t border-border pt-6">
                     <div className="w-12 h-12 rounded-none bg-primary flex items-center justify-center flex-shrink-0">
                       <span className="text-white font-bold font-serif text-lg">{item.name.charAt(0)}</span>
@@ -361,24 +373,50 @@ export default function WhyAashleyPage() {
       <section className="py-16 md:py-32 bg-white">
         <div className="container mx-auto px-4">
           <Reveal direction="scale">
-            <div className="max-w-4xl mx-auto text-center bg-white p-10 md:p-16 rounded-none relative shadow-[0px_20px_50px_rgba(0,0,0,0.1)] border-t-8 border-accent">
-              <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-none bg-primary flex items-center justify-center shadow-lg">
-                <GraduationCap className="h-12 w-12 text-white" />
-              </div>
+            <div className="max-w-5xl mx-auto rounded-none relative shadow-[0px_20px_50px_rgba(0,0,0,0.1)] overflow-hidden bg-white flex flex-col">
               
-              <div className="mt-8 mb-8">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary">A Message from the <span className="text-accent">Principal</span></h2>
+              {/* Top Video Profile (Native Video) */}
+              <div className="relative aspect-video w-full bg-black overflow-hidden border-b border-border">
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center bg-black"
+                  initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.5, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
+                  <video 
+                    ref={principalVideoRef}
+                    src={principalVideo}
+                    className="w-full h-full object-contain opacity-95 transition-opacity"
+                    controls
+                    playsInline
+                    muted
+                    preload="metadata"
+                  />
+                </motion.div>
               </div>
-              
-              <div className="relative mb-10 text-center px-4 md:px-12">
+
+              {/* Bottom Content */}
+              <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center relative bg-white border-t-0 md:border-t-0 border-accent">
+                <div className="absolute top-8 right-8 text-8xl font-serif font-black text-primary/[0.03] leading-none select-none pointer-events-none">"</div>
+
+                <div className="mb-8 border-b border-border pb-6">
+                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary">
+                    A Message from the <span className="text-accent underline decoration-4 underline-offset-8">Principal</span>
+                  </h2>
+                </div>
+
                 <blockquote className="text-xl md:text-2xl text-muted-foreground italic leading-relaxed font-serif relative z-10">
                   "At Aashley International School, we don't just educate — we nurture. Every child who walks through our doors is treated as a unique individual with limitless potential. ICSE curriculum, combined with value-based education, ensures that students don't just excel in examinations but grow as confident, compassionate human beings ready to face the world."
                 </blockquote>
-              </div>
-              
-              <div className="inline-block relative">
-                <div className="font-black text-2xl font-serif text-primary mb-1">Mrs. Veenarani B C</div>
-                <div className="text-accent font-bold text-sm tracking-widest uppercase font-sans">Principal, Aashley International School</div>
+
+                <div className="mt-12 flex items-center gap-6">
+                  <div className="w-16 h-16 bg-primary/5 flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="h-8 w-8 text-accent" />
+                  </div>
+                  <div>
+                    <div className="font-black text-2xl font-serif text-primary mb-1">Mrs. Veenarani B C</div>
+                    <div className="text-accent font-bold text-sm tracking-widest uppercase font-sans">Principal, Aashley International School</div>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -388,15 +426,15 @@ export default function WhyAashleyPage() {
       {/* ── CTA ── */}
       <section className="py-20 md:py-32 relative overflow-hidden bg-primary shadow-inner">
         <div className="absolute top-0 right-0 opacity-5 pointer-events-none">
-           <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="400" height="400" fill="white"/>
-           </svg>
+          <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="400" fill="white" />
+          </svg>
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <Reveal direction="up">
             <span className="bg-accent text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Admissions Open 2025-26</span>
             <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-bold mb-6 leading-tight tracking-tight text-white">
-              Give Your Child the <br/><span className="text-accent underline decoration-4 underline-offset-8">Best Start</span>
+              Give Your Child the <br /><span className="text-accent underline decoration-4 underline-offset-8">Best Start</span>
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-10 text-xl leading-relaxed font-sans">
               Join hundreds of families who have trusted Aashley International School with their children's future. Discover an environment designed for excellence.

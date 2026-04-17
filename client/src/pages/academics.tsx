@@ -317,6 +317,47 @@ export default function AcademicsPage() {
         </div>
       </section>
 
+      {/* ── VIDEO SHOWCASE ── */}
+      <section className="py-20 md:py-32 bg-muted/20 relative overflow-hidden">
+        <div className="container mx-auto px-4 z-10 relative">
+          <Reveal>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="text-accent font-bold uppercase tracking-widest text-sm mb-4 block">Experience It Live</span>
+              <h2 className="text-4xl md:text-5xl font-serif font-black mb-6 text-primary">
+                Explore Our <span className="text-accent underline decoration-4 underline-offset-8">Programs</span>
+              </h2>
+            </div>
+          </Reveal>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <Reveal delay={100} direction="up">
+               <div className="bg-white p-3 shadow-lg border border-border">
+                 <div className="aspect-video relative w-full mb-4 bg-black">
+                   <iframe className="absolute inset-0 w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500" src="https://www.youtube.com/embed/JW3N6JE3oOc?rel=0" title="Montessori Kids" allowFullScreen></iframe>
+                 </div>
+                 <h3 className="font-bold text-xl font-serif text-primary text-center pb-2">Montessori Environment</h3>
+               </div>
+            </Reveal>
+            <Reveal delay={200} direction="up">
+               <div className="bg-white p-3 shadow-lg border border-border">
+                 <div className="aspect-video relative w-full mb-4 bg-black">
+                   <iframe className="absolute inset-0 w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500" src="https://www.youtube.com/embed/yUo5-0oLYsk?rel=0" title="Championship Sports" allowFullScreen></iframe>
+                 </div>
+                 <h3 className="font-bold text-xl font-serif text-primary text-center pb-2">Championship Sports</h3>
+               </div>
+            </Reveal>
+            <Reveal delay={300} direction="up">
+               <div className="bg-white p-3 shadow-lg border border-border">
+                 <div className="aspect-video relative w-full mb-4 bg-black">
+                   <iframe className="absolute inset-0 w-full h-full opacity-90 hover:opacity-100 transition-opacity duration-500" src="https://www.youtube.com/embed/U-cHh73B51E?rel=0" title="Advanced Laboratories" allowFullScreen></iframe>
+                 </div>
+                 <h3 className="font-bold text-xl font-serif text-primary text-center pb-2">Advanced Laboratories</h3>
+               </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* ── FACILITIES (Hover Expansion Gallery) ── */}
       <section className="py-20 md:py-32 relative overflow-hidden bg-primary text-white">
         

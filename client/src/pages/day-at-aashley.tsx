@@ -98,6 +98,25 @@ export default function DayAtAashleyPage() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
       </section>
 
+      {/* ── VIDEO SPOTLIGHT ── */}
+      <section className="pt-24 pb-8 bg-background relative">
+        <div className="container mx-auto px-4 relative z-10">
+          <Reveal>
+            <div className="max-w-4xl mx-auto rounded-none overflow-hidden shadow-[0px_20px_50px_rgba(11,31,58,0.15)] border-8 border-white group">
+              <div className="aspect-video relative bg-black">
+                <iframe 
+                  className="absolute inset-0 w-full h-full opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                  src="https://www.youtube.com/embed/ZxopP6oYJU0?rel=0" 
+                  title="A Day at Aashley International School" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── INTERACTIVE TIMELINE ── */}
       <section className="py-16 md:py-24 bg-background relative" ref={timelineRef}>
         <div className="container mx-auto px-4 relative z-10">

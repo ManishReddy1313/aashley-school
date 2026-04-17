@@ -33,38 +33,38 @@
   --muted: 215 20% 95%;
   --muted-foreground: 214 15% 40%;
 
-  /* Accent: Deep Crimson #A9222B */
-  --accent: 356 66% 40%;
+  /* Accent: Professional Royal Blue */
+  --accent: 221 83% 53%;
   --accent-foreground: 0 0% 100%;
 
-  /* Maps gold to crimson for backwards compat or global overrides */
-  --gold: 356 66% 40%;
-  --gold-light: 356 70% 50%;
-  --gold-dark: 356 75% 30%;
+  /* Premium Gold accents */
+  --gold: 43 74% 49%;
+  --gold-light: 43 80% 60%;
+  --gold-dark: 43 85% 38%;
 
   /* Sidebar uses calm navy/ivory tones */
   --sidebar: 214 40% 14%;
   --sidebar-foreground: 40 55% 98%;
   --sidebar-border: 214 35% 22%;
-  --sidebar-primary: 350 68% 30%;
-  --sidebar-primary-foreground: 40 55% 98%;
+  --sidebar-primary: 221 83% 53%;
+  --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 214 40% 18%;
   --sidebar-accent-foreground: 40 55% 98%;
-  --sidebar-ring: 350 68% 30%;
+  --sidebar-ring: 221 83% 53%;
 
   --popover: 40 40% 99%;
   --popover-foreground: 215 25% 15%;
   --popover-border: 207 26% 88%;
 
-  --destructive: 350 68% 30%;
-  --destructive-foreground: 40 55% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
 
   --input: 207 22% 86%;
   --ring: 214 71% 16%;
 
   /* Charts: keep subtle school-appropriate tints */
   --chart-1: 214 71% 16%;
-  --chart-2: 350 68% 30%;
+  --chart-2: 221 83% 53%;
   --chart-3: 160 45% 38%;
   --chart-4: 195 65% 35%;
   --chart-5: 280 55% 40%;
@@ -150,27 +150,27 @@
   --muted: 214 22% 14%;
   --muted-foreground: 40 18% 65%;
 
-  --accent: 350 68% 35%;
-  --accent-foreground: 40 55% 98%;
+  --accent: 221 83% 53%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 350 68% 35%;
+  --destructive: 0 62% 40%;
   --destructive-foreground: 40 55% 98%;
 
   --input: 214 25% 24%;
   --ring: 214 71% 18%;
 
-  --sidebar-primary: 350 68% 35%;
-  --sidebar-primary-foreground: 40 55% 98%;
+  --sidebar-primary: 221 83% 53%;
+  --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 214 40% 18%;
   --sidebar-accent-foreground: 40 55% 98%;
-  --sidebar-ring: 350 68% 35%;
+  --sidebar-ring: 221 83% 53%;
 
   --popover: 214 40% 14%;
   --popover-foreground: 40 35% 96%;
   --popover-border: 214 35% 20%;
 
   --chart-1: 214 71% 18%;
-  --chart-2: 350 68% 35%;
+  --chart-2: 221 83% 53%;
   --chart-3: 160 45% 42%;
   --chart-4: 195 55% 38%;
   --chart-5: 280 55% 45%;
