@@ -20,6 +20,7 @@ import {
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { sendContactFormEmail, sendAdmissionEnquiryEmail } from "./services/emailService";
+import { logSubmissionToFile } from "./services/fileLogger";
 import { authStorage } from "./replit_integrations/auth/storage";
 import { type PermissionKey, PERMISSION_KEYS, isPermissionKey, normalizeRole } from "@shared/authz";
 import { ensureCanAssignRole, ensureCanManageUser, getRole, requirePermission } from "./authz";
@@ -53,14 +54,26 @@ export async function registerRoutes(
         message: body.message === "" || body.message == null ? undefined : String(body.message),
       };
       const data = insertAdmissionEnquirySchema.parse(normalized);
-      await sendAdmissionEnquiryEmail({
-        studentName: data.studentName,
-        parentName: data.parentName,
-        email: data.email,
-        phone: data.phone ?? "",
-        grade: data.grade,
-        message: data.message ?? undefined,
-      });
+      
+      try {
+        await logSubmissionToFile("admission_enquiries.json", data);
+      } catch (logErr) {
+        console.error("[api] Failed to log admission enquiry to file:", logErr);
+      }
+
+      try {
+        await sendAdmissionEnquiryEmail({
+          studentName: data.studentName,
+          parentName: data.parentName,
+          email: data.email,
+          phone: data.phone ?? "",
+          grade: data.grade,
+          message: data.message ?? undefined,
+        });
+      } catch (emailErr) {
+        console.error("[api] Admission enquiry email failed, but lead was saved to file:", emailErr);
+      }
+
       res.status(200).json({ success: true, message: "Enquiry sent successfully." });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
@@ -95,10 +108,22 @@ export async function registerRoutes(
         message: body.message ?? "",
       };
       const data = insertContactMessageSchema.parse(normalized);
-      await sendContactFormEmail({
-        ...data,
-        phone: data.phone ?? undefined,
-      });
+
+      try {
+        await logSubmissionToFile("contact_messages.json", data);
+      } catch (logErr) {
+        console.error("[api] Failed to log contact message to file:", logErr);
+      }
+
+      try {
+        await sendContactFormEmail({
+          ...data,
+          phone: data.phone ?? undefined,
+        });
+      } catch (emailErr) {
+        console.error("[api] Contact form email failed, but lead was saved to file:", emailErr);
+      }
+
       res.status(200).json({ success: true, message: "Message sent successfully." });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
