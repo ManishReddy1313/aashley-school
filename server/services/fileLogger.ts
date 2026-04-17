@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-const DATA_DIR = path.join(process.cwd(), "server", "data");
+const DATA_DIR = process.env.VERCEL ? "/tmp/data" : path.join(process.cwd(), "server", "data");
 
 async function ensureDataDir() {
   try {
