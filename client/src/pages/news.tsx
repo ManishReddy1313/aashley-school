@@ -114,7 +114,7 @@ export default function NewsPage() {
       <section className="relative min-h-[55vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="Aashley International School Events" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/75 via-primary/60 to-primary/40" />
           <div className="absolute inset-0 dot-pattern opacity-20" />
         </div>
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />

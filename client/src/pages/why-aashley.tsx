@@ -116,7 +116,7 @@ export default function WhyAashleyPage() {
       <section ref={heroRef} className="relative min-h-[75vh] flex items-center overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: yImage }}>
           <img src={heroImage} alt="Aashley International School Campus" className="w-full h-full object-cover scale-110" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/65 to-primary/40 backdrop-blur-[2px]" />
           <div className="absolute inset-0 dot-pattern opacity-30" />
         </motion.div>
 

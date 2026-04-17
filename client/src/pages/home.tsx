@@ -196,7 +196,7 @@ function HeroSlider() {
           playsInline
         />
         {/* Cinematic gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/65 via-primary/40 to-transparent" />
         <div className="absolute inset-0 hero-gradient-cinema" />
         {/* Bottom vignette */}
         <div className="absolute bottom-0 left-0 right-0 h-40 hero-gradient-bottom" />

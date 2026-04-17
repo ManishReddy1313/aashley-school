@@ -80,7 +80,7 @@ export default function ContactPage() {
       <section ref={heroRef} className="relative min-h-[60vh] flex items-center overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: yImage }}>
           <img src={buildingImage} alt="Aashley International School Campus" className="w-full h-full object-cover scale-[1.05]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/65 to-primary/40 backdrop-blur-[2px]" />
           <div className="absolute inset-0 dot-pattern opacity-20" />
         </motion.div>
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-gold-dark via-gold to-gold-light z-20" />

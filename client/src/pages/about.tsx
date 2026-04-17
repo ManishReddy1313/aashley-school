@@ -5,6 +5,7 @@ import buildingImage from "@assets/home_entrance.jpg";
 import teachersImage from "@assets/teachers_group.jpg";
 import classroomImage from "@assets/classroom_1.jpg";
 import assemblyImage from "@assets/hero_2.jpg";
+import headmasterImage from "@assets/HeadMaster-Aashley.JPG";
 import principalVideo from "@assets/Principal Message.mp4";
 import { 
   Target, Eye, Heart, Star, Award, Users, BookOpen, GraduationCap, Lightbulb, Shield
@@ -55,6 +56,74 @@ const accreditations = [
   { icon: Users,          label: "Co-Educational" },
   { icon: GraduationCap,  label: "Pre-Primary to Class X" },
 ];
+
+// Headmaster Message Component for cleaner rendering
+function HeadmasterMessage() {
+  return (
+    <section className="py-24 bg-primary text-white relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
+      <div className="absolute top-[20%] right-[-5%] w-[30rem] h-[30rem] bg-gold/5 rounded-none blur-[100px] pointer-events-none" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            
+            {/* Image Profile with Premium Frame */}
+            <Reveal direction="scale" className="w-full lg:w-1/2 flex-shrink-0">
+              <div className="relative">
+                {/* Gold Frame Layers */}
+                <div className="absolute -top-6 -left-6 w-full h-full border-2 border-gold/30" />
+                <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-gold/30" />
+                
+                <div className="relative overflow-hidden rounded-none shadow-[0px_30px_60px_rgba(0,0,0,0.5)] border-4 border-gold/20">
+                  <img 
+                    src={headmasterImage} 
+                    alt="Mr. Kanthraj - Headmaster of Aashley International School" 
+                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Content Section */}
+            <Reveal direction="left" className="w-full lg:w-1/2">
+              <div className="relative">
+                <span className="text-gold font-bold uppercase tracking-widest text-sm mb-6 block border-l-4 border-gold pl-4">Leadership Insight</span>
+                <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif font-black mb-8 leading-tight tracking-tight">
+                  Headmaster's <br /><span className="text-gradient-gold underline decoration-4 underline-offset-8">Message</span>
+                </h2>
+
+                <div className="relative">
+                  <div className="absolute -top-8 -left-10 text-9xl font-serif font-black text-white/[0.05] leading-none select-none pointer-events-none">"</div>
+                  
+                  <blockquote className="text-white/90 leading-relaxed italic text-2xl relative z-10 font-serif font-medium border-l-2 border-white/10 pl-8">
+                    "At Aashley International School, we believe that education is not merely the filling of a pail, but the lighting of a fire. 
+                    Our mission is to nurture each student's unique potential in an environment that balances rigorous ICSE academics with 
+                    unwavering moral values. Nestled within our lush green campus, we provide a serene sanctuary where character is forged, 
+                    and the leaders of tomorrow are prepared to face global challenges with integrity and confidence."
+                  </blockquote>
+
+                  <div className="mt-12 flex items-center gap-6 pt-10 border-t border-white/10">
+                    <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="h-8 w-8 text-gold" />
+                    </div>
+                    <div>
+                      <div className="text-3xl font-black font-serif text-white mb-1 tracking-tight">Mr. Kanthraj</div>
+                      <div className="text-gold font-bold text-sm tracking-widest uppercase font-sans">Headmaster</div>
+                      <div className="text-white/50 text-xs font-sans mt-1 uppercase tracking-tighter">Aashley International School</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function AboutPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -296,8 +365,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── IMAGE-MASKED LEADERSHIP PROFILE ── */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <section className="py-24 bg-background relative overflow-hidden border-b border-border">
         <div className="container mx-auto px-4 relative z-10">
           <Reveal>
             <div className="text-center mb-20">
@@ -359,6 +427,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ── HEADMASTER MESSAGE ── */}
+      <HeadmasterMessage />
 
       {/* ── ACCREDITATIONS ── */}
       <section className="py-24 bg-[#F4F7F9] relative">

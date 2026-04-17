@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import NotFound from "@/pages/not-found";
+import { Loader } from "@/components/loader";
 
 // Public Pages
 import HomePage from "@/pages/home";
@@ -66,6 +67,7 @@ function App() {
           <SEOHead />
           <JsonLdSchema />
           <Toaster />
+          <Loader />
           <Router />
         </TooltipProvider>
       </QueryClientProvider>

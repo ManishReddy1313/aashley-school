@@ -42,7 +42,6 @@ const grades = ["Nursery", "LKG", "UKG", "Class 1", "Class 2", "Class 3", "Class
 const documents = [
   { name: "Admission Brochure 2026-27 (Part 1)", size: "11.3 MB", url: "/admission brochure(1) - 26-27.pdf" },
   { name: "Admission Brochure 2026-27 (Part 2)", size: "7.5 MB", url: "/admission brochure(2) - 26-27.pdf" },
-  { name: "Instructions 2026-27", size: "0.1 MB", url: "/Instructions for 26-27.pdf" },
 ];
 
 const formSchema = insertAdmissionEnquirySchema.extend({
@@ -81,7 +80,7 @@ export default function AdmissionsPage() {
       <section className="relative min-h-[58vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={home_4} alt="Students at Aashley International School" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/65 to-primary/40 backdrop-blur-[2px]" />
           <div className="absolute inset-0 dot-pattern opacity-20" />
         </div>
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-light" />
