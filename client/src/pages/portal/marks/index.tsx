@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@/hooks/use-auth";
+import { useActiveClass } from "@/contexts/active-class-context";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { computeGrade, computePercent, gradeColorClass } from "@/lib/marks-utils";
@@ -54,6 +55,7 @@ const currentAcademicYear = "2026-27";
 
 export default function MarksPage() {
   const { can, isAuthenticated, isLoading } = useAuth();
+  const { activeClassId } = useActiveClass();
   const isTeacher = can("marks.enter");
   const canView = can("marks.view");
   const [, setLocation] = useLocation();
@@ -85,10 +87,15 @@ export default function MarksPage() {
   });
 
   useEffect(() => {
-    if (isTeacher && !selectedClassId && teacherClassesQuery.data?.classes?.length) {
+    if (!isTeacher) return;
+    if (activeClassId) {
+      setSelectedClassId(activeClassId);
+      return;
+    }
+    if (!selectedClassId && teacherClassesQuery.data?.classes?.length) {
       setSelectedClassId(teacherClassesQuery.data.classes[0].id);
     }
-  }, [isTeacher, selectedClassId, teacherClassesQuery.data?.classes]);
+  }, [isTeacher, selectedClassId, teacherClassesQuery.data?.classes, activeClassId]);
 
   const subjectsQuery = useQuery<SubjectRow[]>({
     queryKey: ["/api/classes", selectedClassId, "subjects", academicYear],

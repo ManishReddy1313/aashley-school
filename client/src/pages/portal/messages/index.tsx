@@ -23,16 +23,9 @@ type ThreadSummary = {
   studentUsername: string;
 };
 
-type ChildRow = {
-  studentUser: {
-    id: string;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
-  };
-  profile: {
-    classId: string | null;
-  } | null;
+type StudentProfileResponse = {
+  user: { id: string; username: string; firstName: string | null; lastName: string | null };
+  profile: { classId: string | null } | null;
 };
 
 type ClassRow = {
@@ -51,24 +44,24 @@ function getInitials(firstName: string | null, lastName: string | null, username
 
 export default function MessagesPage() {
   const [, setLocation] = useLocation();
-  const { isLoading, isAuthenticated, can } = useAuth();
+  const { isLoading, isAuthenticated, can, user } = useAuth();
   const isTeacher = can("chat.respond");
-  const isParent = can("chat.initiate") && !isTeacher;
+  const isStudent = can("chat.initiate") && !isTeacher;
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated && !isTeacher && !isParent) {
+    if (!isLoading && isAuthenticated && !isTeacher && !isStudent) {
       setLocation("/portal/dashboard");
     }
-  }, [isAuthenticated, isLoading, isParent, isTeacher, setLocation]);
+  }, [isAuthenticated, isLoading, isStudent, isTeacher, setLocation]);
 
   const teacherThreadsQuery = useQuery<ThreadSummary[]>({
     queryKey: ["/api/messages/threads"],
     enabled: isAuthenticated && isTeacher,
   });
 
-  const childrenQuery = useQuery<ChildRow[]>({
-    queryKey: ["/api/parent/children"],
-    enabled: isAuthenticated && isParent,
+  const studentProfileQuery = useQuery<StudentProfileResponse>({
+    queryKey: ["/api/student/profile"],
+    enabled: isAuthenticated && isStudent,
   });
 
   const classesQuery = useQuery<ClassRow[]>({
@@ -78,7 +71,7 @@ export default function MessagesPage() {
       if (!response.ok) return [];
       return response.json();
     },
-    enabled: isAuthenticated && isParent,
+    enabled: isAuthenticated && isStudent,
   });
 
   const classNameById = useMemo(() => {
@@ -98,7 +91,7 @@ export default function MessagesPage() {
     );
   }
 
-  if (!isTeacher && !isParent) return null;
+  if (!isTeacher && !isStudent) return null;
 
   if (isTeacher) {
     const threads = teacherThreadsQuery.data ?? [];
@@ -166,53 +159,37 @@ export default function MessagesPage() {
     );
   }
 
-  const children = childrenQuery.data ?? [];
+  const student = studentProfileQuery.data;
+  const classId = student?.profile?.classId ?? null;
+  const studentName =
+    `${student?.user?.firstName ?? ""} ${student?.user?.lastName ?? ""}`.trim() || student?.user?.username || user?.username || "Student";
   return (
     <PortalLayout>
       <div className="min-h-screen bg-background font-sans">
-        <PageHeader title="Messages" subtitle="Contact your child's class teacher" />
+        <PageHeader title="Messages" subtitle="Contact your class teacher" />
         <div className="max-w-7xl mx-auto px-6 py-6">
-          {childrenQuery.isLoading ? (
+          {studentProfileQuery.isLoading ? (
             <PageSkeleton />
-          ) : children.length === 0 ? (
+          ) : !classId ? (
             <Card className="rounded-none">
               <CardContent className="py-14 text-center">
                 <MessageSquare className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
                 <p className="font-medium text-foreground">
-                  No students are linked to your account. Contact the school admin.
+                  No class is assigned to this student account yet. Contact the school admin.
                 </p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-3">
-              {children.map((row) => {
-                const studentName =
-                  `${row.studentUser.firstName ?? ""} ${row.studentUser.lastName ?? ""}`.trim() ||
-                  row.studentUser.username;
-                const classId = row.profile?.classId;
-                const className = classId ? classNameById.get(classId) : null;
-                return (
-                  <div key={row.studentUser.id} className="border border-border p-4">
-                    <p className="font-medium text-foreground">{studentName}</p>
-                    {classId ? (
-                      <p className="text-sm text-muted-foreground mt-1">
-                        Class {className || classId}
-                      </p>
-                    ) : (
-                      <p className="text-sm text-muted-foreground mt-1">No class assigned yet</p>
-                    )}
-                    <div className="mt-3">
-                      {classId ? (
-                        <Link href={`/portal/messages/${row.studentUser.id}/${classId}`}>
-                          <Button variant="outline" className="rounded-none">
-                            Message Teacher →
-                          </Button>
-                        </Link>
-                      ) : null}
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="border border-border p-4">
+                <p className="font-medium text-foreground">{studentName}</p>
+                <p className="text-sm text-muted-foreground mt-1">Class {classNameById.get(classId) || classId}</p>
+                <div className="mt-3">
+                  <Link href={`/portal/messages/${student?.user?.id || user?.id}/${classId}`}>
+                    <Button variant="outline" className="rounded-none">Message Teacher →</Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
         </div>

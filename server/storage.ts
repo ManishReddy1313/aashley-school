@@ -29,8 +29,13 @@ import { eq, desc, and, lte, gte, or, isNull, sql, asc } from "drizzle-orm";
 
 export interface IStorage {
   // Auth Users
+  createUser(data: UpsertUser): Promise<User>;
   getUsers(): Promise<Omit<User, "password">[]>;
+  getUsersByRole(role: string): Promise<Omit<User, "password">[]>;
   updateUserById(id: string, updates: Partial<UpsertUser>): Promise<User | undefined>;
+  disableUser(id: string): Promise<void>;
+  enableUser(id: string): Promise<void>;
+  setUserPassword(id: string, hashedPassword: string): Promise<void>;
   getUserById(id: string): Promise<User | undefined>;
   getStudentProfileByUserId(userId: string): Promise<StudentProfile | null>;
   getStudentProfileByAdmissionNumber(admissionNumber: string): Promise<StudentProfile | null>;
@@ -190,8 +195,22 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   // Auth Users
+  async createUser(data: UpsertUser): Promise<User> {
+    const [created] = await db.insert(users).values(data).returning();
+    return created;
+  }
+
   async getUsers(): Promise<Omit<User, "password">[]> {
     const rows = await db.select().from(users).orderBy(desc(users.createdAt));
+    return rows.map(({ password: _password, ...user }) => user);
+  }
+
+  async getUsersByRole(role: string): Promise<Omit<User, "password">[]> {
+    const rows = await db
+      .select()
+      .from(users)
+      .where(eq(users.role, role as any))
+      .orderBy(desc(users.createdAt));
     return rows.map(({ password: _password, ...user }) => user);
   }
 
@@ -202,6 +221,18 @@ export class DatabaseStorage implements IStorage {
       .where(eq(users.id, id))
       .returning();
     return updated;
+  }
+
+  async disableUser(id: string): Promise<void> {
+    await db.update(users).set({ isActive: false, updatedAt: new Date() }).where(eq(users.id, id));
+  }
+
+  async enableUser(id: string): Promise<void> {
+    await db.update(users).set({ isActive: true, updatedAt: new Date() }).where(eq(users.id, id));
+  }
+
+  async setUserPassword(id: string, hashedPassword: string): Promise<void> {
+    await db.update(users).set({ password: hashedPassword, updatedAt: new Date() }).where(eq(users.id, id));
   }
 
   async getUserById(id: string): Promise<User | undefined> {

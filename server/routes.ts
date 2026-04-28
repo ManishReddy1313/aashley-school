@@ -7,7 +7,6 @@ import {
   insertAdmissionLeadSchema,
   insertAdmissionLeadCommentSchema,
   insertStudentProfileSchema,
-  insertParentStudentLinkSchema,
   insertAlumniSchema, 
   insertContactMessageSchema,
   insertAnnouncementSchema,
@@ -485,15 +484,43 @@ export async function registerRoutes(
       const username = String(body.username ?? "").trim();
       const password = String(body.password ?? "");
       const email = body.email ? String(body.email).trim() : null;
+      const phone = body.phone ? String(body.phone).trim() : null;
       const firstName = body.firstName ? String(body.firstName).trim() : null;
       const lastName = body.lastName ? String(body.lastName).trim() : null;
       const role = normalizeRole(body.role ? String(body.role) : "student");
+      const classId = body.classId ? String(body.classId).trim() : "";
 
       if (!username || !password) {
         return res.status(400).json({ message: "Username and password are required" });
       }
-      if (!ensureCanAssignRole(actor.role, role)) {
-        return res.status(403).json({ message: "You are not allowed to assign this role" });
+      if (password.length < 6) {
+        return res.status(400).json({ message: "Password must be at least 6 characters" });
+      }
+
+      const actorRole = normalizeRole(actor.role);
+      const allowedByRole: Record<string, string[]> = {
+        super_admin: ["super_admin", "principal", "admin_staff", "admissions_officer", "class_teacher", "subject_teacher", "student"],
+        principal: ["admin_staff", "class_teacher", "subject_teacher", "admissions_officer"],
+        admin_staff: ["class_teacher", "subject_teacher", "admissions_officer", "student"],
+        class_teacher: ["student"],
+        subject_teacher: [],
+        admissions_officer: [],
+        student: [],
+      };
+      if (!(allowedByRole[actorRole] ?? []).includes(role)) {
+        return res.status(403).json({ message: "You are not allowed to create this role" });
+      }
+      if (role === "student" && !classId) {
+        return res.status(400).json({ message: "classId is required when creating a student" });
+      }
+      if (actorRole === "class_teacher") {
+        if (role !== "student") {
+          return res.status(403).json({ message: "Class teachers can only create students" });
+        }
+        const teacherClassIds = await storage.getTeacherClassIds(actor.id);
+        if (!teacherClassIds.includes(classId)) {
+          return res.status(403).json({ message: "You can only create students in your assigned classes" });
+        }
       }
 
       const existing = await authStorage.getUserByUsername(username);
@@ -509,31 +536,29 @@ export async function registerRoutes(
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await authStorage.createUser({
+      const user = await storage.createUser({
         username,
         password: hashedPassword,
         email,
+        phone,
         firstName,
         lastName,
         role,
+        isActive: true,
       });
 
-      const { password: _password, ...safeUser } = user;
       if (role === "student") {
-        try {
-          await storage.createStudentProfile({
-            userId: user.id,
-            academicYear: computeCurrentAcademicYear(),
-            isActive: true,
-          });
-        } catch (profileError: any) {
-          console.error("[api] Failed to auto-create student profile:", {
-            userId: user.id,
-            error: profileError?.message ?? profileError,
-          });
-        }
+        await storage.createStudentProfile({
+          userId: user.id,
+          admissionNumber: username,
+          classId,
+          academicYear: computeCurrentAcademicYear(),
+          isActive: true,
+        });
+        await storage.replaceClassStudents(classId, Array.from(new Set([...(await storage.getClassStudentUserIds(classId)), user.id])));
       }
 
+      const { password: _password, ...safeUser } = user;
       res.status(201).json(safeUser);
     } catch (error: any) {
       res.status(500).json({ message: error.message || "Failed to create user" });
@@ -658,6 +683,12 @@ export async function registerRoutes(
         }
         updates.password = await bcrypt.hash(String(body.password), 10);
       }
+      if (body.phone === null || typeof body.phone === "string") {
+        updates.phone = body.phone ? String(body.phone).trim() : null;
+      }
+      if (typeof body.isActive === "boolean") {
+        updates.isActive = body.isActive;
+      }
 
       if (Array.isArray(body.permissionGrants) && actor.role === "super_admin") {
         updates.permissionGrants = body.permissionGrants.map(String).filter(isPermissionKey);
@@ -678,6 +709,58 @@ export async function registerRoutes(
 
   app.get("/api/admin/permissions/catalog", isAuthenticated, requirePermission("users.manage"), (_req, res) => {
     res.json({ permissions: [...PERMISSION_KEYS], roles: [...ROLE_KEYS] });
+  });
+
+  app.patch("/api/admin/users/:id/password", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const target = await storage.getUserById(req.params.id);
+      if (!target) return apiError(res, 404, "User not found");
+      const password = String((req.body as Record<string, unknown>)?.password ?? "");
+      if (password.length < 6) return apiError(res, 400, "Password must be at least 6 characters");
+      if (normalizeRole(target.role) === "super_admin" && normalizeRole(actor.role) !== "super_admin") {
+        return apiError(res, 403, "Only super admin can reset another super admin password");
+      }
+      await storage.setUserPassword(target.id, await bcrypt.hash(password, 10));
+      res.json({ success: true });
+    } catch (error: any) {
+      apiError(res, 500, error.message || "Failed to update password");
+    }
+  });
+
+  app.patch("/api/admin/users/:id/disable", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      if (actor.id === req.params.id) return apiError(res, 400, "You cannot disable your own account");
+      const target = await storage.getUserById(req.params.id);
+      if (!target) return apiError(res, 404, "User not found");
+      if (normalizeRole(target.role) === "super_admin" && normalizeRole(actor.role) !== "super_admin") {
+        return apiError(res, 403, "Only super admin can disable another super admin");
+      }
+      await storage.disableUser(target.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      apiError(res, 500, error.message || "Failed to disable user");
+    }
+  });
+
+  app.patch("/api/admin/users/:id/enable", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      if (actor.id === req.params.id) return apiError(res, 400, "You cannot enable your own account");
+      const target = await storage.getUserById(req.params.id);
+      if (!target) return apiError(res, 404, "User not found");
+      if (normalizeRole(target.role) === "super_admin" && normalizeRole(actor.role) !== "super_admin") {
+        return apiError(res, 403, "Only super admin can enable another super admin");
+      }
+      await storage.enableUser(target.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      apiError(res, 500, error.message || "Failed to enable user");
+    }
   });
 
   // Classes: create/list/assignments
@@ -938,78 +1021,6 @@ export async function registerRoutes(
     }
   });
 
-  // Parent-student links
-  app.get("/api/parent/children", isAuthenticated, async (req, res) => {
-    try {
-      const actor = getAuthUser(req);
-      if (!actor) return res.status(401).json({ message: "Not authenticated" });
-      const children = await storage.getChildrenForParent(actor.id);
-      res.json(children);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message || "Failed to fetch children" });
-    }
-  });
-
-  app.get("/api/students/:userId/parents", isAuthenticated, async (req, res) => {
-    try {
-      const actor = getAuthUser(req);
-      if (!actor) return res.status(401).json({ message: "Not authenticated" });
-      const canReadStudents = Array.isArray((actor as any).effectivePermissions)
-        ? (actor as any).effectivePermissions.includes("students.read")
-        : false;
-      if (!canReadStudents && actor.id !== req.params.userId) {
-        return res.status(403).json({ message: "Permission denied" });
-      }
-      const parents = await storage.getParentsForStudent(req.params.userId);
-      res.json(parents);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message || "Failed to fetch linked parents" });
-    }
-  });
-
-  app.post("/api/admin/parent-student-links", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
-    try {
-      const body = req.body as Record<string, unknown>;
-      const parentUserId = String(body.parentUserId ?? "");
-      const studentUserId = String(body.studentUserId ?? "");
-      const parentUser = await storage.getUserById(parentUserId);
-      const studentUser = await storage.getUserById(studentUserId);
-      if (!parentUser || !studentUser) {
-        return res.status(400).json({ message: "Parent or student user not found" });
-      }
-      const parsed = insertParentStudentLinkSchema.parse({
-        parentUserId,
-        studentUserId,
-        relationship: body.relationship ?? "parent",
-      });
-      try {
-        const link = await storage.createParentStudentLink(parsed);
-        res.status(201).json(link);
-      } catch (error: any) {
-        if (error?.code === "23505" || error?.message?.includes("duplicate key")) {
-          return res.status(409).json({ message: "This parent-student link already exists" });
-        }
-        res.status(500).json({ message: error.message || "Failed to create link" });
-      }
-    } catch (error: any) {
-      res.status(400).json({ message: error.message || "Invalid request" });
-    }
-  });
-
-  app.delete(
-    "/api/admin/parent-student-links/:parentUserId/:studentUserId",
-    isAuthenticated,
-    requirePermission("users.manage"),
-    async (req, res) => {
-      try {
-        await storage.removeParentStudentLink(req.params.parentUserId, req.params.studentUserId);
-        res.json({ success: true });
-      } catch (error: any) {
-        res.status(500).json({ message: error.message || "Failed to remove link" });
-      }
-    }
-  );
-
   // Parent-teacher chat
   app.post("/api/messages/send", isAuthenticated, requirePermission("chat.initiate"), async (req, res) => {
     try {
@@ -1026,12 +1037,8 @@ export async function registerRoutes(
       if (!studentUser) return res.status(400).json({ message: "Student user not found" });
       if (classRows.length === 0) return res.status(400).json({ message: "Class not found" });
 
-      if (user.role !== "super_admin") {
-        const linkedChildren = await storage.getChildrenForParent(user.id);
-        const hasLink = linkedChildren.some((row) => row.studentUser.id === studentUserId);
-        if (!hasLink) {
-          return res.status(403).json({ message: "You are not linked to this student" });
-        }
+      if (user.role === "student" && user.id !== studentUserId && user.role !== "super_admin") {
+        return res.status(403).json({ message: "You can only message for your own student account" });
       }
 
       const created = await storage.sendMessage({
@@ -1087,8 +1094,7 @@ export async function registerRoutes(
       let allowed = isAdmin;
       if (!allowed) {
         if (user.role === "student") {
-          const linkedChildren = await storage.getChildrenForParent(user.id);
-          allowed = linkedChildren.some((row) => row.studentUser.id === studentUserId);
+          allowed = user.id === studentUserId;
         } else if (user.role === "class_teacher" || user.role === "subject_teacher") {
           const teacherClassIds = await storage.getTeacherClassIds(user.id);
           allowed = teacherClassIds.includes(classId);

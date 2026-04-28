@@ -6,7 +6,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ActiveChildProvider } from "@/contexts/active-child-context";
+import { ActiveClassProvider } from "@/contexts/active-class-context";
 import NotFound from "@/pages/not-found";
 import { Loader } from "@/components/loader";
 
@@ -84,7 +84,7 @@ function Router() {
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="aashley-theme">
-      <ActiveChildProvider>
+      <ActiveClassProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <SEOHead />
@@ -94,7 +94,7 @@ function App() {
             <Router />
           </TooltipProvider>
         </QueryClientProvider>
-      </ActiveChildProvider>
+      </ActiveClassProvider>
     </ThemeProvider>
   );
 }

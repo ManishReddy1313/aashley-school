@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GraduationCap, Plus, Search, UserPlus } from "lucide-react";
@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@/hooks/use-auth";
+import { useActiveClass } from "@/contexts/active-class-context";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -66,6 +67,8 @@ const avatarColorByName = (value: string) => {
 
 export default function StudentsPage() {
   const { can } = useAuth();
+  const { activeClassId } = useActiveClass();
+  const isClassTeacher = can("students.update") && !can("users.manage");
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -92,7 +95,7 @@ export default function StudentsPage() {
 
   const studentsQuery = useQuery<StudentProfileRow[]>({
     queryKey: ["/api/admin/students", classId, academicYear],
-    enabled: can("students.read"),
+    enabled: can("students.read") && (!isClassTeacher || !!activeClassId),
     queryFn: async () => {
       const params = new URLSearchParams();
       if (classId !== "all") params.set("classId", classId);
@@ -104,6 +107,12 @@ export default function StudentsPage() {
       return response.json();
     },
   });
+
+  useEffect(() => {
+    if (isClassTeacher) {
+      setClassId(activeClassId ?? "all");
+    }
+  }, [isClassTeacher, activeClassId]);
 
   const addStudentMutation = useMutation({
     mutationFn: async () => {
@@ -266,6 +275,11 @@ export default function StudentsPage() {
         />
 
         <div className="p-6 space-y-4">
+          {isClassTeacher && !activeClassId ? (
+            <Card className="rounded-none">
+              <CardContent className="p-6 text-muted-foreground">Select a class to view students.</CardContent>
+            </Card>
+          ) : null}
           <div className="grid gap-3 md:grid-cols-3">
             <Input
               className="rounded-none"
@@ -273,7 +287,7 @@ export default function StudentsPage() {
               value={academicYear}
               onChange={(e) => setAcademicYear(e.target.value)}
             />
-            <Select value={classId} onValueChange={setClassId}>
+            <Select value={classId} onValueChange={setClassId} disabled={isClassTeacher}>
               <SelectTrigger className="rounded-none">
                 <SelectValue placeholder="Filter by Class" />
               </SelectTrigger>

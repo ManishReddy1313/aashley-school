@@ -32,7 +32,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SchoolLogo } from "@/components/school-logo";
 import { useAuth } from "@/hooks/use-auth";
-import { useActiveChild } from "@/contexts/active-child-context";
+import { useActiveClass } from "@/contexts/active-class-context";
 import {
   Select,
   SelectContent,
@@ -92,12 +92,8 @@ export function PortalLayout({ children }: PortalLayoutProps) {
   const [selectedResultIndex, setSelectedResultIndex] = useState(0);
   const [location, setLocation] = useLocation();
   const { user, roleLabel, can, isLoading, isAuthenticated, logout } = useAuth();
-  const { activeChildId, setActiveChildId } = useActiveChild();
+  const { classes: teacherClasses, activeClassId, setActiveClassId } = useActiveClass();
 
-  const childrenQuery = useQuery<any[]>({
-    queryKey: ["/api/parent/children"],
-    enabled: isAuthenticated,
-  });
   const unreadCountQuery = useQuery<{ count: number }>({
     queryKey: ["/api/messages/unread-count"],
     enabled: isAuthenticated && (can("chat.initiate") || can("chat.respond")),
@@ -311,18 +307,17 @@ export function PortalLayout({ children }: PortalLayoutProps) {
         <p className="text-xs text-sidebar-foreground/60">{roleLabel || "User"}</p>
       </div>
 
-      {user.role === "student" && (childrenQuery.data?.length ?? 0) > 1 ? (
+      {(user.role === "class_teacher" || user.role === "subject_teacher") && teacherClasses.length > 1 ? (
         <div className="px-4 py-3 border-b border-sidebar-border">
-          <p className="text-xs text-sidebar-foreground/50 mb-1">Viewing as:</p>
-          <Select value={activeChildId || childrenQuery.data?.[0]?.studentUser?.id} onValueChange={setActiveChildId}>
+          <p className="text-xs text-sidebar-foreground/50 mb-1">Active Class:</p>
+          <Select value={activeClassId || teacherClasses[0]?.id} onValueChange={setActiveClassId}>
             <SelectTrigger className="rounded-none bg-sidebar-accent text-sidebar-foreground border-sidebar-border">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {(childrenQuery.data ?? []).map((row) => (
-                <SelectItem key={row.studentUser.id} value={row.studentUser.id}>
-                  {`${row.studentUser.firstName ?? ""} ${row.studentUser.lastName ?? ""}`.trim() ||
-                    row.studentUser.username}
+              {teacherClasses.map((row) => (
+                <SelectItem key={row.id} value={row.id}>
+                  {`${row.name}${row.section ? ` ${row.section}` : ""}`}
                 </SelectItem>
               ))}
             </SelectContent>

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useRoute, useLocation } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { GraduationCap, Link2, Mail, Phone, UserRound } from "lucide-react";
+import { CalendarDays, GraduationCap, Phone, UserRound } from "lucide-react";
 import { PortalLayout } from "@/components/portal/portal-layout";
 import { PageHeader } from "@/components/portal/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -62,8 +62,6 @@ export default function StudentProfilePage() {
   const { user: authUser, can } = useAuth();
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
-  const [parentSearch, setParentSearch] = useState("");
-  const [relationship, setRelationship] = useState("parent");
   const [editForm, setEditForm] = useState({
     admissionNumber: "",
     classId: "",
@@ -102,20 +100,6 @@ export default function StudentProfilePage() {
     enabled: can("students.read"),
   });
 
-  const parentsQuery = useQuery<any[]>({
-    queryKey: ["/api/students", studentUserId, "parents"],
-    queryFn: async () => {
-      const res = await fetch(`/api/students/${studentUserId}/parents`, { credentials: "include" });
-      if (!res.ok) throw new Error(await res.text());
-      return res.json();
-    },
-    enabled: !!studentUserId && can("students.read"),
-  });
-
-  const usersQuery = useQuery<any[]>({
-    queryKey: ["/api/admin/users"],
-    enabled: can("users.manage"),
-  });
 
   const updateMutation = useMutation({
     mutationFn: async () => {
@@ -141,43 +125,11 @@ export default function StudentProfilePage() {
     },
   });
 
-  const linkParentMutation = useMutation({
-    mutationFn: async (parentUserId: string) => {
-      const res = await apiRequest("POST", "/api/admin/parent-student-links", {
-        parentUserId,
-        studentUserId,
-        relationship,
-      });
-      return res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/students", studentUserId, "parents"] });
-      setParentSearch("");
-    },
-  });
-
-  const unlinkMutation = useMutation({
-    mutationFn: async (parentUserId: string) => {
-      await apiRequest("DELETE", `/api/admin/parent-student-links/${parentUserId}/${studentUserId}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/students", studentUserId, "parents"] });
-    },
-  });
 
   const classMap = useMemo(
     () => new Map((classesQuery.data ?? []).map((row) => [row.id, `${row.name}${row.section ? ` ${row.section}` : ""}`])),
     [classesQuery.data]
   );
-
-  const parentMatches = useMemo(() => {
-    const q = parentSearch.trim().toLowerCase();
-    if (!q) return [];
-    return (usersQuery.data ?? [])
-      .filter((row) => row.role !== "student")
-      .filter((row) => row.username.toLowerCase().includes(q))
-      .slice(0, 5);
-  }, [parentSearch, usersQuery.data]);
 
   const profile = profileQuery.data?.profile;
   const user = profileQuery.data?.user;
@@ -303,7 +255,7 @@ export default function StudentProfilePage() {
                   </div>
                 ) : (
                   <div className="border-t border-border pt-4 space-y-3 text-sm">
-                    <p><UserRound className="inline h-4 w-4 mr-2 text-muted-foreground" />Admission No.: {profile?.admissionNumber || "—"}</p>
+                    <p><UserRound className="inline h-4 w-4 mr-2 text-muted-foreground" />Admission No.: {profile?.admissionNumber || user?.username || "—"}</p>
                     <p><GraduationCap className="inline h-4 w-4 mr-2 text-muted-foreground" />Class: {profile?.classId ? classMap.get(profile.classId) || "Unassigned" : "Unassigned"}</p>
                     <p>Roll Number: {profile?.rollNumber || "—"}</p>
                     <p>Academic Year: {profile?.academicYear || "—"}</p>
@@ -326,116 +278,51 @@ export default function StudentProfilePage() {
           </div>
 
           <div>
-            <Tabs defaultValue="parents" className="w-full">
+            <Tabs defaultValue="details" className="w-full">
               <TabsList className="rounded-none">
-                <TabsTrigger value="parents">Parents / Guardians</TabsTrigger>
-                <TabsTrigger value="marks">Marks</TabsTrigger>
-                <TabsTrigger value="timetable">Timetable</TabsTrigger>
+                <TabsTrigger value="details">Details</TabsTrigger>
+                <TabsTrigger value="academic">Academic</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="parents" className="mt-4">
+              <TabsContent value="details" className="mt-4">
                 <Card className="rounded-none">
                   <CardHeader>
-                    <CardTitle className="font-serif font-normal text-xl">Linked Parents</CardTitle>
+                    <CardTitle className="font-serif font-normal text-xl">Student Details</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    {(parentsQuery.data ?? []).length === 0 ? (
-                      <p className="text-sm text-muted-foreground">No parents linked yet.</p>
-                    ) : (
-                      (parentsQuery.data ?? []).map((row) => (
-                        <div key={row.link.id} className="border border-border p-3 flex items-center justify-between gap-3">
-                          <div>
-                            <p className="font-medium text-foreground">
-                              {`${row.parentUser.firstName ?? ""} ${row.parentUser.lastName ?? ""}`.trim() || row.parentUser.username}
-                            </p>
-                            <p className="text-sm text-muted-foreground">@{row.parentUser.username}</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="rounded-none">
-                              {row.link.relationship}
-                            </Badge>
-                            {can("users.manage") ? (
-                              <Button
-                                variant="outline"
-                                className="rounded-none"
-                                onClick={() => {
-                                  const ok = window.confirm("Remove this parent link?");
-                                  if (ok) unlinkMutation.mutate(row.parentUser.id);
-                                }}
-                              >
-                                Remove
-                              </Button>
-                            ) : null}
-                          </div>
-                        </div>
-                      ))
-                    )}
-
-                    {can("users.manage") ? (
-                      <div className="border-t border-border pt-4 space-y-2">
-                        <p className="text-sm font-medium text-foreground">Link Parent</p>
-                        <Input
-                          className="rounded-none"
-                          placeholder="Search parent username..."
-                          value={parentSearch}
-                          onChange={(e) => setParentSearch(e.target.value)}
-                        />
-                        <Select value={relationship} onValueChange={setRelationship}>
-                          <SelectTrigger className="rounded-none">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="parent">parent</SelectItem>
-                            <SelectItem value="guardian">guardian</SelectItem>
-                            <SelectItem value="sibling">sibling</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <div className="space-y-2">
-                          {parentMatches.map((match) => (
-                            <div key={match.id} className="border border-border p-2 flex items-center justify-between">
-                              <span className="text-sm text-foreground">@{match.username}</span>
-                              <Button
-                                variant="outline"
-                                className="rounded-none"
-                                onClick={() => linkParentMutation.mutate(match.id)}
-                                disabled={linkParentMutation.isPending}
-                              >
-                                <Link2 className="h-4 w-4" />
-                                Link as Parent
-                              </Button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
+                    <p className="text-sm text-muted-foreground">Admission No.: {profile?.admissionNumber || user?.username || "—"}</p>
+                    <p className="text-sm text-muted-foreground">Class: {profile?.classId ? classMap.get(profile.classId) || "Unassigned" : "Unassigned"}</p>
+                    <p className="text-sm text-muted-foreground">Academic Year: {profile?.academicYear || "—"}</p>
+                    <p className="text-sm text-muted-foreground">Date of Birth: {profile?.dateOfBirth ? format(new Date(profile.dateOfBirth), "dd MMM yyyy") : "—"}</p>
+                    <p className="text-sm text-muted-foreground">Gender: {profile?.gender || "—"}</p>
+                    <p className="text-sm text-muted-foreground">Blood Group: {profile?.bloodGroup || "—"}</p>
+                    <p className="text-sm text-muted-foreground whitespace-pre-wrap">Address: {profile?.address || "—"}</p>
                   </CardContent>
                 </Card>
               </TabsContent>
 
-              <TabsContent value="marks" className="mt-4">
+              <TabsContent value="academic" className="mt-4">
                 <Card className="rounded-none">
-                  <CardContent className="py-16 text-center">
-                    <GraduationCap className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-foreground">Marks and exam results will appear here once exams are configured.</p>
-                    <Link href="/portal/marks">
-                      <Button variant="outline" className="rounded-none mt-4">
-                        View full marks report →
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="timetable" className="mt-4">
-                <Card className="rounded-none">
-                  <CardContent className="py-16 text-center">
-                    <Mail className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-foreground">Timetable will appear here once it is set up for this class.</p>
-                    <Link href="/portal/timetable">
-                      <Button variant="outline" className="rounded-none mt-4">
-                        View Timetable
-                      </Button>
-                    </Link>
+                  <CardContent className="py-8 space-y-4">
+                    <div className="border border-border p-4">
+                      <p className="text-foreground font-medium">Marks & Exams</p>
+                      <p className="text-sm text-muted-foreground">View full report card and exam performance.</p>
+                      <Link href="/portal/marks">
+                        <Button variant="outline" className="rounded-none mt-3">
+                          View full marks report →
+                        </Button>
+                      </Link>
+                    </div>
+                    <div className="border border-border p-4">
+                      <p className="text-foreground font-medium">Timetable</p>
+                      <p className="text-sm text-muted-foreground">Check class schedule for the active academic year.</p>
+                      <Link href="/portal/timetable">
+                        <Button variant="outline" className="rounded-none mt-3">
+                          <CalendarDays className="h-4 w-4" />
+                          View Timetable
+                        </Button>
+                      </Link>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>

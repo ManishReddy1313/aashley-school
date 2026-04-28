@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@/hooks/use-auth";
+import { useActiveClass } from "@/contexts/active-class-context";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import {
@@ -45,6 +46,7 @@ type SubjectRow = { id: string; name: string };
 
 export default function TimetablePage() {
   const { can, isAuthenticated, isLoading } = useAuth();
+  const { activeClassId } = useActiveClass();
   const isManage = can("timetable.manage");
   const canView = can("timetable.view");
   const [, setLocation] = useLocation();
@@ -52,7 +54,7 @@ export default function TimetablePage() {
   const { toast } = useToast();
 
   const [academicYear, setAcademicYear] = useState("2026-27");
-  const [selectedClassId, setSelectedClassId] = useState("0fcd1bb8-7019-4f91-842c-bec41cb39232");
+  const [selectedClassId, setSelectedClassId] = useState("");
   const [selectedDayMobile, setSelectedDayMobile] = useState<number>(getTodayDayNumber() ?? 1);
   const [editingCell, setEditingCell] = useState<{ dayOfWeek: number; periodNumber: number } | null>(null);
   const [form, setForm] = useState({ subjectName: "", startTime: "", endTime: "", teacherUserId: "" });
@@ -67,10 +69,15 @@ export default function TimetablePage() {
   });
 
   useEffect(() => {
-    if (isManage && teacherClassesQuery.data?.classes?.length && !selectedClassId) {
+    if (!isManage) return;
+    if (activeClassId) {
+      setSelectedClassId(activeClassId);
+      return;
+    }
+    if (teacherClassesQuery.data?.classes?.length && !selectedClassId) {
       setSelectedClassId(teacherClassesQuery.data.classes[0].id);
     }
-  }, [isManage, selectedClassId, teacherClassesQuery.data?.classes]);
+  }, [isManage, selectedClassId, teacherClassesQuery.data?.classes, activeClassId]);
 
   const timetableQuery = useQuery<TimetableSlot[]>({
     queryKey: ["/api/timetable", isManage ? selectedClassId : "student", academicYear],

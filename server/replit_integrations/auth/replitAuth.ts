@@ -72,6 +72,12 @@ export async function setupAuth(app: Express) {
         return res.status(401).json({ message: "Invalid username or password" });
       }
 
+      if (user.isActive === false) {
+        return res
+          .status(403)
+          .json({ message: "This account has been disabled. Contact your administrator." });
+      }
+
       const { password: _, ...safeUser } = user;
       const normalizedRole = normalizeRole(safeUser.role);
       const effectivePermissions = Array.from(
