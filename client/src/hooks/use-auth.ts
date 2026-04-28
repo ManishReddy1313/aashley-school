@@ -9,6 +9,7 @@ type AuthUser = {
   lastName: string | null;
   profileImageUrl: string | null;
   role: string;
+  roleLabel?: string;
   effectivePermissions?: string[];
   createdAt: string | null;
   updatedAt: string | null;
@@ -59,17 +60,28 @@ export function useAuth() {
   });
 
   const can = (permission: string) => !!user?.effectivePermissions?.includes(permission);
+  const isPrincipal = user?.role === "principal";
+  const isAdminStaff = user?.role === "admin_staff";
+  const isAdmissionsOfficer = user?.role === "admissions_officer";
+  const isClassTeacher = user?.role === "class_teacher";
+  const isSubjectTeacher = user?.role === "subject_teacher";
   const isSuperAdmin = user?.role === "super_admin";
-  const isAdmin = user?.role === "admin" || isSuperAdmin;
-  const isStaff = user?.role === "staff";
+  const isAdmin = user?.role === "admin_staff" || user?.role === "principal" || user?.role === "super_admin";
+  const isStaff = user?.role === "class_teacher" || user?.role === "subject_teacher";
 
   return {
     user,
     isLoading,
     isAuthenticated: !!user,
+    isPrincipal,
+    isAdminStaff,
+    isAdmissionsOfficer,
+    isClassTeacher,
+    isSubjectTeacher,
     isSuperAdmin,
     isAdmin,
     isStaff,
+    roleLabel: user?.roleLabel ?? "",
     can,
     login: loginMutation.mutateAsync,
     loginError: loginMutation.error,

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Link } from "wouter";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { PortalLayout } from "@/components/portal/portal-layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 type StudentRow = {
   id: string;
@@ -75,19 +75,14 @@ export default function TeacherStudentsPage() {
   });
 
   return (
-    <div className="min-h-screen container mx-auto px-4 py-8 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Users className="h-6 w-6 text-primary" />
-          My Students
-        </h1>
-        <Link href="/portal/dashboard">
-          <Button variant="outline">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Button>
-        </Link>
-      </div>
+    <PortalLayout>
+      <div className="min-h-screen container mx-auto px-4 py-8 space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <Users className="h-6 w-6 text-primary" />
+            My Students
+          </h1>
+        </div>
 
       <Card>
         <CardHeader>
@@ -205,6 +200,7 @@ export default function TeacherStudentsPage() {
           </CardContent>
         </Card>
       )}
-    </div>
+      </div>
+    </PortalLayout>
   );
 }

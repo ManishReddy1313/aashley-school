@@ -64,6 +64,18 @@ export function requirePermission(permission: PermissionKey) {
   };
 }
 
+export function requireAnyPermission(...permissions: PermissionKey[]) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const user = getSessionUser(req);
+    if (!user) return res.status(401).json({ message: "Not authenticated" });
+    const effective = getEffectivePermissions(user);
+    const hasAny = permissions.some((permission) => effective.has(permission));
+    if (!hasAny) return res.status(403).json({ message: "Permission denied" });
+    (req as any).user = { ...user, effectivePermissions: Array.from(effective) };
+    next();
+  };
+}
+
 export function ensureCanAssignRole(actorRole: RoleKey, targetRole: RoleKey): boolean {
   return canAssignRole(actorRole, targetRole);
 }

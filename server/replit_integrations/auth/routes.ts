@@ -1,21 +1,27 @@
 import type { Express } from "express";
 import { isAuthenticated } from "./replitAuth";
-import { normalizeRole, resolveEffectivePermissions } from "@shared/authz";
+import { getRoleLabel, normalizeRole, resolveEffectivePermissions } from "@shared/authz";
+import { authStorage } from "./storage";
 
 export function registerAuthRoutes(app: Express): void {
   app.get("/api/auth/user", isAuthenticated, async (req: any, res) => {
     try {
-      const normalizedRole = normalizeRole(req.user?.role);
+      const dbUser = await authStorage.getUser(req.user.id);
+      if (!dbUser) return res.status(401).json({ message: "User not found" });
+
+      const { password: _password, ...safeUser } = dbUser;
+      const normalizedRole = normalizeRole(safeUser.role);
       const effectivePermissions = Array.from(
         resolveEffectivePermissions({
           role: normalizedRole,
-          permissionGrants: req.user?.permissionGrants ?? [],
-          permissionRevokes: req.user?.permissionRevokes ?? [],
+          permissionGrants: safeUser.permissionGrants ?? [],
+          permissionRevokes: safeUser.permissionRevokes ?? [],
         })
       );
       const sessionUser = {
-        ...req.user,
+        ...safeUser,
         role: normalizedRole,
+        roleLabel: getRoleLabel(normalizedRole),
         effectivePermissions,
       };
       (req.session as any).user = sessionUser;

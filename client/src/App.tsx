@@ -6,6 +6,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ActiveChildProvider } from "@/contexts/active-child-context";
 import NotFound from "@/pages/not-found";
 import { Loader } from "@/components/loader";
 
@@ -28,6 +29,15 @@ import PortalDashboard from "@/pages/portal/dashboard";
 import ManageUsersPage from "@/pages/portal/manage-users";
 import ManageClassesPage from "@/pages/portal/manage-classes";
 import TeacherStudentsPage from "@/pages/portal/teacher-students";
+import PortalAdmissionsPage from "@/pages/portal/admissions";
+import LeadDetailPage from "@/pages/portal/admissions/lead-detail";
+import StudentsPage from "@/pages/portal/students";
+import StudentProfilePage from "@/pages/portal/students/profile";
+import PortalAnnouncementsPage from "@/pages/portal/announcements";
+import MessagesPage from "@/pages/portal/messages";
+import ThreadPage from "@/pages/portal/messages/thread";
+import MarksPage from "@/pages/portal/marks";
+import TimetablePage from "@/pages/portal/timetable";
 
 function Router() {
   return (
@@ -48,10 +58,22 @@ function Router() {
       
       {/* Portal Pages */}
       <Route path="/portal" component={PortalLoginPage} />
+      <Route path="/portal/login" component={PortalLoginPage} />
       <Route path="/portal/dashboard" component={PortalDashboard} />
+      <Route path="/portal/manage-users" component={ManageUsersPage} />
+      <Route path="/portal/manage-classes" component={ManageClassesPage} />
       <Route path="/portal/admin/users" component={ManageUsersPage} />
       <Route path="/portal/admin/classes" component={ManageClassesPage} />
       <Route path="/portal/teacher/students" component={TeacherStudentsPage} />
+      <Route path="/portal/admissions" component={PortalAdmissionsPage} />
+      <Route path="/portal/admissions/:id" component={LeadDetailPage} />
+      <Route path="/portal/announcements" component={PortalAnnouncementsPage} />
+      <Route path="/portal/messages" component={MessagesPage} />
+      <Route path="/portal/messages/:studentUserId/:classId" component={ThreadPage} />
+      <Route path="/portal/marks" component={MarksPage} />
+      <Route path="/portal/timetable" component={TimetablePage} />
+      <Route path="/portal/students" component={StudentsPage} />
+      <Route path="/portal/students/:userId" component={StudentProfilePage} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />
@@ -62,15 +84,17 @@ function Router() {
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="aashley-theme">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <SEOHead />
-          <JsonLdSchema />
-          <Toaster />
-          <Loader />
-          <Router />
-        </TooltipProvider>
-      </QueryClientProvider>
+      <ActiveChildProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <SEOHead />
+            <JsonLdSchema />
+            <Toaster />
+            <Loader />
+            <Router />
+          </TooltipProvider>
+        </QueryClientProvider>
+      </ActiveChildProvider>
     </ThemeProvider>
   );
 }

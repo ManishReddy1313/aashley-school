@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { index, jsonb, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
+import { index, jsonb, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import type { PermissionKey, RoleKey } from "../authz";
 
 export const sessions = pgTable(
@@ -20,9 +20,9 @@ export const users = pgTable("users", {
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
-  role: varchar("role", { length: 20 }).$type<RoleKey>().notNull().default("student"),
-  permissionGrants: jsonb("permission_grants").$type<PermissionKey[]>().notNull().default(sql`'[]'::jsonb`),
-  permissionRevokes: jsonb("permission_revokes").$type<PermissionKey[]>().notNull().default(sql`'[]'::jsonb`),
+  role: varchar("role", { length: 30 }).$type<RoleKey>().notNull().default("student"),
+  permissionGrants: text("permission_grants").array().$type<PermissionKey[]>().notNull().default(sql`ARRAY[]::text[]`),
+  permissionRevokes: text("permission_revokes").array().$type<PermissionKey[]>().notNull().default(sql`ARRAY[]::text[]`),
   legacyRole: varchar("legacy_role", { length: 20 }),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
