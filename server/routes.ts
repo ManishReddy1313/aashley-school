@@ -475,12 +475,17 @@ export async function registerRoutes(
   });
 
   // Admin: Create Portal User
-  app.post("/api/admin/users", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
+  app.post("/api/admin/users", isAuthenticated, requireAnyPermission("users.manage", "students.update"), async (req, res) => {
     try {
       const actor = getAuthUser(req);
       if (!actor) return res.status(401).json({ message: "Not authenticated" });
 
+      const effective = getEffectivePermissions(actor as any);
       const body = req.body as Record<string, unknown>;
+      const targetRole = normalizeRole(body.role ? String(body.role) : "student");
+      if (!effective.has("users.manage") && targetRole !== "student") {
+        return res.status(403).json({ message: "Permission denied" });
+      }
       const username = String(body.username ?? "").trim();
       const password = String(body.password ?? "");
       const email = body.email ? String(body.email).trim() : null;
@@ -489,6 +494,10 @@ export async function registerRoutes(
       const lastName = body.lastName ? String(body.lastName).trim() : null;
       const role = normalizeRole(body.role ? String(body.role) : "student");
       const classId = body.classId ? String(body.classId).trim() : "";
+      const academicYear =
+        body.academicYear && String(body.academicYear).trim()
+          ? String(body.academicYear).trim()
+          : computeCurrentAcademicYear();
 
       if (!username || !password) {
         return res.status(400).json({ message: "Username and password are required" });
@@ -552,7 +561,8 @@ export async function registerRoutes(
           userId: user.id,
           admissionNumber: username,
           classId,
-          academicYear: computeCurrentAcademicYear(),
+          academicYear,
+          rollNumber: body.rollNumber ? String(body.rollNumber).trim() : null,
           isActive: true,
         });
         await storage.replaceClassStudents(classId, Array.from(new Set([...(await storage.getClassStudentUserIds(classId)), user.id])));
@@ -562,6 +572,189 @@ export async function registerRoutes(
       res.status(201).json(safeUser);
     } catch (error: any) {
       res.status(500).json({ message: error.message || "Failed to create user" });
+    }
+  });
+
+  app.post("/api/admin/users/bulk-teachers", isAuthenticated, requirePermission("users.manage"), async (req, res) => {
+    try {
+      const body = req.body;
+      if (!Array.isArray(body) || body.length === 0) {
+        return res.status(400).json({ message: "Request body must be a non-empty array" });
+      }
+      if (body.length > 200) {
+        return res.status(400).json({ message: "Maximum 200 records per upload" });
+      }
+
+      const allowedRoles = new Set(["class_teacher", "subject_teacher", "admissions_officer", "admin_staff"]);
+      let created = 0;
+      const skippedDetails: Array<{ username: string; reason: string }> = [];
+      const errors: string[] = [];
+
+      for (const record of body) {
+        const username = String(record?.username ?? "").trim();
+        const password = String(record?.password ?? "");
+        const firstName = record?.firstName ? String(record.firstName).trim() : null;
+        const lastName = record?.lastName ? String(record.lastName).trim() : null;
+        const phone = record?.phone ? String(record.phone).trim() : null;
+        const email = record?.email ? String(record.email).trim() : null;
+        const role = normalizeRole(record?.role ? String(record.role) : "");
+
+        if (!username || !password) {
+          errors.push(`Missing username or password for row`);
+          continue;
+        }
+        if (password.length < 6) {
+          skippedDetails.push({ username, reason: "Password must be at least 6 characters" });
+          continue;
+        }
+        if (!allowedRoles.has(role)) {
+          skippedDetails.push({ username, reason: `Invalid role: ${role}` });
+          continue;
+        }
+
+        const existing = await authStorage.getUserByUsername(username);
+        if (existing) {
+          skippedDetails.push({ username, reason: "Username already exists" });
+          continue;
+        }
+
+        if (email) {
+          const existingEmail = await authStorage.getUserByEmail(email);
+          if (existingEmail) {
+            skippedDetails.push({ username, reason: "Email already registered" });
+            continue;
+          }
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await storage.createUser({
+          username,
+          password: hashedPassword,
+          email,
+          phone,
+          firstName,
+          lastName,
+          role,
+          isActive: true,
+        });
+        created += 1;
+      }
+
+      res.json({
+        created,
+        skipped: skippedDetails.length,
+        errors,
+        skippedDetails,
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to bulk create teachers" });
+    }
+  });
+
+  app.post(
+    "/api/admin/users/bulk-students",
+    isAuthenticated,
+    requireAnyPermission("students.update", "users.manage"),
+    async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return res.status(401).json({ message: "Not authenticated" });
+
+      const body = req.body;
+      if (!Array.isArray(body) || body.length === 0) {
+        return res.status(400).json({ message: "Request body must be a non-empty array" });
+      }
+      if (body.length > 200) {
+        return res.status(400).json({ message: "Maximum 200 records per upload" });
+      }
+
+      const actorRole = normalizeRole(actor.role);
+      let teacherClassIds: string[] | null = null;
+      if (actorRole === "class_teacher") {
+        teacherClassIds = await storage.getTeacherClassIds(actor.id);
+      }
+
+      let created = 0;
+      const skippedDetails: Array<{ username: string; reason: string }> = [];
+      const errors: string[] = [];
+
+      for (const record of body) {
+        const username = String(record?.username ?? record?.admissionNumber ?? "").trim();
+        const admissionNumber = String(record?.admissionNumber ?? username).trim();
+        const password = String(record?.password ?? "");
+        const firstName = record?.firstName ? String(record.firstName).trim() : null;
+        const lastName = record?.lastName ? String(record.lastName).trim() : null;
+        const phone = record?.phone ? String(record.phone).trim() : null;
+        const classId = record?.classId ? String(record.classId).trim() : "";
+        const academicYear = record?.academicYear ? String(record.academicYear).trim() : computeCurrentAcademicYear();
+        const rollNumber = record?.rollNumber ? String(record.rollNumber).trim() : null;
+        const gender = record?.gender ? String(record.gender).trim() : null;
+        const bloodGroup = record?.bloodGroup ? String(record.bloodGroup).trim() : null;
+        let dateOfBirth: Date | null = null;
+        if (record?.dateOfBirth) {
+          const parsed = new Date(String(record.dateOfBirth));
+          if (!Number.isNaN(parsed.getTime())) dateOfBirth = parsed;
+        }
+
+        if (!username || !password) {
+          errors.push("Missing username or password for a row");
+          continue;
+        }
+        if (password.length < 6) {
+          skippedDetails.push({ username, reason: "Password must be at least 6 characters" });
+          continue;
+        }
+        if (!classId) {
+          skippedDetails.push({ username, reason: "classId is required" });
+          continue;
+        }
+        if (teacherClassIds && !teacherClassIds.includes(classId)) {
+          skippedDetails.push({ username, reason: "Class not assigned to you" });
+          continue;
+        }
+
+        const existing = await authStorage.getUserByUsername(username);
+        if (existing) {
+          skippedDetails.push({ username, reason: "Username already exists" });
+          continue;
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await storage.createUser({
+          username,
+          password: hashedPassword,
+          phone,
+          firstName,
+          lastName,
+          role: "student",
+          isActive: true,
+        });
+
+        await storage.createStudentProfile({
+          userId: user.id,
+          admissionNumber,
+          classId,
+          academicYear,
+          rollNumber,
+          dateOfBirth,
+          gender,
+          bloodGroup,
+          isActive: true,
+        });
+
+        const existingStudentIds = await storage.getClassStudentUserIds(classId);
+        await storage.replaceClassStudents(classId, Array.from(new Set([...existingStudentIds, user.id])));
+        created += 1;
+      }
+
+      res.json({
+        created,
+        skipped: skippedDetails.length,
+        errors,
+        skippedDetails,
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to bulk create students" });
     }
   });
 
@@ -1653,6 +1846,220 @@ export async function registerRoutes(
       res.json(rows);
     } catch (error: any) {
       res.status(500).json({ message: error.message || "Failed to fetch student timetable" });
+    }
+  });
+
+  // ============ ATTENDANCE ROUTES ============
+
+  app.get("/api/attendance/:classId", isAuthenticated, async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const { classId } = req.params;
+      const date = typeof req.query.date === "string" ? req.query.date : "";
+
+      if (date) {
+        // Return attendance for a specific date, filling in students with null status
+        const records = await storage.getAttendanceForDate(classId, date);
+        const studentIds = await storage.getClassStudentUserIds(classId);
+        const studentUsers = await Promise.all(studentIds.map((id) => storage.getUserById(id)));
+        const recordMap = new Map(records.map((r) => [r.studentUserId, r.status]));
+        const result = studentUsers
+          .filter((u): u is NonNullable<typeof u> => !!u)
+          .map((u) => ({
+            studentUserId: u.id,
+            studentName: `${u.firstName ?? ""} ${u.lastName ?? ""}`.trim() || u.username,
+            status: recordMap.get(u.id) ?? null,
+          }));
+        return res.json(result);
+      }
+
+      const records = await storage.getAttendanceForDate(classId, new Date().toISOString().slice(0, 10));
+      res.json(records);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch attendance" });
+    }
+  });
+
+  app.post("/api/attendance/:classId", isAuthenticated, requirePermission("students.update"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const { classId } = req.params;
+      const body = req.body as { date: string; academicYear: string; records: Array<{ studentUserId: string; status: string }> };
+      if (!body.date || !body.academicYear || !Array.isArray(body.records)) {
+        return apiError(res, 400, "date, academicYear and records are required");
+      }
+      let saved = 0;
+      for (const rec of body.records) {
+        if (!["present", "absent", "late"].includes(rec.status)) continue;
+        await storage.upsertAttendance({
+          classId,
+          studentUserId: rec.studentUserId,
+          date: body.date,
+          status: rec.status,
+          markedByUserId: actor.id,
+          academicYear: body.academicYear,
+        });
+        saved++;
+      }
+      res.json({ saved });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to save attendance" });
+    }
+  });
+
+  app.get("/api/attendance/:classId/summary", isAuthenticated, async (req, res) => {
+    try {
+      const { classId } = req.params;
+      const academicYear = typeof req.query.academicYear === "string" ? req.query.academicYear : computeCurrentAcademicYear();
+      const summaryRows = await storage.getAttendanceSummary(classId, academicYear);
+      const studentIds = await storage.getClassStudentUserIds(classId);
+      const studentUsers = await Promise.all(studentIds.map((id) => storage.getUserById(id)));
+      const userMap = new Map(studentUsers.filter(Boolean).map((u) => [u!.id, `${u!.firstName ?? ""} ${u!.lastName ?? ""}`.trim() || u!.username]));
+      const result = summaryRows.map((row) => ({
+        ...row,
+        studentName: userMap.get(row.studentUserId) ?? row.studentUserId,
+        percentage: row.total > 0 ? Math.round((row.present / row.total) * 100) : 0,
+      }));
+      res.json(result);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch summary" });
+    }
+  });
+
+  app.get("/api/attendance/:classId/monthly", isAuthenticated, async (req, res) => {
+    try {
+      const { classId } = req.params;
+      const month = typeof req.query.month === "string" ? req.query.month : new Date().toISOString().slice(0, 7);
+      const records = await storage.getAttendanceMonthly(classId, month);
+      res.json(records);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch monthly attendance" });
+    }
+  });
+
+  app.get("/api/student/attendance", isAuthenticated, async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const academicYear = typeof req.query.academicYear === "string" ? req.query.academicYear : computeCurrentAcademicYear();
+      const summary = await storage.getStudentAttendanceSummary(actor.id, academicYear);
+      res.json(summary);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch student attendance" });
+    }
+  });
+
+  app.patch("/api/attendance/:classId/notify", isAuthenticated, requirePermission("students.update"), async (req, res) => {
+    try {
+      const { classId } = req.params;
+      const body = req.body as { date: string };
+      if (!body.date) return apiError(res, 400, "date is required");
+      const notified = await storage.markAbsentNotified(classId, body.date);
+      res.json({ notified });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to notify" });
+    }
+  });
+
+  // ============ HOMEWORK ROUTES ============
+
+  app.get("/api/homework/:classId", isAuthenticated, async (req, res) => {
+    try {
+      const { classId } = req.params;
+      const academicYear = typeof req.query.academicYear === "string" ? req.query.academicYear : computeCurrentAcademicYear();
+      const rows = await storage.getHomeworkForClass(classId, academicYear);
+      res.json(rows);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch homework" });
+    }
+  });
+
+  app.post("/api/homework/:classId", isAuthenticated, requirePermission("marks.enter"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const { classId } = req.params;
+      const body = req.body as Record<string, unknown>;
+      const created = await storage.createHomework({
+        classId,
+        subjectId: body.subjectId ? String(body.subjectId) : null,
+        subjectName: String(body.subjectName ?? ""),
+        title: String(body.title ?? ""),
+        description: String(body.description ?? ""),
+        dueDate: String(body.dueDate ?? ""),
+        attachmentUrl: body.attachmentUrl ? String(body.attachmentUrl) : null,
+        createdByUserId: actor.id,
+        academicYear: String(body.academicYear ?? computeCurrentAcademicYear()),
+      });
+      res.status(201).json(created);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message || "Failed to create homework" });
+    }
+  });
+
+  app.delete("/api/homework/:classId/:homeworkId", isAuthenticated, requirePermission("marks.enter"), async (req, res) => {
+    try {
+      await storage.deleteHomework(req.params.homeworkId);
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to delete homework" });
+    }
+  });
+
+  app.get("/api/student/homework", isAuthenticated, async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const academicYear = typeof req.query.academicYear === "string" ? req.query.academicYear : computeCurrentAcademicYear();
+      const rows = await storage.getHomeworkForStudent(actor.id, academicYear);
+      res.json(rows);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch homework" });
+    }
+  });
+
+  // ============ ACTIVITIES ROUTES ============
+
+  app.get("/api/activities", isAuthenticated, async (req, res) => {
+    try {
+      const classId = typeof req.query.classId === "string" ? req.query.classId : undefined;
+      const academicYear = typeof req.query.academicYear === "string" ? req.query.academicYear : computeCurrentAcademicYear();
+      const rows = await storage.getActivities({ classId, academicYear });
+      res.json(rows);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to fetch activities" });
+    }
+  });
+
+  app.post("/api/activities", isAuthenticated, requirePermission("content.create"), async (req, res) => {
+    try {
+      const actor = getAuthUser(req);
+      if (!actor) return apiError(res, 401, "Not authenticated");
+      const body = req.body as Record<string, unknown>;
+      const created = await storage.createActivity({
+        classId: body.classId ? String(body.classId) : null,
+        type: String(body.type ?? "cocurricular"),
+        title: String(body.title ?? ""),
+        description: body.description ? String(body.description) : null,
+        activityDate: String(body.activityDate ?? ""),
+        conductedByUserId: body.conductedByUserId ? String(body.conductedByUserId) : actor.id,
+        participants: body.participants ? String(body.participants) : null,
+        academicYear: String(body.academicYear ?? computeCurrentAcademicYear()),
+      });
+      res.status(201).json(created);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message || "Failed to create activity" });
+    }
+  });
+
+  app.delete("/api/activities/:id", isAuthenticated, requirePermission("content.create"), async (req, res) => {
+    try {
+      await storage.deleteActivity(req.params.id);
+      res.json({ success: true });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || "Failed to delete activity" });
     }
   });
 

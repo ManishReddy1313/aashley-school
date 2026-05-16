@@ -21,11 +21,14 @@ import {
   contactMessages, type ContactMessage, type InsertContactMessage,
   growthStories, type GrowthStory, type InsertGrowthStory,
   jobPostings, type JobPosting, type InsertJobPosting,
-  jobApplications, type JobApplication, type InsertJobApplication
+  jobApplications, type JobApplication, type InsertJobApplication,
+  attendance, type Attendance, type InsertAttendance,
+  homework, type Homework, type InsertHomework,
+  activities, type Activity, type InsertActivity,
 } from "@shared/schema";
 import { users, type UpsertUser, type User } from "@shared/models/auth";
 import { db } from "./db";
-import { eq, desc, and, lte, gte, or, isNull, sql, asc } from "drizzle-orm";
+import { eq, desc, and, lte, gte, or, isNull, sql, asc, like, between } from "drizzle-orm";
 
 export interface IStorage {
   // Auth Users
@@ -191,6 +194,28 @@ export interface IStorage {
   // Job Applications
   getJobApplications(): Promise<JobApplication[]>;
   createJobApplication(application: InsertJobApplication): Promise<JobApplication>;
+
+  // Last login
+  updateUserLastLogin(id: string): Promise<void>;
+
+  // Attendance
+  getAttendanceForDate(classId: string, date: string): Promise<Attendance[]>;
+  upsertAttendance(record: InsertAttendance): Promise<Attendance>;
+  getAttendanceSummary(classId: string, academicYear: string): Promise<Array<{ studentUserId: string; present: number; absent: number; late: number; total: number }>>;
+  getAttendanceMonthly(classId: string, month: string): Promise<Attendance[]>;
+  markAbsentNotified(classId: string, date: string): Promise<number>;
+  getStudentAttendanceSummary(studentUserId: string, academicYear: string): Promise<{ present: number; absent: number; late: number; total: number; records: Attendance[] }>;
+
+  // Homework
+  getHomeworkForClass(classId: string, academicYear: string): Promise<Homework[]>;
+  createHomework(data: InsertHomework): Promise<Homework>;
+  deleteHomework(id: string): Promise<void>;
+  getHomeworkForStudent(studentUserId: string, academicYear: string): Promise<Homework[]>;
+
+  // Activities
+  getActivities(params: { classId?: string; academicYear: string }): Promise<Activity[]>;
+  createActivity(data: InsertActivity): Promise<Activity>;
+  deleteActivity(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -1094,6 +1119,105 @@ export class DatabaseStorage implements IStorage {
   async createJobApplication(application: InsertJobApplication): Promise<JobApplication> {
     const [created] = await db.insert(jobApplications).values(application).returning();
     return created;
+  }
+
+  async updateUserLastLogin(id: string): Promise<void> {
+    await db.update(users).set({ lastLoginAt: new Date(), updatedAt: new Date() }).where(eq(users.id, id));
+  }
+
+  // Attendance
+  async getAttendanceForDate(classId: string, date: string): Promise<Attendance[]> {
+    return db.select().from(attendance)
+      .where(and(eq(attendance.classId, classId), eq(attendance.date, date)));
+  }
+
+  async upsertAttendance(record: InsertAttendance): Promise<Attendance> {
+    const [result] = await db.insert(attendance)
+      .values(record)
+      .onConflictDoUpdate({
+        target: [attendance.classId, attendance.studentUserId, attendance.date],
+        set: { status: record.status, markedByUserId: record.markedByUserId, notificationSent: false },
+      })
+      .returning();
+    return result;
+  }
+
+  async getAttendanceSummary(classId: string, academicYear: string): Promise<Array<{ studentUserId: string; present: number; absent: number; late: number; total: number }>> {
+    const rows = await db.select().from(attendance)
+      .where(and(eq(attendance.classId, classId), eq(attendance.academicYear, academicYear)));
+    const map = new Map<string, { present: number; absent: number; late: number; total: number }>();
+    for (const row of rows) {
+      const curr = map.get(row.studentUserId) ?? { present: 0, absent: 0, late: 0, total: 0 };
+      curr.total += 1;
+      if (row.status === "present") curr.present += 1;
+      else if (row.status === "absent") curr.absent += 1;
+      else if (row.status === "late") curr.late += 1;
+      map.set(row.studentUserId, curr);
+    }
+    return Array.from(map.entries()).map(([studentUserId, stats]) => ({ studentUserId, ...stats }));
+  }
+
+  async getAttendanceMonthly(classId: string, month: string): Promise<Attendance[]> {
+    return db.select().from(attendance)
+      .where(and(eq(attendance.classId, classId), like(attendance.date, `${month}%`)));
+  }
+
+  async markAbsentNotified(classId: string, date: string): Promise<number> {
+    const result = await db.update(attendance)
+      .set({ notificationSent: true })
+      .where(and(eq(attendance.classId, classId), eq(attendance.date, date), eq(attendance.status, "absent")));
+    return result.rowCount ?? 0;
+  }
+
+  async getStudentAttendanceSummary(studentUserId: string, academicYear: string): Promise<{ present: number; absent: number; late: number; total: number; records: Attendance[] }> {
+    const records = await db.select().from(attendance)
+      .where(and(eq(attendance.studentUserId, studentUserId), eq(attendance.academicYear, academicYear)))
+      .orderBy(desc(attendance.date));
+    const present = records.filter((r) => r.status === "present").length;
+    const absent = records.filter((r) => r.status === "absent").length;
+    const late = records.filter((r) => r.status === "late").length;
+    return { present, absent, late, total: records.length, records };
+  }
+
+  // Homework
+  async getHomeworkForClass(classId: string, academicYear: string): Promise<Homework[]> {
+    return db.select().from(homework)
+      .where(and(eq(homework.classId, classId), eq(homework.academicYear, academicYear)))
+      .orderBy(desc(homework.dueDate));
+  }
+
+  async createHomework(data: InsertHomework): Promise<Homework> {
+    const [created] = await db.insert(homework).values(data).returning();
+    return created;
+  }
+
+  async deleteHomework(id: string): Promise<void> {
+    await db.delete(homework).where(eq(homework.id, id));
+  }
+
+  async getHomeworkForStudent(studentUserId: string, academicYear: string): Promise<Homework[]> {
+    const classRows = await this.getStudentClassIds(studentUserId);
+    if (classRows.length === 0) return [];
+    const classId = classRows[0];
+    return this.getHomeworkForClass(classId, academicYear);
+  }
+
+  // Activities
+  async getActivities(params: { classId?: string; academicYear: string }): Promise<Activity[]> {
+    const conditions = [eq(activities.academicYear, params.academicYear)];
+    if (params.classId) conditions.push(eq(activities.classId, params.classId));
+    return db.select().from(activities)
+      .where(and(...conditions))
+      .orderBy(desc(activities.activityDate));
+  }
+
+  async createActivity(data: InsertActivity): Promise<Activity> {
+    const [created] = await db.insert(activities).values(data).returning();
+    return created;
+  }
+
+  async deleteActivity(id: string): Promise<void> {
+    await db.delete(activities).where(eq(activities.id, id));
   }
 }
 

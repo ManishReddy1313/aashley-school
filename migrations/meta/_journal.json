@@ -50,6 +50,13 @@
       "when": 1777407325609,
       "tag": "0006_huge_doctor_strange",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1778955231488,
+      "tag": "0007_glamorous_boomerang",
+      "breakpoints": true
     }
   ]
 }

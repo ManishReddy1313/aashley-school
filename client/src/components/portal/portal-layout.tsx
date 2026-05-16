@@ -3,9 +3,11 @@ import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import {
+  Activity,
   Bell,
   BookOpen,
   CalendarDays,
+  CheckSquare,
   GraduationCap,
   LayoutDashboard,
   Loader2,
@@ -68,6 +70,11 @@ type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
   visible: boolean;
   badgeCount?: number;
+};
+
+type NavGroup = {
+  label: string;
+  items: NavItem[];
 };
 
 function getUserInitials(user: {
@@ -165,24 +172,55 @@ export function PortalLayout({ children }: PortalLayoutProps) {
     setSelectedResultIndex(0);
   }, [debouncedSearch, searchQuery.data?.results?.length]);
 
-  const navItems = useMemo<NavItem[]>(
-    () => [
-      { label: "Dashboard", href: "/portal/dashboard", icon: LayoutDashboard, visible: true },
-      { label: "Admissions CRM", href: "/portal/admissions", icon: UserPlus, visible: can("admissions.view") },
-      { label: "Announcements", href: "/portal/announcements", icon: Megaphone, visible: can("portal.read") },
-      { label: "Marks & Exams", href: "/portal/marks", icon: BookOpen, visible: can("marks.view") },
-      { label: "Timetable", href: "/portal/timetable", icon: CalendarDays, visible: can("timetable.view") },
-      {
-        label: "Messages",
-        href: "/portal/messages",
-        icon: MessageSquare,
-        visible: can("chat.initiate") || can("chat.respond"),
-        badgeCount: unreadCountQuery.data?.count ?? 0,
-      },
-      { label: "Students", href: "/portal/students", icon: GraduationCap, visible: can("students.read") },
-      { label: "Manage Classes", href: "/portal/manage-classes", icon: School, visible: can("classes.manage") },
-      { label: "Manage Users", href: "/portal/manage-users", icon: Users, visible: can("users.manage") },
-    ].filter((item) => item.visible),
+  const navGroups = useMemo<NavGroup[]>(
+    () => {
+      const groups: NavGroup[] = [
+        {
+          label: "Overview",
+          items: [
+            { label: "Dashboard", href: "/portal/dashboard", icon: LayoutDashboard, visible: true },
+          ],
+        },
+        {
+          label: "Academics",
+          items: [
+            { label: "Attendance", href: "/portal/attendance", icon: CheckSquare, visible: can("students.read") },
+            { label: "Homework", href: "/portal/homework", icon: BookOpen, visible: can("portal.read") },
+            { label: "Marks & Exams", href: "/portal/marks", icon: BookOpen, visible: can("marks.view") },
+            { label: "Timetable", href: "/portal/timetable", icon: CalendarDays, visible: can("timetable.view") },
+          ],
+        },
+        {
+          label: "Communication",
+          items: [
+            { label: "Announcements", href: "/portal/announcements", icon: Megaphone, visible: can("portal.read") },
+            {
+              label: "Messages",
+              href: "/portal/messages",
+              icon: MessageSquare,
+              visible: can("chat.initiate") || can("chat.respond"),
+              badgeCount: unreadCountQuery.data?.count ?? 0,
+            },
+          ],
+        },
+        {
+          label: "School Life",
+          items: [
+            { label: "Activities", href: "/portal/activities", icon: Activity, visible: can("portal.read") },
+            { label: "Students", href: "/portal/students", icon: GraduationCap, visible: can("students.read") },
+          ],
+        },
+        {
+          label: "Administration",
+          items: [
+            { label: "Admissions CRM", href: "/portal/admissions", icon: UserPlus, visible: can("admissions.view") },
+            { label: "Manage Classes", href: "/portal/manage-classes", icon: School, visible: can("classes.manage") },
+            { label: "Manage Users", href: "/portal/manage-users", icon: Users, visible: can("users.manage") },
+          ],
+        },
+      ];
+      return groups.map((g) => ({ ...g, items: g.items.filter((i) => i.visible) })).filter((g) => g.items.length > 0);
+    },
     [can, unreadCountQuery.data?.count]
   );
 
@@ -325,31 +363,38 @@ export function PortalLayout({ children }: PortalLayoutProps) {
         </div>
       ) : null}
 
-      <nav className="flex-1 overflow-y-auto py-2">
-        {navItems.map((item) => {
-          const active = isActive(item.href);
-          const Icon = item.icon;
-          return (
-            <Link key={item.href} href={item.href}>
-              <a
-                onClick={() => setMobileOpen(false)}
-                className={`flex items-center px-4 py-2.5 text-sm font-medium border-l-2 transition-colors ${
-                  active
-                    ? "bg-sidebar-accent text-sidebar-accent-foreground border-sidebar-primary"
-                    : "border-transparent text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
-                }`}
-              >
-                <Icon className="h-4 w-4 mr-3" />
-                {item.label}
-                {item.badgeCount && item.badgeCount > 0 ? (
-                  <span className="ml-2 inline-flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold px-1">
-                    {item.badgeCount}
-                  </span>
-                ) : null}
-              </a>
-            </Link>
-          );
-        })}
+      <nav className="flex-1 overflow-y-auto py-1">
+        {navGroups.map((group) => (
+          <div key={group.label}>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-sidebar-foreground/40 px-4 pt-4 pb-1">
+              {group.label}
+            </p>
+            {group.items.map((item) => {
+              const active = isActive(item.href);
+              const Icon = item.icon;
+              return (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center px-4 py-2.5 text-sm font-medium border-l-2 transition-colors ${
+                      active
+                        ? "bg-sidebar-accent text-sidebar-foreground border-gold"
+                        : "border-transparent text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                    }`}
+                  >
+                    <Icon className="h-4 w-4 mr-3 shrink-0" />
+                    {item.label}
+                    {item.badgeCount && item.badgeCount > 0 ? (
+                      <span className="ml-auto inline-flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold px-1">
+                        {item.badgeCount}
+                      </span>
+                    ) : null}
+                  </a>
+                </Link>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       <div className="border-t border-sidebar-border p-2">

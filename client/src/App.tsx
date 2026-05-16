@@ -38,6 +38,9 @@ import MessagesPage from "@/pages/portal/messages";
 import ThreadPage from "@/pages/portal/messages/thread";
 import MarksPage from "@/pages/portal/marks";
 import TimetablePage from "@/pages/portal/timetable";
+import AttendancePage from "@/pages/portal/attendance";
+import HomeworkPage from "@/pages/portal/homework";
+import ActivitiesPage from "@/pages/portal/activities";
 
 function Router() {
   return (
@@ -74,6 +77,9 @@ function Router() {
       <Route path="/portal/timetable" component={TimetablePage} />
       <Route path="/portal/students" component={StudentsPage} />
       <Route path="/portal/students/:userId" component={StudentProfilePage} />
+      <Route path="/portal/attendance" component={AttendancePage} />
+      <Route path="/portal/homework" component={HomeworkPage} />
+      <Route path="/portal/activities" component={ActivitiesPage} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />

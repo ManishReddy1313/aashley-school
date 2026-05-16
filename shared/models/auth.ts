@@ -26,6 +26,7 @@ export const users = pgTable("users", {
   permissionGrants: text("permission_grants").array().$type<PermissionKey[]>().notNull().default(sql`ARRAY[]::text[]`),
   permissionRevokes: text("permission_revokes").array().$type<PermissionKey[]>().notNull().default(sql`ARRAY[]::text[]`),
   legacyRole: varchar("legacy_role", { length: 20 }),
+  lastLoginAt: timestamp("last_login_at"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

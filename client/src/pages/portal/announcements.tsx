@@ -317,7 +317,26 @@ export default function PortalAnnouncementsPage() {
           }
         />
 
-        <div className="max-w-7xl mx-auto px-6 py-6 space-y-6">
+        <div className="max-w-7xl mx-auto px-6 py-6 space-y-4">
+          {/* Stats bar */}
+          {announcementsQuery.data && (
+            <div className="flex flex-wrap gap-4 text-sm border-b border-border pb-3">
+              {[
+                { label: "Total", value: announcementsQuery.data.length },
+                { label: "School-Wide", value: announcementsQuery.data.filter((a) => a.type === "school").length },
+                { label: "Class", value: announcementsQuery.data.filter((a) => a.type === "class").length },
+                { label: "Section", value: announcementsQuery.data.filter((a) => a.type === "section").length },
+                { label: "Active", value: announcementsQuery.data.filter((a) => a.isActive).length },
+                { label: "Expired", value: announcementsQuery.data.filter((a) => !a.isActive).length },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center gap-1.5">
+                  <span className="text-muted-foreground">{s.label}:</span>
+                  <span className="font-semibold text-foreground">{s.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             {(["all", "school", "class", "section"] as const).map((tab) => (
               <button
@@ -338,11 +357,23 @@ export default function PortalAnnouncementsPage() {
           {announcementsQuery.isLoading ? (
             <PageSkeleton />
           ) : filteredAnnouncements.length === 0 ? (
-            <Card className="rounded-none">
+            <Card className="shadow-sm">
               <CardContent className="py-14 text-center">
-                <Inbox className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
-                <p className="font-medium text-foreground">No announcements yet</p>
-                <p className="text-sm text-muted-foreground mt-1">New school or class updates will appear here.</p>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                    <Inbox className="h-8 w-8 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-lg font-normal text-foreground">No announcements yet</p>
+                    <p className="text-sm text-muted-foreground mt-1">Post one to notify students and parents.</p>
+                  </div>
+                  {canPostAny && (
+                    <Button size="sm" onClick={() => setSheetOpen(true)}>
+                      <Plus className="h-4 w-4 mr-1.5" />
+                      Post Announcement
+                    </Button>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ) : (
@@ -354,28 +385,27 @@ export default function PortalAnnouncementsPage() {
                   : "Just now";
                 const expiryText = row.expiresAt ? format(new Date(row.expiresAt), "dd MMM yyyy") : null;
                 return (
-                  <Card key={row.id} className={`rounded-none border-l-2 ${cardAccentClass[row.priority]}`}>
-                    <CardContent className="p-4">
+                  <Card key={row.id} className={`shadow-sm border-l-2 ${cardAccentClass[row.priority]}`}>
+                    <CardContent className="p-5">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className={`rounded-none ${typeChipClass[row.type]}`}>{typeChipText[row.type]}</Badge>
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
+                            <Badge className={`rounded-lg ${typeChipClass[row.type]}`}>{typeChipText[row.type]}</Badge>
+                            {row.priority === "high" && (
+                              <Badge variant="destructive" className="rounded-lg text-xs">Urgent</Badge>
+                            )}
+                            <span className="text-xs text-muted-foreground">{createdAtText}</span>
                           </div>
-                          <p className="font-medium text-foreground">{row.title}</p>
-                          <p className="text-sm text-muted-foreground mt-1 overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+                          <p className="font-serif text-base font-normal text-foreground">{row.title}</p>
+                          <p className="text-sm text-muted-foreground mt-1.5 line-clamp-3">
                             {row.content}
                           </p>
-                          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                            <span>{createdAtText}</span>
-                            {expiryText ? <span>Expires on {expiryText}</span> : null}
-                            {row.priority === "high" ? (
-                              <Badge variant="destructive" className="rounded-none">
-                                Urgent
-                              </Badge>
-                            ) : null}
+                          <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                            {expiryText ? <span>Expires {expiryText}</span> : null}
+                            {!row.isActive && <span className="text-destructive">Deactivated</span>}
                           </div>
                         </div>
-                        {canDeactivate ? (
+                        {canDeactivate && row.isActive ? (
                           <Button
                             variant="ghost"
                             size="icon"

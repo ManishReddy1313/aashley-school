@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, boolean, integer, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, boolean, integer, uniqueIndex, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -442,3 +442,65 @@ export const jobApplications = pgTable("job_applications", {
 export const insertJobApplicationSchema = createInsertSchema(jobApplications).omit({ id: true, createdAt: true, status: true });
 export type InsertJobApplication = z.infer<typeof insertJobApplicationSchema>;
 export type JobApplication = typeof jobApplications.$inferSelect;
+
+// Attendance
+export const attendance = pgTable(
+  "attendance",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    classId: varchar("class_id").notNull(),
+    studentUserId: varchar("student_user_id").notNull(),
+    date: varchar("date", { length: 10 }).notNull(),
+    status: varchar("status", { length: 10 }).notNull(),
+    markedByUserId: varchar("marked_by_user_id").notNull(),
+    notificationSent: boolean("notification_sent").notNull().default(false),
+    academicYear: varchar("academic_year", { length: 20 }).notNull(),
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (table) => ({
+    attendanceUniqueIdx: uniqueIndex("attendance_class_student_date_idx").on(
+      table.classId,
+      table.studentUserId,
+      table.date,
+    ),
+    attendanceDateIdx: index("attendance_date_idx").on(table.date),
+  }),
+);
+export const insertAttendanceSchema = createInsertSchema(attendance).omit({ id: true, createdAt: true });
+export type InsertAttendance = z.infer<typeof insertAttendanceSchema>;
+export type Attendance = typeof attendance.$inferSelect;
+
+// Homework
+export const homework = pgTable("homework", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  classId: varchar("class_id").notNull(),
+  subjectId: varchar("subject_id"),
+  subjectName: varchar("subject_name", { length: 100 }).notNull(),
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description").notNull(),
+  dueDate: varchar("due_date", { length: 10 }).notNull(),
+  attachmentUrl: text("attachment_url"),
+  createdByUserId: varchar("created_by_user_id").notNull(),
+  academicYear: varchar("academic_year", { length: 20 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+export const insertHomeworkSchema = createInsertSchema(homework).omit({ id: true, createdAt: true });
+export type InsertHomework = z.infer<typeof insertHomeworkSchema>;
+export type Homework = typeof homework.$inferSelect;
+
+// Activities
+export const activities = pgTable("activities", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  classId: varchar("class_id"),
+  type: varchar("type", { length: 30 }).notNull(),
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  activityDate: varchar("activity_date", { length: 10 }).notNull(),
+  conductedByUserId: varchar("conducted_by_user_id"),
+  participants: text("participants"),
+  academicYear: varchar("academic_year", { length: 20 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+export const insertActivitySchema = createInsertSchema(activities).omit({ id: true, createdAt: true });
+export type InsertActivity = z.infer<typeof insertActivitySchema>;
+export type Activity = typeof activities.$inferSelect;

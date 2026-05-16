@@ -4,6 +4,7 @@ import connectPg from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { authStorage } from "./storage";
+import { storage } from "../../storage";
 import { getRoleLabel, normalizeRole, resolveEffectivePermissions } from "@shared/authz";
 
 const loginLimiter = rateLimit({
@@ -94,7 +95,7 @@ export async function setupAuth(app: Express) {
         effectivePermissions,
       };
       (req.session as any).user = sessionUser;
-
+      storage.updateUserLastLogin(user.id).catch(() => {/* non-critical */});
       res.json(sessionUser);
     } catch (error) {
       console.error("Login error:", error);
